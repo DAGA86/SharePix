@@ -34,12 +34,13 @@ namespace SharePix.Data.Providers
 
             if (_dbContext.UserAccounts.Any(x => x.Email == account.Email))
             {
-                result.ErrorMessage = "ja existe email";
+                result.ErrorMessage = "register.emailAlreadyExists";
                 return result;
             }
+           
             if (_dbContext.UserAccounts.Any(x => x.Username == account.Username))
             {
-                result.ErrorMessage = "ja existe Username";
+                result.ErrorMessage = "register.usernameAlreadyExists";
                 return result;
             }
 

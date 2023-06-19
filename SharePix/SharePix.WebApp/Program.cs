@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using SharePix.Data.Providers;
+using System.Globalization;
 
 namespace SharePix.WebApp
 {
@@ -28,8 +31,27 @@ namespace SharePix.WebApp
             builder.Services.AddDbContext<Data.Contexts.DatabaseContext>(options =>
                 options.UseSqlServer(connectionString));
 
+            builder.Services.AddScoped<LanguageProvider>();
+            builder.Services.AddScoped<LocalizationProvider>();
+
+            builder.Services.AddLocalization();
+
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews()
+                .AddViewLocalization();
+
+            string[] cultures = new string[] { "en-US", "pt-PT" };
+            var cultureInfos = cultures.Select(x => new CultureInfo(x)).ToArray();
+
+            //language default request
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var englishCulture = cultureInfos.FirstOrDefault(x => x.Name == "en-US");
+                options.DefaultRequestCulture = new RequestCulture(englishCulture?.Name ?? "en-US");
+
+                options.SupportedCultures = cultureInfos;
+                options.SupportedUICultures = cultureInfos;
+            });
 
             var app = builder.Build();
 
@@ -47,6 +69,7 @@ namespace SharePix.WebApp
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseRequestLocalization();
 
             app.MapControllerRoute(
                 name: "default",

@@ -9,14 +9,16 @@ using SharePix.Data.Contexts;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Identity;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace SharePix.WebApp.Controllers
 {
-    public class UserAccountsController : Controller
+    public class UserAccountsController : BaseController
     {
         private UserAccountProvider _userAccountProvider;
 
-        public UserAccountsController(DatabaseContext context)
+        public UserAccountsController(DatabaseContext context, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(context, languageProvider, localizationProvider)
         {
             _userAccountProvider = new UserAccountProvider(context);
         }
@@ -130,11 +132,11 @@ namespace SharePix.WebApp.Controllers
                 var result = _userAccountProvider.Create(user);
                 if (!string.IsNullOrEmpty(result.ErrorMessage))
                 {
-                    ViewData["ErrorMessage"] = result.ErrorMessage;
+                    ViewData["ErrorMessage"] = Localize(result.ErrorMessage);
                 }
                 else
                 {
-                    ViewData["SuccessMessage"] = "Conta criada com sucesso";
+                    ViewData["SuccessMessage"] = Localize("register.success");
                     return View(nameof(Login));
                 }
 

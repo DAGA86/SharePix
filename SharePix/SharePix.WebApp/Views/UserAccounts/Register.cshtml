@@ -1,49 +1,55 @@
 ﻿@model SharePix.WebApp.Models.UserAccounts.RegisterViewModel
 
+@{
+    ViewData["Title"] = Localize("register.title");
+}
+
 @if (ViewData["ErrorMessage"] != null)
 {
     <div class="text-danger">@ViewData["ErrorMessage"]</div>
 }
 
 
-<h1>Login</h1>
+<div>
+    <h3>@Localize("register.title")</h3>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Register">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>         
             <div class="form-group">
-                <label asp-for="FirstName" class="control-label">First Name</label>
+                <label asp-for="FirstName" class="control-label">@Localize("label.firstName")</label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="LastName" class="control-label">Last Name</label>
+                <label asp-for="LastName" class="control-label">@Localize("label.lastName")</label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Username" class="control-label">Username</label>
+                <label asp-for="Username" class="control-label">@Localize("label.username")</label>
                 <input asp-for="Username" class="form-control" />
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label">Email</label>
+                <label asp-for="Email" class="control-label">@Localize("label.email")</label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PasswordHash" class="control-label">Password</label>
+                <label asp-for="PasswordHash" class="control-label">@Localize("label.password")</label>
                 <input asp-for="PasswordHash" class="form-control" />
                 <span asp-validation-for="PasswordHash" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label">Confirm password</label>
+                <label asp-for="ConfirmPassword" class="control-label">@Localize("label.confirmPassword")</label>
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-primary" />
+                <input type="submit" value="@Localize("general.button.create")" class=" btn btn-primary" />
             </div>
         </form>
     </div>

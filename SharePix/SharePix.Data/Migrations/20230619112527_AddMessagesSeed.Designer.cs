@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SharePix.Data.Contexts;
 
@@ -11,9 +12,10 @@ using SharePix.Data.Contexts;
 namespace SharePix.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230619112527_AddMessagesSeed")]
+    partial class AddMessagesSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -334,19 +336,19 @@ namespace SharePix.Data.Migrations
                         },
                         new
                         {
-                            Key = "register.emailAlreadyExists",
+                            Key = "register.errorMessage.email",
                             LanguageId = 1,
                             Value = "Email already exist. Please try another one"
                         },
                         new
                         {
-                            Key = "register.usernameAlreadyExists",
+                            Key = "register.errorMessage.username",
                             LanguageId = 1,
                             Value = "Username already exist. Please try another one"
                         },
                         new
                         {
-                            Key = "register.success",
+                            Key = "register.successMessage.account",
                             LanguageId = 1,
                             Value = "Account created successfully"
                         },
@@ -448,19 +450,19 @@ namespace SharePix.Data.Migrations
                         },
                         new
                         {
-                            Key = "register.emailAlreadyExists",
+                            Key = "register.errorMessage.email",
                             LanguageId = 2,
                             Value = "Email existente. Por favor tente outro"
                         },
                         new
                         {
-                            Key = "register.usernameAlreadyExists",
+                            Key = "register.errorMessage.username",
                             LanguageId = 2,
                             Value = "Nome de Utilizador existente. Por favor tente outro"
                         },
                         new
                         {
-                            Key = "register.success",
+                            Key = "register.successMessage.account",
                             LanguageId = 2,
                             Value = "Conta criada com sucesso"
                         });
