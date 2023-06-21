@@ -1,40 +1,154 @@
 ﻿@model SharePix.WebApp.Models.UserAccounts.LoginViewModel
 
 @{
-    ViewData["Title"] = Localize("login.title");
+    Layout = "~/Views/Shared/_GuestLayout.cshtml";
 }
 
-@if (ViewData["SuccessMessage"] != null)
-{
+<main role="main">
 
-<div class="text-success">@ViewData["SuccessMessage"]</div>
-}
 
-@{
-    ViewData["Title"] = Localize("customer.page.create.title");
-}
+    <header id="form-box" class="vm transparent">
 
-<div>
-    <h3>@Localize("login.title")</h3>
-</div>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+        <!-- - - - - - - - - - - - - - Logo - - - - - - - - - - - - - - - - -->
+
         <form asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="UsernameOrEmail" class="control-label">@Localize("label.usernameOrEmail")</label>
-                <input asp-for="UsernameOrEmail" class="form-control" />
-                <span asp-validation-for="UsernameOrEmail" class="text-danger"></span>
+
+            @{
+                ViewData["Title"] = Localize("login.title");
+            }
+
+
+            @if (ViewData["SuccessMessage"] != null)
+            {
+
+                <div class="text-success">@ViewData["SuccessMessage"]</div>
+            }
+
+            @{
+                ViewData["Title"] = Localize("customer.page.create.title");
+            }
+
+            <div>
+                <h3>@Localize("login.title")</h3>
             </div>
-            <div class="form-group">
-                <label asp-for="PasswordHash" class="control-label">@Localize("label.password")</label>
-                <input asp-for="PasswordHash" class="form-control" />
-                <span asp-validation-for="PasswordHash" class="text-danger"></span>
+            <hr />
+            <div class="row">
+                <div class="col-md-2">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="UsernameOrEmail" class="control-label">@Localize("label.usernameOrEmail")</label>
+                        <input asp-for="UsernameOrEmail" class="form-control" />
+                        <span asp-validation-for="UsernameOrEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PasswordHash" class="control-label">@Localize("label.password")</label>
+                        <input asp-for="PasswordHash" class="form-control" />
+                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="@Localize("general.button.login")" class=" btn btn-primary" />
+                    </div>
+
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="@Localize("general.button.login")" class=" btn btn-primary" />
-            </div>
+
         </form>
+
+
+        <!-- - - - - - - - - - - - - - End of Main Navigation Container - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Top Buttons - - - - - - - - - - - - - - - - -->
+
+    </header>
+    <!-- - - - - - - - - - - - - - Revolution Slider - - - - - - - - - - - - - - - - -->
+
+    <div class="bannercontainer">
+
+        <div class="banner">
+
+            <ul>
+
+                <!-- - - - - - - - - - - - - - Slide - - - - - - - - - - - - - - - - -->
+
+                <li data-transition="fade" data-thumb="images/1.jpg">
+
+                    <img src="~/images/1.jpg" alt="">
+
+                    <div class="caption sfb stb" data-x="30" data-y="bottom" data-speed="400" data-voffset="-95">
+
+                        <h2 class="slide_title">Donec sit amet eros</h2>
+                        <p class="slide_desc">Duis ac turpis. Aliquam Erat Volutpat.</p>
+
+                    </div>
+
+                </li>
+
+                <!-- - - - - - - - - - - - - - End of Slide - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Slide - - - - - - - - - - - - - - - - -->
+
+                <li data-transition="fade" data-thumb="images/2.jpg">
+
+                    <img src="~/images/2.jpg" alt="">
+
+                    <div class="caption sfb stb" data-x="30" data-y="bottom" data-speed="400" data-voffset="-95">
+
+                        <h2 class="slide_title">Aliquam Erat Volutpat</h2>
+
+                        <p class="slide_desc">Duis ac turpis. Donec sit amet eros.</p>
+
+                    </div>
+
+                </li>
+
+                <!-- - - - - - - - - - - - - - End of Slide - - - - - - - - - - - - - - - - -->
+
+            </ul>
+
+        </div>
+
     </div>
-</div>
+
+    <!-- - - - - - - - - - - - - - End of Revolution Slider - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - Actions - - - - - - - - - - - - - - - - -->
+
+    <ul class="page_actions">
+
+        <li>
+
+            <!-- - - - - - - - - - - - - - Share - - - - - - - - - - - - - - - - -->
+
+            <div class="share_wrap">
+
+                <span class="si-icon share action_btn dark large" data-width="28" data-height="28" data-event="click" data-icon-name="socialLight"></span>
+
+                <div class="addthis_sharing_toolbox large_icons"></div>
+
+            </div>
+
+            <!-- - - - - - - - - - - - - - End of Share - - - - - - - - - - - - - - - - -->
+
+        </li>
+
+        <li><span id="rs_prev" class="si-icon action_btn dark large" data-width="28" data-height="28" data-event="mouseover" data-icon-name="previous"></span></li>
+
+        <li class="play_pause_action_wrap">
+            <span id="rs_pause" class="si-icon action_btn dark large" data-width="28" data-height="28" data-event="mouseover" data-icon-name="pause"></span>
+            <span id="rs_play" class="si-icon action_btn dark large" data-width="42" data-height="42" data-event="mouseover" data-icon-name="play"></span>
+        </li>
+
+        <li><span id="rs_next" class="si-icon action_btn dark large" data-width="28" data-height="28" data-event="mouseover" data-icon-name="next"></span></li>
+
+        <li><span id="rs_show_thumbs" class="si-icon action_btn dark large" data-width="28" data-height="28" data-event="mouseover" data-icon-name="thumbs"></span></li>
+
+        <li class="fs_stay"><span id="toggle_view_fullscreen" class="si-icon si-icon-reverse action_btn dark large" data-width="28" data-height="28" data-icon-name="plusLight"></span></li>
+
+    </ul>
+
+    <!-- - - - - - - - - - - - - - End of Actions - - - - - - - - - - - - - - - - -->
+
+</main>
+
+
+
+
+

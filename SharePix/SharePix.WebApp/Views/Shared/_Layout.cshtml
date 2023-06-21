@@ -20,8 +20,7 @@
 
     <title>@ViewData["Title"] - SharePix.WebApp</title>
 
-    <!-- Basic page needs
-            ============================================ -->
+    <!-- Basic page needs ============================================ -->
     <title>Joker | Home</title>
     <meta charset="utf-8">
     <meta name="author" content="">
@@ -41,617 +40,635 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
 
-	<!-- Libs CSS
-			============================================ -->
-	<link rel="stylesheet" href="css/animate.css">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Libs CSS
+            ============================================ -->
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
-	<!-- Theme CSS
-	============================================ -->
-	<link rel="stylesheet" href="css/style.css">
-	<!-- <link rel="stylesheet" href="css/rtl.css"> -->
-	<!-- JS Libs
-	============================================ -->
-	<script src="plugins/modernizr.js"></script>
+    <!-- Theme CSS
+    ============================================ -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="css/rtl.css"> -->
+    <!-- JS Libs
+    ============================================ -->
+    <script src="plugins/modernizr.js"></script>
 
-	<!-- Old IE stylesheet
-	============================================ -->
-	<!--[if lte IE 9]>
-		<link rel="stylesheet" type="text/css" href="css/oldie.css">
-		<script src="js/placeholderIE.js"></script>
-	<![endif]-->
+    <!-- Old IE stylesheet
+    ============================================ -->
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" type="text/css" href="css/oldie.css">
+        <script src="js/placeholderIE.js"></script>
+    <![endif]-->
 
 </head>
 
 <body>
 
-	<div id="page_loader" class="page_loader">
-		<div id="loader"></div>
-	</div>
+    <div id="page_loader" class="page_loader">
+        <div id="loader"></div>
+    </div>
 
-	<!-- - - - - - - - - - - - - - Cookie Control & Old ie Message - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - Cookie Control & Old ie Message - - - - - - - - - - - - - - - - -->
 
-	<div class="messages_wrap">
+    <div class="messages_wrap">
 
-		<!-- - - - - - - - - - - - - - Old IE Message - - - - - - - - - - - - - - - - -->
-		<!--[if lt IE 9]>
+        <!-- - - - - - - - - - - - - - Old IE Message - - - - - - - - - - - - - - - - -->
+        <!--[if lt IE 9]>
 
-		<div class="old_ie_message">
+        <div class="old_ie_message">
 
-			<div class="on_the_sides">
+            <div class="on_the_sides">
 
-				<div class="left_side">
+                <div class="left_side">
 
-					<i class="icon-attention"></i> <b>Attention!</b> This page may not display correctly. You are using an outdated version of Internet Explorer. For a faster, safer browsing experience.
+                    <i class="icon-attention"></i> <b>Attention!</b> This page may not display correctly. You are using an outdated version of Internet Explorer. For a faster, safer browsing experience.
 
-				</div>
+                </div>
 
-				<div class="right_side">
+                <div class="right_side">
 
-					<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode" class="btn small transparent black" target="_blank">Update Now!</a>
+                    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode" class="btn small transparent black" target="_blank">Update Now!</a>
 
-				</div>
+                </div>
 
-			</div>
+            </div>
 
-		</div>
+        </div>
 
-		<![endif]-->
-		<!-- - - - - - - - - - - - - - End of Old IE Message - - - - - - - - - - - - - - - - -->
+        <![endif]-->
+        <!-- - - - - - - - - - - - - - End of Old IE Message - - - - - - - - - - - - - - - - -->
 
-	</div>
+    </div>
 
-	<!-- - - - - - - - - - - - - - End of Cookie Control & Old ie Message - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - End of Cookie Control & Old ie Message - - - - - - - - - - - - - - - - -->
 
-	<div id="document_wrap">
+    <div id="document_wrap">
 
-		<!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->
 
-		<header role="banner" id="header" class="vm transparent">
+        <header role="banner" id="header" class="vm transparent">
 
-			<!-- - - - - - - - - - - - - - Logo - - - - - - - - - - - - - - - - -->
+            <!-- - - - - - - - - - - - - - Logo - - - - - - - - - - - - - - - - -->
 
-			<a href="index.html" class="logo">
+            <a href="index.html" class="logo">
 
-				<img src="images/logo.png" alt="">
+                <img src="images/logo.png" alt="">
 
-			</a>
+            </a>
+            <div>
+                <ul>
+                    <li>
+                        <form asp-action="ChangeLanguage" asp-controller="Home" method="post">
+                            <input type="hidden" id="returnUrl" name="returnUrl" value="@returnUrl" />
+                            <select id="culture"
+                                    name="culture"
+                                    class="form-control"
+                                    onchange="this.form.submit();"
+                                    asp-items="cultureItems"
+                                    asp-for="@requestCulture.RequestCulture.UICulture.Name">
+                            </select>
+                        </form>
+                    </li>
+                </ul>
+            </div>
 
-			<!-- - - - - - - - - - - - - - End Logo - - - - - - - - - - - - - - - - -->
-			<!-- - - - - - - - - - - - - - Horizontal Main Navigation - - - - - - - - - - - - - - - - -->
+            <!-- - - - - - - - - - - - - - End Logo - - - - - - - - - - - - - - - - -->
+            <!-- - - - - - - - - - - - - - Horizontal Main Navigation - - - - - - - - - - - - - - - - -->
 
-			<div id="horizontal_menu_wrap" class="hm_wrap">
+            <div id="horizontal_menu_wrap" class="hm_wrap">
 
-				<nav>
+                <nav>
 
-					<ul class="navigation">
+                    <ul class="navigation">
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="index.html">Home</a>
+                            <a href="index.html">Home</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li><a href="index.html">Fullscreen slider</a></li>
-								<li><a href="home_rev_slider.html">Revolution slider</a></li>
-								<li><a href="home_ribbon_slider.html">Ribbon slider</a></li>
-								<li><a href="home_masonry_albums.html">Masonry albums</a></li>
-								<li><a href="home_grid_albums.html">Grid albums</a></li>
-								<li><a href="home_masonry_portfolio.html">Masonry portfolio</a></li>
-								<li><a href="home_grid_portfolio.html">Grid portfolio</a></li>
-								<li><a href="home_kenburns_slideshow.html">Kenburns</a></li>
-								<li><a href="home_masonry_wall.html">Masonry wall</a></li>
-								<li><a href="home_grid_wall.html">Grid wall</a></li>
-								<li><a href="home_bg_image.html">Background image</a></li>
-								<li><a href="home_bg_youtube_video.html">Background Youtube video</a></li>
-								<li><a href="home_bg_vimeo_video.html">Background Vimeo video</a></li>
+                                <li><a href="index.html">Fullscreen slider</a></li>
+                                <li><a href="home_rev_slider.html">Revolution slider</a></li>
+                                <li><a href="home_ribbon_slider.html">Ribbon slider</a></li>
+                                <li><a href="home_masonry_albums.html">Masonry albums</a></li>
+                                <li><a href="home_grid_albums.html">Grid albums</a></li>
+                                <li><a href="home_masonry_portfolio.html">Masonry portfolio</a></li>
+                                <li><a href="home_grid_portfolio.html">Grid portfolio</a></li>
+                                <li><a href="home_kenburns_slideshow.html">Kenburns</a></li>
+                                <li><a href="home_masonry_wall.html">Masonry wall</a></li>
+                                <li><a href="home_grid_wall.html">Grid wall</a></li>
+                                <li><a href="home_bg_image.html">Background image</a></li>
+                                <li><a href="home_bg_youtube_video.html">Background Youtube video</a></li>
+                                <li><a href="home_bg_vimeo_video.html">Background Vimeo video</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu current">
+                        <li class="has_submenu current">
 
-							<a href="pages_about.html">Pages</a>
+                            <a href="pages_about.html">Pages</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li class="current"><a href="pages_about.html">About</a></li>
-								<li><a href="pages_contact.html">Contact</a></li>
-								<li><a href="pages_full_width.html">Full width page</a></li>
-								<li><a href="pages_with_sidebar.html">Page with sidebar</a></li>
-								<li><a href="pages_coming_soon.html">Coming soon</a></li>
-								<li><a href="pages_404.html">404 page</a></li>
+                                <li class="current"><a href="pages_about.html">About</a></li>
+                                <li><a href="pages_contact.html">Contact</a></li>
+                                <li><a href="pages_full_width.html">Full width page</a></li>
+                                <li><a href="pages_with_sidebar.html">Page with sidebar</a></li>
+                                <li><a href="pages_coming_soon.html">Coming soon</a></li>
+                                <li><a href="pages_404.html">404 page</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="portfolio_masonry_full_width.html">Portfolio</a>
+                            <a href="portfolio_masonry_full_width.html">Portfolio</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li class="has_submenu">
+                                <li class="has_submenu">
 
-									<a href="portfolio_masonry_full_width.html">Masonry</a>
+                                    <a href="portfolio_masonry_full_width.html">Masonry</a>
 
-									<!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
+                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
 
-									<ul class="submenu">
+                                    <ul class="submenu">
 
-										<li><a href="portfolio_masonry_full_width.html">Full width</a></li>
-										<li><a href="portfolio_masonry_2_columns.html">2 columns</a></li>
-										<li><a href="portfolio_masonry_3_columns.html">3 columns</a></li>
-										<li><a href="portfolio_masonry_4_columns.html">4 columns</a></li>
+                                        <li><a href="portfolio_masonry_full_width.html">Full width</a></li>
+                                        <li><a href="portfolio_masonry_2_columns.html">2 columns</a></li>
+                                        <li><a href="portfolio_masonry_3_columns.html">3 columns</a></li>
+                                        <li><a href="portfolio_masonry_4_columns.html">4 columns</a></li>
 
-									</ul>
+                                    </ul>
 
-									<!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
+                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
 
-								</li>
-								<li class="has_submenu">
+                                </li>
+                                <li class="has_submenu">
 
-									<a href="portfolio_grid_full_width.html">Grid</a>
+                                    <a href="portfolio_grid_full_width.html">Grid</a>
 
-									<!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
+                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
 
-									<ul class="submenu">
+                                    <ul class="submenu">
 
-										<li><a href="portfolio_grid_full_width.html">Full width</a></li>
-										<li><a href="portfolio_grid_2_columns.html">2 columns</a></li>
-										<li><a href="portfolio_grid_3_columns.html">3 columns</a></li>
-										<li><a href="portfolio_grid_4_columns.html">4 columns</a></li>
+                                        <li><a href="portfolio_grid_full_width.html">Full width</a></li>
+                                        <li><a href="portfolio_grid_2_columns.html">2 columns</a></li>
+                                        <li><a href="portfolio_grid_3_columns.html">3 columns</a></li>
+                                        <li><a href="portfolio_grid_4_columns.html">4 columns</a></li>
 
-									</ul>
+                                    </ul>
 
-									<!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
+                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
 
-								</li>
-								<li><a href="portfolio_image_list_post.html">Image list post with top image</a></li>
-								<li><a href="portfolio_image_slideshow_post.html">Image slideshow post</a></li>
-								<li><a href="portfolio_video_post.html">Video post</a></li>
-								<li><a href="portfolio_audio_post.html">Audio post with top image</a></li>
-								<li><a href="portfolio_mixed_list_post.html">Mixed list post</a></li>
-								<li><a href="portfolio_post_with_sidebar.html">Post with sidebar</a></li>
-								<li><a href="portfolio_ribbon_post.html">Ribbon post</a></li>
+                                </li>
+                                <li><a href="portfolio_image_list_post.html">Image list post with top image</a></li>
+                                <li><a href="portfolio_image_slideshow_post.html">Image slideshow post</a></li>
+                                <li><a href="portfolio_video_post.html">Video post</a></li>
+                                <li><a href="portfolio_audio_post.html">Audio post with top image</a></li>
+                                <li><a href="portfolio_mixed_list_post.html">Mixed list post</a></li>
+                                <li><a href="portfolio_post_with_sidebar.html">Post with sidebar</a></li>
+                                <li><a href="portfolio_ribbon_post.html">Ribbon post</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="galleries_masonry_albums.html">Galleries</a>
+                            <a href="galleries_masonry_albums.html">Galleries</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li><a href="galleries_masonry_albums.html">Masonry albums</a></li>
-								<li><a href="galleries_grid_albums.html">Grid albums</a></li>
-								<li><a href="galleries_ribbon.html">Ribbon gallery</a></li>
-								<li><a href="galleries_flow.html">Flow gallery</a></li>
-								<li><a href="galleries_kenburns.html">Kenburns</a></li>
-								<li><a href="galleries_masonry_wall.html">Masonry wall</a></li>
-								<li><a href="galleries_grid_wall.html">Grid wall</a></li>
-								<li><a href="galleries_protected.html">Protected gallery</a></li>
+                                <li><a href="galleries_masonry_albums.html">Masonry albums</a></li>
+                                <li><a href="galleries_grid_albums.html">Grid albums</a></li>
+                                <li><a href="galleries_ribbon.html">Ribbon gallery</a></li>
+                                <li><a href="galleries_flow.html">Flow gallery</a></li>
+                                <li><a href="galleries_kenburns.html">Kenburns</a></li>
+                                <li><a href="galleries_masonry_wall.html">Masonry wall</a></li>
+                                <li><a href="galleries_grid_wall.html">Grid wall</a></li>
+                                <li><a href="galleries_protected.html">Protected gallery</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="features_elements.html">Features</a>
+                            <a href="features_elements.html">Features</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li><a href="features_elements.html">Elements</a></li>
-								<li><a href="features_typography.html">Typography</a></li>
-								<li><a href="features_columns.html">Columns</a></li>
-								<li><a href="RTL/index.html">RTL layout</a></li>
+                                <li><a href="features_elements.html">Elements</a></li>
+                                <li><a href="features_typography.html">Typography</a></li>
+                                <li><a href="features_columns.html">Columns</a></li>
+                                <li><a href="RTL/index.html">RTL layout</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="blog_full_width.html">Blog</a>
+                            <a href="blog_full_width.html">Blog</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li><a href="blog_full_width.html">Full width blog</a></li>
-								<li><a href="blog_with_sidebar.html">Blog with sidebar</a></li>
-								<li><a href="blog_masonry.html">Masonry blog</a></li>
-								<li><a href="blog_full_width_post.html">Full width single blog post</a></li>
-								<li><a href="blog_post_with_right_sidebar.html">Single blog post with right sidebar</a></li>
-								<li><a href="blog_post_with_left_sidebar.html">Single blog post with left sidebar</a></li>
-								<li><a href="blog_post_with_extended_image.html">Single blog post with extended featured image</a></li>
+                                <li><a href="blog_full_width.html">Full width blog</a></li>
+                                <li><a href="blog_with_sidebar.html">Blog with sidebar</a></li>
+                                <li><a href="blog_masonry.html">Masonry blog</a></li>
+                                <li><a href="blog_full_width_post.html">Full width single blog post</a></li>
+                                <li><a href="blog_post_with_right_sidebar.html">Single blog post with right sidebar</a></li>
+                                <li><a href="blog_post_with_left_sidebar.html">Single blog post with left sidebar</a></li>
+                                <li><a href="blog_post_with_extended_image.html">Single blog post with extended featured image</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="shop_full_width_front_page.html">Shop</a>
+                            <a href="shop_full_width_front_page.html">Shop</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li><a href="shop_full_width_front_page.html">Full width front page</a></li>
-								<li><a href="shop_front_page_with_sidebar.html">Front page with sidebar</a></li>
-								<li><a href="shop_full_width_product_page.html">Full width product page</a></li>
-								<li><a href="shop_product_page_with_sidebar.html">Product page with sidebar</a></li>
-								<li><a href="shop_shopping_cart.html">Shopping cart</a></li>
-								<li><a href="shop_checkout.html">Checkout</a></li>
+                                <li><a href="shop_full_width_front_page.html">Full width front page</a></li>
+                                <li><a href="shop_front_page_with_sidebar.html">Front page with sidebar</a></li>
+                                <li><a href="shop_full_width_product_page.html">Full width product page</a></li>
+                                <li><a href="shop_product_page_with_sidebar.html">Product page with sidebar</a></li>
+                                <li><a href="shop_shopping_cart.html">Shopping cart</a></li>
+                                <li><a href="shop_checkout.html">Checkout</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-					</ul>
+                    </ul>
 
-				</nav>
+                </nav>
 
-			</div>
+            </div>
 
-			<!-- - - - - - - - - - - - - - End of Horizontal Main Navigation - - - - - - - - - - - - - - - - -->
-			<!-- - - - - - - - - - - - - - Main Navigation Container - - - - - - - - - - - - - - - - -->
+            <!-- - - - - - - - - - - - - - End of Horizontal Main Navigation - - - - - - - - - - - - - - - - -->
+            <!-- - - - - - - - - - - - - - Main Navigation Container - - - - - - - - - - - - - - - - -->
 
-			<div id="vertical_menu_wrap" class="vm_wrap">
+            <div id="vertical_menu_wrap" class="vm_wrap">
 
-				<!-- - - - - - - - - - - - - - Main Navigation - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Main Navigation - - - - - - - - - - - - - - - - -->
 
-				<nav>
+                <nav>
 
-					<ul class="navigation">
+                    <ul class="navigation">
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="index.html">Home</a>
+                            <a href="index.html">Home</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li><a href="index.html">Fullscreen slider</a></li>
-								<li><a href="home_rev_slider.html">Revolution slider</a></li>
-								<li><a href="home_ribbon_slider.html">Ribbon slider</a></li>
-								<li><a href="home_masonry_albums.html">Masonry albums</a></li>
-								<li><a href="home_grid_albums.html">Grid albums</a></li>
-								<li><a href="home_masonry_portfolio.html">Masonry portfolio</a></li>
-								<li><a href="home_grid_portfolio.html">Grid portfolio</a></li>
-								<li><a href="home_kenburns_slideshow.html">Kenburns</a></li>
-								<li><a href="home_masonry_wall.html">Masonry wall</a></li>
-								<li><a href="home_grid_wall.html">Grid wall</a></li>
-								<li><a href="home_bg_image.html">Background image</a></li>
-								<li><a href="home_bg_youtube_video.html">Background Youtube video</a></li>
-								<li><a href="home_bg_vimeo_video.html">Background Vimeo video</a></li>
+                                <li><a href="index.html">Fullscreen slider</a></li>
+                                <li><a href="home_rev_slider.html">Revolution slider</a></li>
+                                <li><a href="home_ribbon_slider.html">Ribbon slider</a></li>
+                                <li><a href="home_masonry_albums.html">Masonry albums</a></li>
+                                <li><a href="home_grid_albums.html">Grid albums</a></li>
+                                <li><a href="home_masonry_portfolio.html">Masonry portfolio</a></li>
+                                <li><a href="home_grid_portfolio.html">Grid portfolio</a></li>
+                                <li><a href="home_kenburns_slideshow.html">Kenburns</a></li>
+                                <li><a href="home_masonry_wall.html">Masonry wall</a></li>
+                                <li><a href="home_grid_wall.html">Grid wall</a></li>
+                                <li><a href="home_bg_image.html">Background image</a></li>
+                                <li><a href="home_bg_youtube_video.html">Background Youtube video</a></li>
+                                <li><a href="home_bg_vimeo_video.html">Background Vimeo video</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu current">
+                        <li class="has_submenu current">
 
-							<a href="pages_about.html">Pages</a>
+                            <a href="pages_about.html">Pages</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li class="current"><a href="pages_about.html">About</a></li>
-								<li><a href="pages_contact.html">Contact</a></li>
-								<li><a href="pages_full_width.html">Full width page</a></li>
-								<li><a href="pages_with_sidebar.html">Page with sidebar</a></li>
-								<li><a href="pages_coming_soon.html">Coming soon</a></li>
-								<li><a href="pages_404.html">404 page</a></li>
+                                <li class="current"><a href="pages_about.html">About</a></li>
+                                <li><a href="pages_contact.html">Contact</a></li>
+                                <li><a href="pages_full_width.html">Full width page</a></li>
+                                <li><a href="pages_with_sidebar.html">Page with sidebar</a></li>
+                                <li><a href="pages_coming_soon.html">Coming soon</a></li>
+                                <li><a href="pages_404.html">404 page</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="portfolio_masonry_full_width.html">Portfolio</a>
+                            <a href="portfolio_masonry_full_width.html">Portfolio</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li class="has_submenu">
+                                <li class="has_submenu">
 
-									<a href="portfolio_masonry_full_width.html">Masonry</a>
+                                    <a href="portfolio_masonry_full_width.html">Masonry</a>
 
-									<!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
+                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
 
-									<ul class="submenu">
+                                    <ul class="submenu">
 
-										<li><a href="portfolio_masonry_full_width.html">Full width</a></li>
-										<li><a href="portfolio_masonry_2_columns.html">2 columns</a></li>
-										<li><a href="portfolio_masonry_3_columns.html">3 columns</a></li>
-										<li><a href="portfolio_masonry_4_columns.html">4 columns</a></li>
+                                        <li><a href="portfolio_masonry_full_width.html">Full width</a></li>
+                                        <li><a href="portfolio_masonry_2_columns.html">2 columns</a></li>
+                                        <li><a href="portfolio_masonry_3_columns.html">3 columns</a></li>
+                                        <li><a href="portfolio_masonry_4_columns.html">4 columns</a></li>
 
-									</ul>
+                                    </ul>
 
-									<!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
+                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
 
-								</li>
-								<li class="has_submenu">
+                                </li>
+                                <li class="has_submenu">
 
-									<a href="portfolio_grid_full_width.html">Grid</a>
+                                    <a href="portfolio_grid_full_width.html">Grid</a>
 
-									<!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
+                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
 
-									<ul class="submenu">
+                                    <ul class="submenu">
 
-										<li><a href="portfolio_grid_full_width.html">Full width</a></li>
-										<li><a href="portfolio_grid_2_columns.html">2 columns</a></li>
-										<li><a href="portfolio_grid_3_columns.html">3 columns</a></li>
-										<li><a href="portfolio_grid_4_columns.html">4 columns</a></li>
+                                        <li><a href="portfolio_grid_full_width.html">Full width</a></li>
+                                        <li><a href="portfolio_grid_2_columns.html">2 columns</a></li>
+                                        <li><a href="portfolio_grid_3_columns.html">3 columns</a></li>
+                                        <li><a href="portfolio_grid_4_columns.html">4 columns</a></li>
 
-									</ul>
+                                    </ul>
 
-									<!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
+                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
 
-								</li>
-								<li><a href="portfolio_image_list_post.html">Image list post with top image</a></li>
-								<li><a href="portfolio_image_slideshow_post.html">Image slideshow post</a></li>
-								<li><a href="portfolio_video_post.html">Video post</a></li>
-								<li><a href="portfolio_audio_post.html">Audio post with top image</a></li>
-								<li><a href="portfolio_mixed_list_post.html">Mixed list post</a></li>
-								<li><a href="portfolio_post_with_sidebar.html">Post with sidebar</a></li>
-								<li><a href="portfolio_ribbon_post.html">Ribbon post</a></li>
+                                </li>
+                                <li><a href="portfolio_image_list_post.html">Image list post with top image</a></li>
+                                <li><a href="portfolio_image_slideshow_post.html">Image slideshow post</a></li>
+                                <li><a href="portfolio_video_post.html">Video post</a></li>
+                                <li><a href="portfolio_audio_post.html">Audio post with top image</a></li>
+                                <li><a href="portfolio_mixed_list_post.html">Mixed list post</a></li>
+                                <li><a href="portfolio_post_with_sidebar.html">Post with sidebar</a></li>
+                                <li><a href="portfolio_ribbon_post.html">Ribbon post</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="galleries_masonry_albums.html">Galleries</a>
+                            <a href="galleries_masonry_albums.html">Galleries</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li><a href="galleries_masonry_albums.html">Masonry albums</a></li>
-								<li><a href="galleries_grid_albums.html">Grid albums</a></li>
-								<li><a href="galleries_ribbon.html">Ribbon gallery</a></li>
-								<li><a href="galleries_flow.html">Flow gallery</a></li>
-								<li><a href="galleries_kenburns.html">Kenburns</a></li>
-								<li><a href="galleries_masonry_wall.html">Masonry wall</a></li>
-								<li><a href="galleries_grid_wall.html">Grid wall</a></li>
-								<li><a href="galleries_protected.html">Protected gallery</a></li>
+                                <li><a href="galleries_masonry_albums.html">Masonry albums</a></li>
+                                <li><a href="galleries_grid_albums.html">Grid albums</a></li>
+                                <li><a href="galleries_ribbon.html">Ribbon gallery</a></li>
+                                <li><a href="galleries_flow.html">Flow gallery</a></li>
+                                <li><a href="galleries_kenburns.html">Kenburns</a></li>
+                                <li><a href="galleries_masonry_wall.html">Masonry wall</a></li>
+                                <li><a href="galleries_grid_wall.html">Grid wall</a></li>
+                                <li><a href="galleries_protected.html">Protected gallery</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="features_elements.html">Features</a>
+                            <a href="features_elements.html">Features</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li><a href="features_elements.html">Elements</a></li>
-								<li><a href="features_typography.html">Typography</a></li>
-								<li><a href="features_columns.html">Columns</a></li>
-								<li><a href="RTL/index.html">RTL layout</a></li>
+                                <li><a href="features_elements.html">Elements</a></li>
+                                <li><a href="features_typography.html">Typography</a></li>
+                                <li><a href="features_columns.html">Columns</a></li>
+                                <li><a href="RTL/index.html">RTL layout</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="blog_full_width.html">Blog</a>
+                            <a href="blog_full_width.html">Blog</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li><a href="blog_full_width.html">Full width blog</a></li>
-								<li><a href="blog_with_sidebar.html">Blog with sidebar</a></li>
-								<li><a href="blog_masonry.html">Masonry blog</a></li>
-								<li><a href="blog_full_width_post.html">Full width single blog post</a></li>
-								<li><a href="blog_post_with_right_sidebar.html">Single blog post with right sidebar</a></li>
-								<li><a href="blog_post_with_left_sidebar.html">Single blog post with left sidebar</a></li>
-								<li><a href="blog_post_with_extended_image.html">Single blog post with extended featured image</a></li>
+                                <li><a href="blog_full_width.html">Full width blog</a></li>
+                                <li><a href="blog_with_sidebar.html">Blog with sidebar</a></li>
+                                <li><a href="blog_masonry.html">Masonry blog</a></li>
+                                <li><a href="blog_full_width_post.html">Full width single blog post</a></li>
+                                <li><a href="blog_post_with_right_sidebar.html">Single blog post with right sidebar</a></li>
+                                <li><a href="blog_post_with_left_sidebar.html">Single blog post with left sidebar</a></li>
+                                <li><a href="blog_post_with_extended_image.html">Single blog post with extended featured image</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-						<li class="has_submenu">
+                        <li class="has_submenu">
 
-							<a href="shop_full_width_front_page.html">Shop</a>
+                            <a href="shop_full_width_front_page.html">Shop</a>
 
-							<!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-							<ul class="submenu">
+                            <ul class="submenu">
 
-								<li><a href="shop_full_width_front_page.html">Full width front page</a></li>
-								<li><a href="shop_front_page_with_sidebar.html">Front page with sidebar</a></li>
-								<li><a href="shop_full_width_product_page.html">Full width product page</a></li>
-								<li><a href="shop_product_page_with_sidebar.html">Product page with sidebar</a></li>
-								<li><a href="shop_shopping_cart.html">Shopping cart</a></li>
-								<li><a href="shop_checkout.html">Checkout</a></li>
+                                <li><a href="shop_full_width_front_page.html">Full width front page</a></li>
+                                <li><a href="shop_front_page_with_sidebar.html">Front page with sidebar</a></li>
+                                <li><a href="shop_full_width_product_page.html">Full width product page</a></li>
+                                <li><a href="shop_product_page_with_sidebar.html">Product page with sidebar</a></li>
+                                <li><a href="shop_shopping_cart.html">Shopping cart</a></li>
+                                <li><a href="shop_checkout.html">Checkout</a></li>
 
-							</ul>
+                            </ul>
 
-							<!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
-						</li>
+                        </li>
 
-					</ul>
+                    </ul>
 
-				</nav>
+                </nav>
 
-				<!-- - - - - - - - - - - - - - End of Main Navigation - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - End of Main Navigation - - - - - - - - - - - - - - - - -->
 
-			</div><!--/ #vertical_menu_wrap -->
-			<!-- - - - - - - - - - - - - - End of Main Navigation Container - - - - - - - - - - - - - - - - -->
-			<!-- - - - - - - - - - - - - - Top Buttons - - - - - - - - - - - - - - - - -->
+            </div><!--/ #vertical_menu_wrap -->
+            <!-- - - - - - - - - - - - - - End of Main Navigation Container - - - - - - - - - - - - - - - - -->
+            <!-- - - - - - - - - - - - - - Top Buttons - - - - - - - - - - - - - - - - -->
 
-			<div id="top_actions_wrap">
+            <div id="top_actions_wrap">
 
-				<!-- - - - - - - - - - - - - - Isotope Filter - - - - - - - - - - - - - - - - -->
 
-				<div id="filter_wrap">
+                <!-- - - - - - - - - - - - - - Isotope Filter - - - - - - - - - - - - - - - - -->
 
-					<span id="filter_btn" class="si-icon toggle_box" data-width="28" data-height="28" data-event="click" data-icon-name="filter"></span>
+                <div id="filter_wrap">
 
-					<ul id="filter" class="animation_box">
+                    <span id="filter_btn" class="si-icon toggle_box" data-width="28" data-height="28" data-event="click" data-icon-name="filter"></span>
 
-						<li data-filter="*">All</li>
-						<li data-filter=".people">People</li>
-						<li data-filter=".macro">Macro</li>
-						<li data-filter=".travelling">Travelling</li>
+                    <ul id="filter" class="animation_box">
 
-					</ul>
+                        <li data-filter="*">All</li>
+                        <li data-filter=".people">People</li>
+                        <li data-filter=".macro">Macro</li>
+                        <li data-filter=".travelling">Travelling</li>
 
-				</div>
+                    </ul>
 
-				<!-- - - - - - - - - - - - - - End of Isotope Filter - - - - - - - - - - - - - - - - -->
+                </div>
 
-				<!-- - - - - - - - - - - - - - Searchform - - - - - - - - - - - - - - - - -->
 
-				<form role="search" class="nav_searchform">
 
-					<input type="search" placeholder="Search..." name="">
+                <!-- - - - - - - - - - - - - - End of Isotope Filter - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Searchform - - - - - - - - - - - - - - - - -->
 
-					<button><span class="si-icon" data-width="24" data-height="24" data-event="mouseover" data-icon-name="search"></span></button>
+                <form role="search" class="nav_searchform">
 
-				</form>
+                    <input type="search" placeholder="Search..." name="">
 
-				<!-- - - - - - - - - - - - - - End of Searchform - - - - - - - - - - - - - - - - -->
+                    <button><span class="si-icon" data-width="24" data-height="24" data-event="mouseover" data-icon-name="search"></span></button>
 
-				<span id="toggle_menu" class="si-icon" data-width="36" data-height="36" data-event="click" data-icon-name="hamburgerCross"></span>
+                </form>
 
-			</div><!--/ #top_btns_wrap -->
-			<!-- - - - - - - - - - - - - - End of Top Buttons - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - End of Searchform - - - - - - - - - - - - - - - - -->
 
-		</header>
+                <span id="toggle_menu" class="si-icon" data-width="36" data-height="36" data-event="click" data-icon-name="hamburgerCross"></span>
 
-		<!-- - - - - - - - - - - - - - End Header - - - - - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - Extended Block (image, gmap) - - - - - - - - - - - - - - - - -->
+            </div><!--/ #top_btns_wrap -->
+            <!-- - - - - - - - - - - - - - End of Top Buttons - - - - - - - - - - - - - - - - -->
 
-		<div class="extended_wrap" data-image-url="images/top_image_4.jpg"></div>
+        </header>
 
-		<!-- - - - - - - - - - - - - - End of Extended Block - - - - - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - Page content - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - End Header - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Extended Block (image, gmap) - - - - - - - - - - - - - - - - -->
 
-		<div id="page_wrap">
+        <div class="extended_wrap" data-image-url="images/top_image_4.jpg"></div>
+
+        <!-- - - - - - - - - - - - - - End of Extended Block - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Page content - - - - - - - - - - - - - - - - -->
+
+        <div id="page_wrap">
             @RenderBody()
-		</div><!--/ .page_wrapper -->
-		<!-- - - - - - - - - - - - - - End page content - - - - - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
+        </div><!--/ .page_wrapper -->
+        <!-- - - - - - - - - - - - - - End page content - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
 
-		<footer role="contentinfo" id="footer">
+        <footer role="contentinfo" id="footer">
 
-			<span class="copyright">&copy; 2015 Joker. All rights reserved.</span>
+            <span class="copyright">&copy; 2015 Joker. All rights reserved.</span>
 
-			<!-- - - - - - - - - - - - - - Social icons - - - - - - - - - - - - - - - - -->
+            <!-- - - - - - - - - - - - - - Social icons - - - - - - - - - - - - - - - - -->
 
-			<ul class="social_links">
+            <ul class="social_links">
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Facebook</span><i class="icon-facebook-1"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Facebook</span><i class="icon-facebook-1"></i></a>
+                </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">GooglePlus+</span><i class="icon-gplus"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">GooglePlus+</span><i class="icon-gplus"></i></a>
+                </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Twitter</span><i class="icon-twitter"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Twitter</span><i class="icon-twitter"></i></a>
+                </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">LinkedIn</span><i class="icon-linkedin-1"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">LinkedIn</span><i class="icon-linkedin-1"></i></a>
+                </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Instagramm</span><i class="icon-instagramm"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Instagramm</span><i class="icon-instagramm"></i></a>
+                </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Flickr</span><i class="icon-flickr"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Flickr</span><i class="icon-flickr"></i></a>
+                </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">500px</span><i class="icon-fivehundredpx"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">500px</span><i class="icon-fivehundredpx"></i></a>
+                </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Pinterest</span><i class="icon-pinterest-circled"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Pinterest</span><i class="icon-pinterest-circled"></i></a>
+                </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Dribbble</span><i class="icon-dribbble-1"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Dribbble</span><i class="icon-dribbble-1"></i></a>
+                </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">YouTube</span><i class="icon-youtube-play"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">YouTube</span><i class="icon-youtube-play"></i></a>
+                </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Vimeo</span><i class="icon-vimeo-squared"></i></a>
-				</li>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Vimeo</span><i class="icon-vimeo-squared"></i></a>
+                </li>
 
-			</ul>
+            </ul>
 
-			<!-- - - - - - - - - - - - - - End Social icons - - - - - - - - - - - - - - - - -->
+            <!-- - - - - - - - - - - - - - End Social icons - - - - - - - - - - - - - - - - -->
 
-		</footer>
+        </footer>
 
-		<!-- - - - - - - - - - - - - - End Footer - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - End Footer - - - - - - - - - - - - - - - - -->
 
-	</div>
+    </div>
 
     <!-- Include Libs & Plugins
     ============================================ -->
@@ -669,3 +686,6 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+
