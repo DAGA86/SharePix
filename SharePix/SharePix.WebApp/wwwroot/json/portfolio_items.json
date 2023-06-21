@@ -1,0 +1,224 @@
+{
+	"items" : [
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_1.jpg",
+			"postTitle" : "Portfolio Post 14",
+			"postLink" : "portfolio_post_with_sidebar.html",
+			"categoryLink" : "#",
+			"layoutType" : 1,
+			"category" : "travelling",
+			"statLink1" : {
+				"amount" : 15,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 100,
+				"icon": "heart-empty"
+			}
+		},
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_2.jpg",
+			"postTitle" : "Portfolio Post 15",
+			"postLink" : "portfolio_mixed_list_post.html",
+			"categoryLink" : "#",
+			"layoutType" : 2,
+			"category" : "people",
+			"statLink1" : {
+				"amount" : 36,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 119,
+				"icon": "heart-empty"
+			}
+		},
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_3.jpg",
+			"postTitle" : "Portfolio Post 16",
+			"postLink" : "portfolio_ribbon_post.html",
+			"categoryLink" : "#",
+			"layoutType" : 3,
+			"category" : "macro",
+			"statLink1" : {
+				"amount" : 58,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 141,
+				"icon": "heart-empty"
+			}
+		},
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_4.jpg",
+			"postTitle" : "Portfolio Post 4",
+			"postLink" : "portfolio_video_post.html",
+			"categoryLink" : "#",
+			"layoutType" : 2,
+			"category" : "people",
+			"statLink1" : {
+				"amount" : 10,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 10,
+				"icon": "heart-empty"
+			}
+		},
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_14.jpg",
+			"postTitle" : "Portfolio Post 18",
+			"postLink" : "portfolio_audio_post.html",
+			"categoryLink" : "#",
+			"layoutType" : 4,
+			"category" : "people",
+			"statLink1" : {
+				"amount" : 15,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 151,
+				"icon": "heart-empty"
+			}
+		},
+		{
+			"imageSrc" : "images/portfolio_masonry_img_15.jpg",
+			"postTitle" : "Portfolio Post 19",
+			"postLink" : "portfolio_mixed_list_post.html",
+			"categoryLink" : "#",
+			"layoutType" : 5,
+			"category" : "macro",
+			"statLink1" : {
+				"amount" : 19,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 24,
+				"icon": "heart-empty"
+			}
+		},
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_5.jpg",
+			"postTitle" : "Portfolio Post 20",
+			"postLink" : "portfolio_post_with_sidebar.html",
+			"categoryLink" : "#",
+			"layoutType" : 5,
+			"category" : "travelling",
+			"statLink1" : {
+				"amount" : 17,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 81,
+				"icon": "heart-empty"
+			}
+		},
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_6.jpg",
+			"postTitle" : "Portfolio Post 21",
+			"postLink" : "portfolio_audio_post.html",
+			"categoryLink" : "#",
+			"layoutType" : 2,
+			"category" : "people",
+			"statLink1" : {
+				"amount" : 181,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 94,
+				"icon": "heart-empty"
+			}
+		},
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_7.jpg",
+			"postTitle" : "Portfolio Post 22",
+			"postLink" : "portfolio_video_post.html",
+			"categoryLink" : "#",
+			"layoutType" : 1,
+			"category" : "people",
+			"statLink1" : {
+				"amount" : 85,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 77,
+				"icon": "heart-empty"
+			}
+		},
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_8.jpg",
+			"postTitle" : "Portfolio Post 23",
+			"postLink" : "portfolio_ribbon_post.html",
+			"categoryLink" : "#",
+			"layoutType" : 5,
+			"category" : "travelling",
+			"statLink1" : {
+				"amount" : 71,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 88,
+				"icon": "heart-empty"
+			}
+		},
+		{
+			"imageSrc" : "images/portfolio_masonry_img_9.jpg",
+			"postTitle" : "Portfolio Post 24",
+			"postLink" : "portfolio_mixed_list_post.html",
+			"categoryLink" : "#",
+			"layoutType" : 1,
+			"category" : "travelling",
+			"statLink1" : {
+				"amount" : 81,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 17,
+				"icon": "heart-empty"
+			}
+		},
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_10.jpg",
+			"postTitle" : "Portfolio Post 25",
+			"postLink" : "portfolio_post_with_sidebar.html",
+			"categoryLink" : "#",
+			"layoutType" : 3,
+			"category" : "travelling",
+			"statLink1" : {
+				"amount" : 56,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 49,
+				"icon": "heart-empty"
+			}
+		},
+
+		{
+			"imageSrc" : "images/portfolio_masonry_img_11.jpg",
+			"postTitle" : "Portfolio Post 26",
+			"postLink" : "portfolio_audio_post.html",
+			"categoryLink" : "#",
+			"layoutType" : 4,
+			"category" : "macro",
+			"statLink1" : {
+				"amount" : 897,
+				"icon": "eye"
+			},
+			"statLink2" : {
+				"amount" : 478,
+				"icon": "heart-empty"
+			}
+		}
+
+	]
+}
