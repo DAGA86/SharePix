@@ -1,4 +1,4 @@
-﻿@*@using Microsoft.AspNetCore.Builder
+﻿@using Microsoft.AspNetCore.Builder
 @using Microsoft.AspNetCore.Localization
 @using Microsoft.Extensions.Options
 @inject IOptions<RequestLocalizationOptions> LocOptions
@@ -11,204 +11,243 @@
         .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
         .ToList();
 }
-*@
+
 <!doctype html>
 <html>
 
 <head>
 
-	<!-- Basic page needs
-	============================================ -->
-	<title>Joker | Home</title>
-	<meta charset="utf-8">
-	<meta name="author" content="">
-	<meta name="description" content="">
-	<meta name="keywords" content="">
+    <!-- Basic page needs
+    ============================================ -->
+    <title>Joker | Home</title>
+    <meta charset="utf-8">
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
 
-	<!-- Mobile specific metas
-	============================================ -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<!-- Favicon
-	============================================ -->
-	<link rel="shortcut icon" type="image/x-icon" href="~/images/fav_icon.ico">
+    <!-- Favicon
+    ============================================ -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/images/fav_icon.ico">
 
-	<!-- Google web fonts
-	============================================ -->
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <!-- Google web fonts
+    ============================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tsukimi+Rounded:wght@300,400,700&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic' rel='stylesheet' type='text/css'>
 
-	<!-- Libs CSS
-	============================================ -->
-	<link rel="stylesheet" href="~/css/animate.css">
-	<link rel="stylesheet" href="~/plugins/rs-plugin/css/settings.css">
-	<link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/plugins/rs-plugin/css/settings.css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
 
-	<!-- Theme CSS
-	============================================ -->
-	<link rel="stylesheet" href="~/css/style.css">
-	<link rel="stylesheet" href="~/css/login.css">
-	<!-- <link rel="stylesheet" href="css/rtl.css"> -->
-	<!-- JS Libs
-	============================================ -->
-	<script src="~/plugins/modernizr.js"></script>
+    <!-- Theme CSS
+    ============================================ -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/guest.css">
 
-	<!-- Old IE stylesheet
-	============================================ -->
-	<!--[if lte IE 9]>
-		<link rel="stylesheet" type="text/css" href="css/oldie.css">
-		<script src="js/placeholderIE.js"></script>
-	<![endif]-->
+    <!-- JS Libs
+    ============================================ -->
+    <script src="~/plugins/modernizr.js"></script>
+
+
 
 </head>
 
 <body>
 
-	<div id="page_loader" class="page_loader">
-		<div id="loader"></div>
-	</div>
+    <div id="page_loader" class="page_loader">
+        <div id="loader"></div>
+    </div>
 
-	<!-- - - - - - - - - - - - - - Cookie Control & Old ie Message - - - - - - - - - - - - - - - - -->
+    <!-- - - - - - - - - - - - - - Cookie Control & Old ie Message - - - - - - - - - - - - - - - - -->
 
-	<div class="messages_wrap">
+    <div class="messages_wrap">
+    </div>
 
-		<!-- - - - - - - - - - - - - - Old IE Message - - - - - - - - - - - - - - - - -->
-		<!--[if lt IE 9]>
+    <!-- - - - - - - - - - - - - - End of Cookie Control & Old ie Message - - - - - - - - - - - - - - - - -->
 
-		<div class="old_ie_message">
+    <div id="document_wrap">
 
-			<div class="on_the_sides">
+        <!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->
 
-				<div class="left_side">
+        <header role="banner" id="header-guest" class="vm transparent">
 
-					<i class="icon-attention"></i> <b>Attention!</b> This page may not display correctly. You are using an outdated version of Internet Explorer. For a faster, safer browsing experience.
+            <!-- - - - - - - - - - - - - - Logo - - - - - - - - - - - - - - - - -->
+            <div>
 
-				</div>
+                <a href="index.html" class="logo">
 
-				<div class="right_side">
+                    <img src="~/images/logo.png" alt="">
 
-					<a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode" class="btn small transparent black" target="_blank">Update Now!</a>
+                </a>
 
-				</div>
+                <form asp-action="ChangeLanguage" asp-controller="Home" method="post" class="lang-position">
+                    <input type="hidden" id="returnUrl" name="returnUrl" value="@returnUrl" />
+                    <select id="culture"
+                            name="culture"
+                            class="form-control"
+                            onchange="this.form.submit();"
+                            asp-items="cultureItems"
+                            asp-for="@requestCulture.RequestCulture.UICulture.Name">
+                    </select>
+                </form>
 
-			</div>
 
-		</div>
+            </div>
 
-		<![endif]-->
-		<!-- - - - - - - - - - - - - - End of Old IE Message - - - - - - - - - - - - - - - - -->
+            <!-- - - - - - - - - - - - - - End of Main Navigation Container - - - - - - - - - - - - - - - - -->
 
-	</div>
+        </header>
 
-	<!-- - - - - - - - - - - - - - End of Cookie Control & Old ie Message - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - End Header - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Page content - - - - - - - - - - - - - - - - -->
 
-	<div id="document_wrap">
+        <div id="page_wrap" class="fullscreen">
+            <main>
+                <!-- - - - - - - - - - - - - - Revolution Slider - - - - - - - - - - - - - - - - -->
 
-		<!-- - - - - - - - - - - - - - Header - - - - - - - - - - - - - - - - -->
+                <div class="bannercontainer">
 
-		<header role="banner" id="header" class="vm transparent">
+                    <div class="banner">
 
-			<!-- - - - - - - - - - - - - - Logo - - - - - - - - - - - - - - - - -->
+                        <ul>
 
-			<a href="index.html" class="logo">
+                            <!-- - - - - - - - - - - - - - Slide - - - - - - - - - - - - - - - - -->
 
-				<img src="~/images/logo.png" alt="">
+                            <li data-transition="fade" data-thumb="images/1.jpg">
 
-			</a>
+                                <img src="~/images/1.jpg" alt="">
 
-			
-			<!-- - - - - - - - - - - - - - End of Main Navigation Container - - - - - - - - - - - - - - - - -->
-			<!-- - - - - - - - - - - - - - Top Buttons - - - - - - - - - - - - - - - - -->
+                                <div class="caption sfb stb" data-x="30" data-y="bottom" data-speed="400" data-voffset="-95">
 
-		</header>
 
-		<!-- - - - - - - - - - - - - - End Header - - - - - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - Page content - - - - - - - - - - - - - - - - -->
+                                    <p class="slide_desc">Duis ac turpis. Aliquam Erat Volutpat.</p>
 
-		<div id="page_wrap" class="fullscreen">
-        @RenderBody()
-		</div><!--/ #page_wrapper -->
-		<!-- - - - - - - - - - - - - - End page content - - - - - - - - - - - - - - - - -->
-		<!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
+                                </div>
 
-		<footer role="contentinfo" id="footer" class="fullscreen">
+                            </li>
 
-			<span class="copyright">&copy; 2015 Joker. All rights reserved.</span>
+                            <!-- - - - - - - - - - - - - - End of Slide - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Slide - - - - - - - - - - - - - - - - -->
 
-			<!-- - - - - - - - - - - - - - Social icons - - - - - - - - - - - - - - - - -->
+                            <li data-transition="fade" data-thumb="images/2.jpg">
 
-			<ul class="social_links">
+                                <img src="~/images/2.jpg" alt="">
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Facebook</span><i class="icon-facebook-1"></i></a>
-				</li>
+                                <div class="caption sfb stb" data-x="30" data-y="bottom" data-speed="400" data-voffset="-95">
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">GooglePlus+</span><i class="icon-gplus"></i></a>
-				</li>
+                                    <p class="slide_desc">Duis ac turpis. Donec sit amet eros.</p>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Twitter</span><i class="icon-twitter"></i></a>
-				</li>
+                                </div>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">LinkedIn</span><i class="icon-linkedin-1"></i></a>
-				</li>
+                            </li>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Instagramm</span><i class="icon-instagramm"></i></a>
-				</li>
+                            <!-- - - - - - - - - - - - - - End of Slide - - - - - - - - - - - - - - - - -->
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Flickr</span><i class="icon-flickr"></i></a>
-				</li>
+                        </ul>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">500px</span><i class="icon-fivehundredpx"></i></a>
-				</li>
+                    </div>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Pinterest</span><i class="icon-pinterest-circled"></i></a>
-				</li>
+                </div>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Dribbble</span><i class="icon-dribbble-1"></i></a>
-				</li>
+                <!-- - - - - - - - - - - - - - End of Revolution Slider - - - - - - - - - - - - - - - - -->
+                <!-- - - - - - - - - - - - - - Actions - - - - - - - - - - - - - - - - -->
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">YouTube</span><i class="icon-youtube-play"></i></a>
-				</li>
+            </main>
 
-				<li>
-					<a href="#" class="tooltip_container"><span class="tooltip top">Vimeo</span><i class="icon-vimeo-squared"></i></a>
-				</li>
+            @RenderBody()
+        </div><!--/ #page_wrapper -->
+        <!-- - - - - - - - - - - - - - End page content - - - - - - - - - - - - - - - - -->
+        <!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
 
-			</ul>
+        <footer role="contentinfo" id="footer" class="fullscreen">
 
-			<!-- - - - - - - - - - - - - - End Social icons - - - - - - - - - - - - - - - - -->
+            <span class="copyright">&copy; 2015 Joker. All rights reserved.</span>
 
-		</footer>
+            <!-- - - - - - - - - - - - - - Social icons - - - - - - - - - - - - - - - - -->
 
-		<!-- - - - - - - - - - - - - - End Footer - - - - - - - - - - - - - - - - -->
+            <ul class="social_links">
 
-	</div>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Facebook</span><i class="icon-facebook-1"></i></a>
+                </li>
 
-	<!-- Include Libs & Plugins
-	============================================ -->
-	<script src="~/js/jquery-2.1.3.min.js"></script>
-	<script src="~/plugins/jquery.mousewheel.min.js"></script>
-	<script src="~/plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-	<script src="~/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-	<script src="~/plugins/svg/snap.svg-min.js"></script>
-	<script src="~/plugins/svg/svgicons-config.js"></script>
-	<script src="~/plugins/svg/svgicons.js"></script>
-	<script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53b561d45194bf47" async="async"></script>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">GooglePlus+</span><i class="icon-gplus"></i></a>
+                </li>
 
-	<!-- Theme files
-	============================================ -->
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Twitter</span><i class="icon-twitter"></i></a>
+                </li>
 
-	<script src="~/js/theme.core.js"></script>
-	<script src="~/js/theme.plugins.js"></script>
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">LinkedIn</span><i class="icon-linkedin-1"></i></a>
+                </li>
+
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Instagramm</span><i class="icon-instagramm"></i></a>
+                </li>
+
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Flickr</span><i class="icon-flickr"></i></a>
+                </li>
+
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">500px</span><i class="icon-fivehundredpx"></i></a>
+                </li>
+
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Pinterest</span><i class="icon-pinterest-circled"></i></a>
+                </li>
+
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Dribbble</span><i class="icon-dribbble-1"></i></a>
+                </li>
+
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">YouTube</span><i class="icon-youtube-play"></i></a>
+                </li>
+
+                <li>
+                    <a href="#" class="tooltip_container"><span class="tooltip top">Vimeo</span><i class="icon-vimeo-squared"></i></a>
+                </li>
+
+            </ul>
+
+            <!-- - - - - - - - - - - - - - End Social icons - - - - - - - - - - - - - - - - -->
+
+        </footer>
+
+        <!-- - - - - - - - - - - - - - End Footer - - - - - - - - - - - - - - - - -->
+
+    </div>
+
+    <!-- Include Libs & Plugins
+    ============================================ -->
+    <script src="~/js/jquery-2.1.3.min.js"></script>
+    <script src="~/plugins/jquery.mousewheel.min.js"></script>
+    <script src="~/plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="~/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="~/plugins/svg/snap.svg-min.js"></script>
+    <script src="~/plugins/svg/svgicons-config.js"></script>
+    <script src="~/plugins/svg/svgicons.js"></script>
+    <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53b561d45194bf47" async="async"></script>
+
+    <!-- Theme files
+    ============================================ -->
+
+    <script src="~/js/theme.core.js"></script>
+    <script src="~/js/theme.plugins.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
