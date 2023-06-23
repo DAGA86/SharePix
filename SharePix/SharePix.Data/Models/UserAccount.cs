@@ -23,6 +23,8 @@ namespace SharePix.Data.Models
         public string? PasswordHash { get; set; }
         public DateTime? RegisterDate { get; set; }       
         public bool IsActive { get; set; }
+        public Guid? RecoveryToken { get; set; }
+
 
 
         public ICollection<Friend> FriendsAddedThis { get; set; }

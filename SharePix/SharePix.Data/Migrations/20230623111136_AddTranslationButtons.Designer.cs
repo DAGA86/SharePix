@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SharePix.Data.Contexts;
 
@@ -11,9 +12,10 @@ using SharePix.Data.Contexts;
 namespace SharePix.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230623111136_AddTranslationButtons")]
+    partial class AddTranslationButtons
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,7 +272,7 @@ namespace SharePix.Data.Migrations
                         {
                             Key = "general.button.forgottenPassword",
                             LanguageId = 1,
-                            Value = "Forgotten password?"
+                            Value = "Forgotten password"
                         },
                         new
                         {
@@ -396,7 +398,7 @@ namespace SharePix.Data.Migrations
                         {
                             Key = "general.button.forgottenPassword",
                             LanguageId = 2,
-                            Value = "Recuperar palavra-passe?"
+                            Value = "Recuperar palavra-passe"
                         },
                         new
                         {
@@ -517,9 +519,6 @@ namespace SharePix.Data.Migrations
                     b.Property<string>("PasswordHash")
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
-
-                    b.Property<Guid?>("RecoveryToken")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("RegisterDate")
                         .HasColumnType("datetime2");

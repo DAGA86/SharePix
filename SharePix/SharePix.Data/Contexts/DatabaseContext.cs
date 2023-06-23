@@ -63,6 +63,8 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "login.title", Value = "Login", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.login", Value = "Login", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.create", Value = "Create", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "general.button.createAccount", Value = "Create account", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "general.button.forgottenPassword", Value = "Forgotten password?", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.cancel", Value = "Cancel", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.edit", Value = "Edit", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.delete", Value = "Delete", LanguageId = 1 });
@@ -83,6 +85,8 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "login.title", Value = "Entrar", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.login", Value = "Entrar", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.create", Value = "Criar", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "general.button.createAccount", Value = "Criar conta", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "general.button.forgottenPassword", Value = "Recuperar palavra-passe?", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.cancel", Value = "Cancelar", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.edit", Value = "Editar", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.delete", Value = "Eliminar", LanguageId = 2 });

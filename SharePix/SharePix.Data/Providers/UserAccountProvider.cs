@@ -1,4 +1,5 @@
-﻿using SharePix.Data.Models;
+﻿using SharePix.Data.Contexts;
+using SharePix.Data.Models;
 using System.Security.Principal;
 
 namespace SharePix.Data.Providers
@@ -20,6 +21,11 @@ namespace SharePix.Data.Providers
         public UserAccount? GetAccountById(int id)
         {
             return _dbContext.UserAccounts.FirstOrDefault(x => x.Id == id);
+        }
+
+        public UserAccount? GetFirstByEmail(string email)
+        {
+            return _dbContext.UserAccounts.FirstOrDefault(u => u.Email == email);
         }
 
         public UserAccount? ValidateCredencials(string usernameOrEmail, string password)
@@ -60,6 +66,35 @@ namespace SharePix.Data.Providers
             }
 
             return result;
+        }
+
+
+        public UserAccount? ForgotPassword(UserAccount account)
+        {
+            Models.UserAccount? forgotPassword = _dbContext.UserAccounts.FirstOrDefault(x => x.RecoveryToken == account.RecoveryToken); //FirstOrDefault(u => u.Email == email);
+
+            if (ForgotPassword != null)
+            {
+                forgotPassword.PasswordHash = account.PasswordHash;
+
+                _dbContext.SaveChanges();
+            }
+
+            return forgotPassword;
+        }
+
+        public UserAccount? RecoverPassword(UserAccount account)
+        {
+            Models.UserAccount? recoverPassword = _dbContext.UserAccounts.FirstOrDefault(x => x.Id == account.Id); //FirstOrDefault(u => u.Email == email);
+
+            if (RecoverPassword != null)
+            {
+                recoverPassword.PasswordHash = account.PasswordHash;
+
+                _dbContext.SaveChanges();
+            }
+
+            return recoverPassword;
         }
 
         public UserAccount? UpdateAccount(UserAccount account)

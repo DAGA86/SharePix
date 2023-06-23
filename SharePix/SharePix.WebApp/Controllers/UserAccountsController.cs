@@ -145,6 +145,47 @@ namespace SharePix.WebApp.Controllers
 
         }
 
+
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        private readonly ILogger<HomeController> _logger;
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Data.Models.UserAccount user = _userAccountProvider.GetFirstByEmail(model.Email);
+
+                if( user != null)
+                {
+                    var token = _userAccountProvider.ForgotPassword(user);
+
+                    var passwordResetPassword = Url.Action("ResetPassword", "UserAccounts", new { email = model.Email, token = token }, Request.Scheme);
+
+                    _logger.Log(LogLevel.Warning, passwordResetPassword);
+
+                    return View("~/UserAccounts/ForgotPasswordConfirmation");
+                }
+                return View("~/UserAccounts/ForgotPasswordConfirmation");
+            }
+            return View(model);
+        }
+
+        public ActionResult SendEmail()
+        {
+            return View();
+        }
+
+        public ActionResult ResetPassword()
+        {
+            return View();
+        }
+
         // GET: UserAccountsController/Details/5
         public ActionResult Details(int id)
         {

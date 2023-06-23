@@ -1,6 +1,8 @@
+var basePath = window.location.protocol + '//' + window.location.host + '/'
+
 var svgIconConfig = {
 	clock : { 
-		url : 'plugins/svg/icons/clock.svg',
+		url : basePath + 'plugins/svg/icons/clock.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(2)', 
@@ -19,7 +21,7 @@ var svgIconConfig = {
 		]
 	},
 	trash : { 
-		url : 'plugins/svg/icons/trash.svg',
+		url : basePath + 'plugins/svg/icons/trash.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -31,7 +33,7 @@ var svgIconConfig = {
 		]
 	},
 	contract : { 
-		url : 'plugins/svg/icons/contract.svg',
+		url : basePath + 'plugins/svg/icons/contract.svg',
 		animation : [
 			{ 
 				el : 'rect:nth-child(2)', 
@@ -50,7 +52,7 @@ var svgIconConfig = {
 		]
 	},
 	maximize : { 
-		url : 'plugins/svg/icons/maximize.svg',
+		url : basePath + 'plugins/svg/icons/maximize.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -83,7 +85,7 @@ var svgIconConfig = {
 		]
 	},
 	maximizeRotate : { 
-		url : 'plugins/svg/icons/maximize.svg',
+		url : basePath + 'plugins/svg/icons/maximize.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -116,7 +118,7 @@ var svgIconConfig = {
 		]
 	},
 	volume : {
-		url : 'plugins/svg/icons/volume.svg',
+		url : basePath + 'plugins/svg/icons/volume.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -142,7 +144,7 @@ var svgIconConfig = {
 		]
 	},
 	account : {
-		url : 'plugins/svg/icons/account.svg',
+		url : basePath + 'plugins/svg/icons/account.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -154,7 +156,7 @@ var svgIconConfig = {
 		]
 	},
 	cart : {
-		url : 'plugins/svg/icons/cart.svg',
+		url : basePath + 'plugins/svg/icons/cart.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -166,7 +168,7 @@ var svgIconConfig = {
 		]
 	},
 	likeDark : {
-		url : 'plugins/svg/icons/like_dark.svg',
+		url : basePath + 'plugins/svg/icons/like_dark.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -178,7 +180,7 @@ var svgIconConfig = {
 		]
 	},
 	likedDark : {
-		url : 'plugins/svg/icons/liked_dark.svg',
+		url : basePath + 'plugins/svg/icons/liked_dark.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -190,7 +192,7 @@ var svgIconConfig = {
 		]
 	},
 	portfolio : {
-		url : 'plugins/svg/icons/portfolio.svg',
+		url : basePath + 'plugins/svg/icons/portfolio.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -202,7 +204,7 @@ var svgIconConfig = {
 		]
 	},
 	plus : { 
-		url : 'plugins/svg/icons/plus.svg',
+		url : basePath + 'plugins/svg/icons/plus.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -221,7 +223,7 @@ var svgIconConfig = {
 		]
 	},
 	plusCross : { 
-		url : 'plugins/svg/icons/plus.svg',
+		url : basePath + 'plugins/svg/icons/plus.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -240,7 +242,7 @@ var svgIconConfig = {
 		]
 	},
 	plusLight : { 
-		url : 'plugins/svg/icons/plus_light.svg',
+		url : basePath + 'plugins/svg/icons/plus_light.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -259,7 +261,7 @@ var svgIconConfig = {
 		]
 	},
 	plusLightCross : { 
-		url : 'plugins/svg/icons/plus_light.svg',
+		url : basePath + 'plugins/svg/icons/plus_light.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -278,7 +280,7 @@ var svgIconConfig = {
 		]
 	},
 	hamburger : {
-		url : 'plugins/svg/icons/hamburger.svg',
+		url : basePath + 'plugins/svg/icons/hamburger.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -297,7 +299,7 @@ var svgIconConfig = {
 		]
 	},
 	hamburgerCross : {
-		url : 'plugins/svg/icons/hamburger.svg',
+		url : basePath + 'plugins/svg/icons/hamburger.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -323,7 +325,7 @@ var svgIconConfig = {
 		]
 	},
 	navLeftArrow : {
-		url : 'plugins/svg/icons/nav-left-arrow.svg',
+		url : basePath + 'plugins/svg/icons/nav-left-arrow.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -335,7 +337,7 @@ var svgIconConfig = {
 		]
 	},
 	navUpArrow : {
-		url : 'plugins/svg/icons/nav-up-arrow.svg',
+		url : basePath + 'plugins/svg/icons/nav-up-arrow.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -347,7 +349,7 @@ var svgIconConfig = {
 		]
 	},
 	rightArrow : {
-		url : 'plugins/svg/icons/right-arrow.svg',
+		url : basePath + 'plugins/svg/icons/right-arrow.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -359,7 +361,7 @@ var svgIconConfig = {
 		]
 	},
 	downArrow : {
-		url : 'plugins/svg/icons/down-arrow.svg',
+		url : basePath + 'plugins/svg/icons/down-arrow.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -371,7 +373,7 @@ var svgIconConfig = {
 		]
 	},
 	filter : {
-		url : 'plugins/svg/icons/filter.svg',
+		url : basePath + 'plugins/svg/icons/filter.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -383,7 +385,7 @@ var svgIconConfig = {
 		]
 	},
 	smiley : {
-		url : 'plugins/svg/icons/smiley.svg',
+		url : basePath + 'plugins/svg/icons/smiley.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -395,7 +397,7 @@ var svgIconConfig = {
 		]
 	},
 	play : {
-		url : 'plugins/svg/icons/play.svg',
+		url : basePath + 'plugins/svg/icons/play.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -407,7 +409,7 @@ var svgIconConfig = {
 		]
 	},
 	pause : {
-		url : 'plugins/svg/icons/pause.svg',
+		url : basePath + 'plugins/svg/icons/pause.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -419,7 +421,7 @@ var svgIconConfig = {
 		]
 	},
 	cog: {
-		url : 'plugins/svg/icons/style_switcher.svg',
+		url : basePath + 'plugins/svg/icons/style_switcher.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -431,7 +433,7 @@ var svgIconConfig = {
 		]
 	},
 	previous : {
-		url : 'plugins/svg/icons/previous.svg',
+		url : basePath + 'plugins/svg/icons/previous.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -443,7 +445,7 @@ var svgIconConfig = {
 		]
 	},
 	next : {
-		url : 'plugins/svg/icons/next.svg',
+		url : basePath + 'plugins/svg/icons/next.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -455,7 +457,7 @@ var svgIconConfig = {
 		]
 	},
 	thumbs : {
-		url : 'plugins/svg/icons/thumbnails.svg',
+		url : basePath + 'plugins/svg/icons/thumbnails.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -467,7 +469,7 @@ var svgIconConfig = {
 		]
 	},
 	mail : {
-		url : 'plugins/svg/icons/mail.svg',
+		url : basePath + 'plugins/svg/icons/mail.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -479,7 +481,7 @@ var svgIconConfig = {
 		]
 	},
 	equalizer : {
-		url : 'plugins/svg/icons/equalizer.svg',
+		url : basePath + 'plugins/svg/icons/equalizer.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -505,7 +507,7 @@ var svgIconConfig = {
 		]
 	},
 	glass : {
-		url : 'plugins/svg/icons/glass.svg',
+		url : basePath + 'plugins/svg/icons/glass.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -517,7 +519,7 @@ var svgIconConfig = {
 		]
 	},
 	hourglass : {
-		url : 'plugins/svg/icons/hourglass.svg',
+		url : basePath + 'plugins/svg/icons/hourglass.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -536,7 +538,7 @@ var svgIconConfig = {
 		]
 	},
 	padlock : {
-		url : 'plugins/svg/icons/padlock.svg',
+		url : basePath + 'plugins/svg/icons/padlock.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -548,7 +550,7 @@ var svgIconConfig = {
 		]
 	},
 	zoom : {
-		url : 'plugins/svg/icons/zoom.svg',
+		url : basePath + 'plugins/svg/icons/zoom.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -567,7 +569,7 @@ var svgIconConfig = {
 		]
 	},
 	search : {
-		url : 'plugins/svg/icons/search.svg',
+		url: basePath + '../plugins/svg/icons/search.svg',
 		animation : [
 			{ 
 				el : 'path:nth-child(1)', 
@@ -579,7 +581,7 @@ var svgIconConfig = {
 		]
 	},
 	monitor : {
-		url : 'plugins/svg/icons/monitor.svg',
+		url : basePath + 'plugins/svg/icons/monitor.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -591,7 +593,7 @@ var svgIconConfig = {
 		]
 	},
 	flag : {
-		url : 'plugins/svg/icons/flag.svg',
+		url : basePath + 'plugins/svg/icons/flag.svg',
 		animation : [
 			{ 
 				el : 'path', 
@@ -603,7 +605,7 @@ var svgIconConfig = {
 		]
 	},
 	social : {
-		url : 'plugins/svg/icons/social.svg',
+		url : basePath + 'plugins/svg/icons/social.svg',
 		animation : [
 			{ 
 				el : 'path:first-child', 
@@ -643,7 +645,7 @@ var svgIconConfig = {
 		]
 	},
 	socialLight : {
-		url : 'plugins/svg/icons/social_light.svg',
+		url : basePath + 'plugins/svg/icons/social_light.svg',
 		animation : [
 			{ 
 				el : 'path:first-child', 

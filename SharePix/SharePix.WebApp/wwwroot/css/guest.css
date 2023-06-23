@@ -1,5 +1,4 @@
 ﻿/*View Login*/
-
 #form-box li {
     padding-bottom: 30px;
 }
@@ -60,6 +59,7 @@ span {
         color: #0a9396;
         text-transform: uppercase;
         font-family: 'Indie Flower', cursive;
+        padding-top: 1rem;
     }
 
     #form-box .form-style {
@@ -84,7 +84,7 @@ span {
         font-weight: 300;
     }
 
-    #form-box input[type='submit'] {
+    #form-box input[type='submit'], #form-box input[type='button'] {
         padding: 5px 20px;
         width: 100%;
         margin-top: 2px;
@@ -107,29 +107,29 @@ span {
         position: absolute;
         top: 0;
         left: 0px;
-        padding: 10px 0;
+        padding: 5px 0;
         font-size: 15px;
         pointer-events: none;
         transition: 0.5s;
         font-family: 'Indie Flower', cursive;
     }
 
-    #form-box .form-style input:focus + label{
+    #form-box .form-style input:valid + label {
+        top: -16px;
+        left: 0px;
+        font-size: 20px;
+        color: #0a9396;
+        position: absolute;
+    }
+
+    #form-box .form-style input:focus + label {
         top: -23px;
         left: 0px;
         font-size: 20px;
         color: #0a9396;
     }
 
-    #form-box .form-style input:focus + label {
-        padding-top: 2px;
-        top: -23px;
-        left: 0px;
-        font-size: 20px;
-        color: #0a9396;
-    }
-    
-/*  
+
 
 @media screen and (max-width: 1024px) {
 
@@ -143,7 +143,7 @@ span {
 @media screen and (max-width: 800px) {
 
     #form-box {
-        top: 40%;
+        /*top: 40%;*/
         width: 400px;
         height: 400px;
     }
@@ -160,43 +160,43 @@ span {
         #form-box .padding {
             margin-bottom: 10px;
         }
+}
 
+@media screen and (max-width: 600px) {
+    #form-box {
+        top:50%;
+        width: 350px;
+        height: 400px;
+    }
+}
 
-    @media screen and (max-width: 600px) {
-        #form-box {
-            width: 350px;
-            height: 400px;
-        }
+@media screen and (max-width: 420px) {
+    #form-box {
+        width: 340px;
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #form-box {
+        width: 340px;
+        height: 380px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    #form-box {
+
+        width: 280px;
+        height: 350px;
     }
 
-    @media screen and (max-width: 420px) {
-        #form-box {
-            width: 340px;
-            height: 400px;
+        #form-box input[type='submit'] {
+            padding: 5px 5px;
+            width: 50%;
+            border-radius: 3px;
+            text-transform: uppercase;
+            font-size: 15px;
+            float: left;
         }
-    }
-
-    @media screen and (max-width: 400px) {
-        #form-box {
-            width: 340px;
-            height: 380px;
-        }
-    }
-
-    @media screen and (max-width: 300px) {
-        #form-box {
-            top: 25%;
-            width: 280px;
-            height: 350px;
-        }
-
-            #form-box input[type='submit'] {
-                padding: 5px 5px;
-                width: 50%;
-                border-radius: 3px;
-                text-transform: uppercase;
-                font-size: 15px;
-                float: left;
-            }
-    }
-*/
+}
