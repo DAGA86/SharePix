@@ -1,26 +1,23 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SharePix.WebApp.Models.UserAccounts;
 using System.Security.Claims;
 using SharePix.Data.Providers;
 using SharePix.Data.Contexts;
-using Newtonsoft.Json;
-using Microsoft.AspNetCore.Identity;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using Microsoft.AspNetCore.Authorization;
-
+using SharePix.Shared.Providers;
 
 namespace SharePix.WebApp.Controllers
 {
     public class UserAccountsController : BaseController
     {
         private UserAccountProvider _userAccountProvider;
+        private readonly IConfiguration _Configuration;
 
-        public UserAccountsController(DatabaseContext context, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(context, languageProvider, localizationProvider)
+        public UserAccountsController(DatabaseContext context, IConfiguration configuration, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(context, languageProvider, localizationProvider)
         {
             _userAccountProvider = new UserAccountProvider(context);
+            _Configuration = configuration;
         }
         // GET: UserAccountsController
         public ActionResult Index()
@@ -145,13 +142,11 @@ namespace SharePix.WebApp.Controllers
 
         }
 
-
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
-        private readonly ILogger<HomeController> _logger;
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -161,29 +156,74 @@ namespace SharePix.WebApp.Controllers
             {
                 Data.Models.UserAccount user = _userAccountProvider.GetFirstByEmail(model.Email);
 
-                if( user != null)
+                if (user != null)
                 {
-                    var token = _userAccountProvider.ForgotPassword(user);
+                    user = _userAccountProvider.GeneratePasswordResetToken(user);
 
-                    var passwordResetPassword = Url.Action("ResetPassword", "UserAccounts", new { email = model.Email, token = token }, Request.Scheme);
+                    string resetLink = $"https://localhost:7175/useraccounts/resetpassword?token={user.RecoveryToken}";
 
-                    _logger.Log(LogLevel.Warning, passwordResetPassword);
+                    if (resetLink != null)
+                    {                                           
+                        string content = $"<p>Please click the following link to reset your password:</p><a href=\"{resetLink}\">{resetLink}</a>";
+                        string subject = $"Password Reset";
 
-                    return View("~/UserAccounts/ForgotPasswordConfirmation");
+                        SendEmailProvider sendEmailProvider = new SendEmailProvider(_Configuration);
+
+                        sendEmailProvider.Send(user.FirstName ?? "", user.Email, subject, content);
+                        ViewData["SuccessMessage"] = "Success";
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Error");
+                    }
                 }
-                return View("~/UserAccounts/ForgotPasswordConfirmation");
+                return View(nameof(ForgotPasswordConfirmation));
             }
             return View(model);
         }
 
-        public ActionResult SendEmail()
+        public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
 
-        public ActionResult ResetPassword()
+        public ActionResult ResetPassword(Guid token)
+        
         {
-            return View();
+            Data.Models.UserAccount user = _userAccountProvider.GetFirstByRecoveryToken(token);
+
+            if (user != null)
+            {
+                ResetPasswordViewModel model = new ResetPasswordViewModel()
+                {
+                    Id = user.Id
+                };
+                return View(model);
+            }
+
+            return RedirectToAction(nameof(Index), "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        {          
+            if (ModelState.IsValid)
+            {
+                Data.Models.UserAccount user = _userAccountProvider.ResetPassword(model.Password, model.Id);
+
+                if (user != null)
+                {
+                    ViewData["SuccessMessage"] = "Success !!";
+
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid or expired password reset token.");
+                }
+                return View(nameof(Login));
+            }
+            return View(model);
         }
 
         // GET: UserAccountsController/Details/5

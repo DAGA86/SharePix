@@ -1,19 +1,21 @@
-﻿using SharePix.Data.Contexts;
+﻿using MimeKit;
 using SharePix.Data.Models;
-using System.Security.Principal;
+
+using MailKit.Net.Smtp;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace SharePix.Data.Providers
-{    
+{
     public class UserAccountProvider
     {
         private Contexts.DatabaseContext _dbContext;
 
         public UserAccountProvider(Contexts.DatabaseContext dbContext)
-        { 
-            _dbContext = dbContext; 
+        {
+            _dbContext = dbContext;
         }
 
-        public List<UserAccount> GetAllAccounts() 
+        public List<UserAccount> GetAllAccounts()
         {
             return _dbContext.UserAccounts.ToList();
         }
@@ -27,11 +29,22 @@ namespace SharePix.Data.Providers
         {
             return _dbContext.UserAccounts.FirstOrDefault(u => u.Email == email);
         }
+        public UserAccount? GetFirstByRecoveryToken(Guid token)
+        {
+            return _dbContext.UserAccounts.FirstOrDefault(u => u.RecoveryToken == token);
+        }
 
         public UserAccount? ValidateCredencials(string usernameOrEmail, string password)
         {
             string passwordHash = Shared.Providers.CryptographyProvider.EncodeToBase64(password);
-            return _dbContext.UserAccounts.FirstOrDefault(x => (x.Username == usernameOrEmail || x.Email == usernameOrEmail) && x.PasswordHash == passwordHash);
+            var user =_dbContext.UserAccounts.FirstOrDefault(x => (x.Username == usernameOrEmail || x.Email == usernameOrEmail) && x.PasswordHash == passwordHash);
+
+            if(user != null)
+            {
+                user.RecoveryToken = null;
+                _dbContext.SaveChanges();
+            }
+            return user;
         }
 
         public Shared.Models.Result<UserAccount> Create(UserAccount account)
@@ -43,7 +56,7 @@ namespace SharePix.Data.Providers
                 result.ErrorMessage = "register.emailAlreadyExists";
                 return result;
             }
-           
+
             if (_dbContext.UserAccounts.Any(x => x.Username == account.Username))
             {
                 result.ErrorMessage = "register.usernameAlreadyExists";
@@ -68,40 +81,39 @@ namespace SharePix.Data.Providers
             return result;
         }
 
-
-        public UserAccount? ForgotPassword(UserAccount account)
+        public UserAccount? GeneratePasswordResetToken(UserAccount account)
         {
-            Models.UserAccount? forgotPassword = _dbContext.UserAccounts.FirstOrDefault(x => x.RecoveryToken == account.RecoveryToken); //FirstOrDefault(u => u.Email == email);
-
-            if (ForgotPassword != null)
+            Models.UserAccount? user = _dbContext.UserAccounts.FirstOrDefault(u => u.Email == account.Email);
+            if (user != null)
             {
-                forgotPassword.PasswordHash = account.PasswordHash;
+                user.RecoveryToken = Guid.NewGuid();
 
                 _dbContext.SaveChanges();
             }
 
-            return forgotPassword;
+            return user;
         }
 
-        public UserAccount? RecoverPassword(UserAccount account)
+        public UserAccount? ResetPassword(string password, int id)
         {
-            Models.UserAccount? recoverPassword = _dbContext.UserAccounts.FirstOrDefault(x => x.Id == account.Id); //FirstOrDefault(u => u.Email == email);
+            Models.UserAccount? user = _dbContext.UserAccounts.FirstOrDefault(x => x.Id == id);
 
-            if (RecoverPassword != null)
+            if (user != null)
             {
-                recoverPassword.PasswordHash = account.PasswordHash;
+                user.PasswordHash = Shared.Providers.CryptographyProvider.EncodeToBase64(password);
+                user.RecoveryToken = null;
 
                 _dbContext.SaveChanges();
             }
 
-            return recoverPassword;
+            return user;
         }
 
         public UserAccount? UpdateAccount(UserAccount account)
         {
             Models.UserAccount? updateAccount = _dbContext.UserAccounts.FirstOrDefault(x => x.Id == account.Id);
-            
-            if (UpdateAccount != null) 
+
+            if (updateAccount != null)
             {
                 updateAccount.FirstName = account.FirstName;
                 updateAccount.LastName = account.LastName;

@@ -7,5 +7,7 @@ namespace SharePix.WebApp.Models.UserAccounts
         [Required]
         [StringLength(320)]
         public string Email { get; set; }
+
+        public Guid RecoveryToken { get; set; }
     }
 }
