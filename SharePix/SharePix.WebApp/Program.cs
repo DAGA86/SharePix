@@ -72,8 +72,8 @@ namespace SharePix.WebApp
             app.UseRequestLocalization();
 
             app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            name: "default",
+            pattern: "{controller=UserAccounts}/{action=Login}/{id?}");
 
             app.Run();
         }
