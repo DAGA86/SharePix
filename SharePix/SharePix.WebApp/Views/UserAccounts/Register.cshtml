@@ -41,15 +41,15 @@
             <label asp-for="Email" class="control-label">@Localize("label.email")</label>
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
-        <div class="form-style">
-            <input asp-for="PasswordHash" class="form-control" />
-            <label asp-for="PasswordHash" class="control-label">@Localize("label.password")</label>
-            <span asp-validation-for="PasswordHash" class="text-danger"></span>
+        <div class="form-style cs">
+            <input asp-for="Password" id="password" class="form-control input-conf" />
+            <label asp-for="Password" class="control-label">@Localize("label.password")</label>
+            <span asp-validation-for="Password" id="mess" class="text-danger"></span>
         </div>
-        <div class="form-style">
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <label asp-for="ConfirmPassword" class="control-label">@Localize("label.confirmPassword")</label>
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <div class="form-style cs">
+            <input type="password" id="confirmPassword" class="form-control input-conf" />
+            <label class="control-label">@Localize("label.confirmPassword")</label>
+            <span class="style" id="message"></span>
         </div>
         <div class="form-style padding">
             <input type="submit" value="@Localize("general.button.create")" class=" btn btn-primary" />
@@ -59,6 +59,10 @@
         </div>
     </form>
 </header>
+
+@section scripts{
+    <script src="/js/matchPassword.js"></script>
+}
 
 
 

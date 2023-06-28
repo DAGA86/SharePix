@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SharePix.Data.Contexts;
 
@@ -11,9 +12,10 @@ using SharePix.Data.Contexts;
 namespace SharePix.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230627145618_AddTranslationSeed")]
+    partial class AddTranslationSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -448,84 +450,6 @@ namespace SharePix.Data.Migrations
                         },
                         new
                         {
-                            Key = "field.required",
-                            LanguageId = 1,
-                            Value = "Field is required"
-                        },
-                        new
-                        {
-                            Key = "register.firstName.maxLength",
-                            LanguageId = 1,
-                            Value = "Maximun 32 characters"
-                        },
-                        new
-                        {
-                            Key = "register.firstName.minLength",
-                            LanguageId = 1,
-                            Value = "Minimun 3 characters"
-                        },
-                        new
-                        {
-                            Key = "register.lastName.maxLength",
-                            LanguageId = 1,
-                            Value = "Maximun is 32 characters"
-                        },
-                        new
-                        {
-                            Key = "register.lastName.minLength",
-                            LanguageId = 1,
-                            Value = "Minimun is 3 characters"
-                        },
-                        new
-                        {
-                            Key = "register.username.maxLength",
-                            LanguageId = 1,
-                            Value = "Maximun is 64 characters"
-                        },
-                        new
-                        {
-                            Key = "register.username.minLength",
-                            LanguageId = 1,
-                            Value = "Minimun is 3 characters"
-                        },
-                        new
-                        {
-                            Key = "email.regularExpression",
-                            LanguageId = 1,
-                            Value = "Email address inválid! E.g: example@example.com"
-                        },
-                        new
-                        {
-                            Key = "email.maxLength",
-                            LanguageId = 1,
-                            Value = "Maximun 320 characters"
-                        },
-                        new
-                        {
-                            Key = "password.maxLength",
-                            LanguageId = 1,
-                            Value = "Maximun is 120 characters"
-                        },
-                        new
-                        {
-                            Key = "password.minLength",
-                            LanguageId = 1,
-                            Value = "Minimun is 8 characters"
-                        },
-                        new
-                        {
-                            Key = "password.regularExpression",
-                            LanguageId = 1,
-                            Value = "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number"
-                        },
-                        new
-                        {
-                            Key = "confirmPassword.compare",
-                            LanguageId = 1,
-                            Value = "Password not match"
-                        },
-                        new
-                        {
                             Key = "register.title",
                             LanguageId = 2,
                             Value = "Registar"
@@ -733,84 +657,6 @@ namespace SharePix.Data.Migrations
                             Key = "info.messageEmail",
                             LanguageId = 2,
                             Value = "Por favor verifique o seu email para prosseguir. Caso não tenha recebido, verifique o spam."
-                        },
-                        new
-                        {
-                            Key = "field.required",
-                            LanguageId = 2,
-                            Value = "Campo obrigatório"
-                        },
-                        new
-                        {
-                            Key = "register.firstName.maxLength",
-                            LanguageId = 2,
-                            Value = "Máximo de 32 caracteres"
-                        },
-                        new
-                        {
-                            Key = "register.firstName.minLength",
-                            LanguageId = 2,
-                            Value = "Mínimo de 3 caracteres"
-                        },
-                        new
-                        {
-                            Key = "register.lastName.maxLength",
-                            LanguageId = 2,
-                            Value = "Máximo de 32 caracteres"
-                        },
-                        new
-                        {
-                            Key = "register.lastName.minLength",
-                            LanguageId = 2,
-                            Value = "Mínimo de 3 caracteres"
-                        },
-                        new
-                        {
-                            Key = "register.username.maxLength",
-                            LanguageId = 2,
-                            Value = "Máximo de 64 caracteres"
-                        },
-                        new
-                        {
-                            Key = "register.username.minLength",
-                            LanguageId = 2,
-                            Value = "Mínimo de 3 caracteres"
-                        },
-                        new
-                        {
-                            Key = "email.regularExpression",
-                            LanguageId = 2,
-                            Value = "Endereço de email inválido! Ex: exemplo@exemplo.pt"
-                        },
-                        new
-                        {
-                            Key = "email.maxLength",
-                            LanguageId = 2,
-                            Value = "Máximo de 320 caracteres"
-                        },
-                        new
-                        {
-                            Key = "password.maxLength",
-                            LanguageId = 2,
-                            Value = "Máximo de 120 caracteres"
-                        },
-                        new
-                        {
-                            Key = "password.minLength",
-                            LanguageId = 2,
-                            Value = "Mínimo de 8 caracteres"
-                        },
-                        new
-                        {
-                            Key = "password.regularExpression",
-                            LanguageId = 2,
-                            Value = "Mínimo de 8 caracteres, pelo menos 1 letra maiúscula, 1 letra minúscula e 1 número"
-                        },
-                        new
-                        {
-                            Key = "confirmPassword.compare",
-                            LanguageId = 2,
-                            Value = "A palavra-passe não coincide"
                         });
                 });
 

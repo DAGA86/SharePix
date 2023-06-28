@@ -6,6 +6,7 @@ using System.Security.Claims;
 using SharePix.Data.Providers;
 using SharePix.Data.Contexts;
 using SharePix.Shared.Providers;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace SharePix.WebApp.Controllers
 {
@@ -14,7 +15,7 @@ namespace SharePix.WebApp.Controllers
         private UserAccountProvider _userAccountProvider;
         private readonly IConfiguration _Configuration;
 
-        public UserAccountsController(DatabaseContext context, IConfiguration configuration, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(context, languageProvider, localizationProvider)
+        public UserAccountsController(DatabaseContext context, IConfiguration configuration, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(languageProvider, localizationProvider)
         {
             _userAccountProvider = new UserAccountProvider(context);
             _Configuration = configuration;
@@ -36,7 +37,7 @@ namespace SharePix.WebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                Data.Models.UserAccount dbUserAccount = _userAccountProvider.ValidateCredencials(model.UsernameOrEmail, model.PasswordHash);
+                Data.Models.UserAccount dbUserAccount = _userAccountProvider.ValidateCredencials(model.UsernameOrEmail, model.Password);
 
                 if (dbUserAccount != null)
                 {
@@ -87,12 +88,16 @@ namespace SharePix.WebApp.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Account inactive");
+                        ModelState.AddModelError(string.Empty, Localize("account.inactive"));
                         return View(model);
                     }
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid credentials!");
+                ModelState.AddModelError(string.Empty, Localize("account.invalidCredentials"));
+            }
+            else
+            {
+                TranslatedInvalidModelState(ModelState);
             }
 
             return View(model);
@@ -122,7 +127,7 @@ namespace SharePix.WebApp.Controllers
                 {
                     Username = model.Username,
                     Email = model.Email,
-                    PasswordHash = model.PasswordHash,
+                    PasswordHash = model.Password,
                     FirstName = model.FirstName,
                     LastName = model.LastName
                 };
@@ -137,6 +142,10 @@ namespace SharePix.WebApp.Controllers
                     return View(nameof(Login));
                 }
 
+            }
+            else
+            {
+                TranslatedInvalidModelState(ModelState);
             }
             return View();
 
@@ -163,21 +172,25 @@ namespace SharePix.WebApp.Controllers
                     string resetLink = $"https://localhost:7175/useraccounts/resetpassword?token={user.RecoveryToken}";
 
                     if (resetLink != null)
-                    {                                           
-                        string content = $"<p>Please click the following link to reset your password:</p><a href=\"{resetLink}\">{resetLink}</a>";
-                        string subject = $"Password Reset";
+                    {
+                        string content = $"<p>{Localize("email.content")}</p><a href=\"{resetLink}\">{resetLink}</a>";
+                        string subject = $"{Localize("email.subject")}";
 
                         SendEmailProvider sendEmailProvider = new SendEmailProvider(_Configuration);
 
                         sendEmailProvider.Send(user.FirstName ?? "", user.Email, subject, content);
-                        ViewData["SuccessMessage"] = "Success";
+                        ViewData["SuccessMessage"] = Localize("sendEmail.success");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Error");
+                        ModelState.AddModelError("", Localize("sendEmail.error"));
                     }
                 }
                 return View(nameof(ForgotPasswordConfirmation));
+            }
+            else
+            {
+                TranslatedInvalidModelState(ModelState);
             }
             return View(model);
         }
@@ -188,7 +201,7 @@ namespace SharePix.WebApp.Controllers
         }
 
         public ActionResult ResetPassword(Guid token)
-        
+
         {
             Data.Models.UserAccount user = _userAccountProvider.GetFirstByRecoveryToken(token);
 
@@ -207,21 +220,25 @@ namespace SharePix.WebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
-        {          
+        {
             if (ModelState.IsValid)
             {
                 Data.Models.UserAccount user = _userAccountProvider.ResetPassword(model.Password, model.Id);
 
                 if (user != null)
                 {
-                    ViewData["SuccessMessage"] = "Success !!";
+                    ViewData["SuccessMessage"] = Localize("passwordChanged.success");
 
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid or expired password reset token.");
+                    ViewData["SuccessMessage"] = Localize("passwordChanged.error");
                 }
                 return View(nameof(Login));
+            }
+            else
+            {
+                TranslatedInvalidModelState(ModelState);
             }
             return View(model);
         }

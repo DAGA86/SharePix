@@ -11,7 +11,7 @@ namespace SharePix.WebApp.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(DatabaseContext context, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(context, languageProvider, localizationProvider)
+        public HomeController(LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(languageProvider, localizationProvider)
         {
 
         }

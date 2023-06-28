@@ -7,9 +7,11 @@ namespace SharePix.WebApp.Models.UserAccounts
         [Required]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
-        [StringLength(255, ErrorMessage = "Must be between 5 and 255 characters", MinimumLength = 5)]
+        [Required(ErrorMessage = "field.required")]
         [DataType(DataType.Password)]
+        [MaxLength(128, ErrorMessage = "password.maxLength")]
+        [MinLength(5, ErrorMessage = "password.minLength")]
+        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", ErrorMessage = "password.regularExpression")]
         public string Password { get; set; }       
 
     }
