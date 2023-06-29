@@ -7,6 +7,9 @@ using SharePix.Data.Providers;
 using SharePix.Data.Contexts;
 using SharePix.Shared.Providers;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using NuGet.Common;
+using Microsoft.AspNetCore.Identity;
+using NuGet.Protocol.Core.Types;
 
 namespace SharePix.WebApp.Controllers
 {
@@ -49,7 +52,7 @@ namespace SharePix.WebApp.Controllers
                         List<Claim> claims = new List<Claim>
                             {
                                 new Claim(ClaimTypes.Email, dbUserAccount.Email),
-                                new Claim(ClaimTypes.NameIdentifier, dbUserAccount.Username.ToString())
+                                new Claim(ClaimTypes.NameIdentifier, dbUserAccount.Id.ToString())
                             };
 
                         ClaimsIdentity claimsIdentity = new ClaimsIdentity(
@@ -249,46 +252,77 @@ namespace SharePix.WebApp.Controllers
             return View();
         }
 
-        // GET: UserAccountsController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public ActionResult Edit()
+        //{
+        //    int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        //    Data.Models.UserAccount user = _userAccountProvider.GetFirstById(userId);
+        //    if (user != null)
+        //    {
+        //        EditViewModel model = new EditViewModel()
+        //        {
+        //            Id = user.Id,
+        //            FirstName = user.FirstName,
+        //            LastName = user.LastName,
+        //            Username = user.Username,
+        //            Email = user.Email
+        //        };
+        //        return View(model);
+        //    }
+        //    return RedirectToAction(nameof(Index), "Home");
+        //}
 
-        // POST: UserAccountsController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Edit()
         {
-            try
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            EditViewModel model = _userAccountProvider.GetFirstById(userId, x => new EditViewModel
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+                Id = x.Id,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Username = x.Username,
+                Email = x.Email
+            });
+            if (model != null)
             {
-                return View();
+                return View(model);
             }
-        }
-
-        // GET: UserAccountsController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            return RedirectToAction(nameof(Index), "Home");
         }
 
         // POST: UserAccountsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(EditViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                Data.Models.UserAccount user = new Data.Models.UserAccount()
+                {
+                    Id= model.Id,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Username = model.Username,
+                    Email = model.Email,
+                    PasswordHash = model.Password
+                };
+
+                var result = _userAccountProvider.UpdateAccount(user);
+                if (!string.IsNullOrEmpty(result.ErrorMessage))
+                {
+                    ViewData["ErrorMessage"] = Localize(result.ErrorMessage);
+                }
+                else
+                {
+                    ViewData["SuccessMessage"] = Localize("updateAccount.successMessage");
+                    return RedirectToAction(nameof(Edit));
+                }
             }
-            catch
+            else
             {
-                return View();
+                TranslatedInvalidModelState(ModelState);
             }
+            return View(model);
         }
 
         // GET: UserAccountsController/Delete/5

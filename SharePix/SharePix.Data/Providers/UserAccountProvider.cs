@@ -3,6 +3,7 @@ using SharePix.Data.Models;
 
 using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Linq.Expressions;
 
 namespace SharePix.Data.Providers
 {
@@ -20,11 +21,15 @@ namespace SharePix.Data.Providers
             return _dbContext.UserAccounts.ToList();
         }
 
-        public UserAccount? GetAccountById(int id)
+        public TViewModel GetFirstById<TViewModel>(int id, Expression<Func<UserAccount, TViewModel>> selectExpression)
         {
-            return _dbContext.UserAccounts.FirstOrDefault(x => x.Id == id);
+            return _dbContext.UserAccounts.Where(x => x.Id == id).Select(selectExpression).FirstOrDefault();
         }
 
+        public UserAccount? GetFirstByUsername(string username)
+        {
+            return _dbContext.UserAccounts.FirstOrDefault(u => u.Username == username);
+        }
         public UserAccount? GetFirstByEmail(string email)
         {
             return _dbContext.UserAccounts.FirstOrDefault(u => u.Email == email);
@@ -37,9 +42,9 @@ namespace SharePix.Data.Providers
         public UserAccount? ValidateCredencials(string usernameOrEmail, string password)
         {
             string passwordHash = Shared.Providers.CryptographyProvider.EncodeToBase64(password);
-            var user =_dbContext.UserAccounts.FirstOrDefault(x => (x.Username == usernameOrEmail || x.Email == usernameOrEmail) && x.PasswordHash == passwordHash);
+            var user = _dbContext.UserAccounts.FirstOrDefault(x => (x.Username == usernameOrEmail || x.Email == usernameOrEmail) && x.PasswordHash == passwordHash);
 
-            if(user != null)
+            if (user != null)
             {
                 user.RecoveryToken = null;
                 _dbContext.SaveChanges();
@@ -62,6 +67,11 @@ namespace SharePix.Data.Providers
                 result.ErrorMessage = "register.usernameAlreadyExists";
                 return result;
             }
+
+            //if (_dbContext.UserAccounts.Any(x => x.RecoveryToken == account.RecoveryToken))
+            //{
+
+            //}
 
             account.RegisterDate = DateTime.Now;
             account.IsActive = true;
@@ -109,22 +119,37 @@ namespace SharePix.Data.Providers
             return user;
         }
 
-        public UserAccount? UpdateAccount(UserAccount account)
+        public Shared.Models.Result<UserAccount> UpdateAccount(UserAccount account)
         {
+            var result = new Shared.Models.Result<UserAccount>();
             Models.UserAccount? updateAccount = _dbContext.UserAccounts.FirstOrDefault(x => x.Id == account.Id);
-
             if (updateAccount != null)
             {
+                if (_dbContext.UserAccounts.Any(x => x.Email == account.Email && x.Id != account.Id))
+                {
+                    result.ErrorMessage = "register.emailAlreadyExists";
+                    return result;
+                }
+
+                if (_dbContext.UserAccounts.Any(x => x.Username == account.Username && x.Id != account.Id))
+                {
+                    result.ErrorMessage = "register.usernameAlreadyExists";
+                    return result;
+                }
+
                 updateAccount.FirstName = account.FirstName;
                 updateAccount.LastName = account.LastName;
                 updateAccount.Username = account.Username;
                 updateAccount.Email = account.Email;
-                updateAccount.PasswordHash = account.PasswordHash;
-
+                if (updateAccount.PasswordHash != account.PasswordHash && !string.IsNullOrEmpty(account.PasswordHash))
+                {
+                    updateAccount.PasswordHash = Shared.Providers.CryptographyProvider.EncodeToBase64(account.PasswordHash);
+                }
 
                 _dbContext.SaveChanges();
             }
-            return updateAccount;
+
+            return result;
         }
 
         public bool DeleteAccount(int id)

@@ -107,6 +107,12 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "password.minLength", Value = "Minimun is 8 characters", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "password.regularExpression", Value = "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter and 1 number", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "confirmPassword.compare", Value = "Password not match", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "profile.title", Value = "Profile", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "profile.changePassword.title", Value = "Change password", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "updateAccount.successMessage", Value = "Changes made successfully!", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "profile.preview.title", Value = "Preview:", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "general.button.upload", Value = "Upload", LanguageId = 1 });
+
 
             builder.Entity<Translation>().HasData(new Translation { Key = "register.title", Value = "Registar", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "login.title", Value = "Entrar", LanguageId = 2 });
@@ -156,6 +162,12 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "password.minLength", Value = "Mínimo de 8 caracteres", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "password.regularExpression", Value = "Mínimo de 8 caracteres, pelo menos 1 letra maiúscula, 1 letra minúscula e 1 número", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "confirmPassword.compare", Value = "A palavra-passe não coincide", LanguageId = 2 });
+
+            builder.Entity<Translation>().HasData(new Translation { Key = "profile.title", Value = "Perfil", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "profile.changePassword.title", Value = "Mudar palavra-passe", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "updateAccount.successMessage", Value = "Alterações realizadas com sucesso!", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "profile.preview.title", Value = "Pré-visualização:", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "general.button.upload", Value = "Carregar", LanguageId = 2 });
 
             base.OnModelCreating(builder);
         }

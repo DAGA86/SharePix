@@ -677,7 +677,7 @@
 		#top_actions_wrap > .action_btn ~ .nav_searchform,
 		#top_actions_wrap > .action_btn ~ .shopping_cart_wrap{
 			position: relative;
-			top: -12px;
+			/*top: -12px;*/
 		}
 
 		#top_actions_wrap > .action_btn,

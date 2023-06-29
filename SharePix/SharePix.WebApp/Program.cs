@@ -20,8 +20,8 @@ namespace SharePix.WebApp
             }
             ).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, (options) =>
             {
-                options.LoginPath = "/Accounts/Login";
-                options.LogoutPath = "/Accounts/Logout";
+                options.LoginPath = "/UserAccounts/Login";
+                options.LogoutPath = "/UserAccounts/Logout";
                 options.ExpireTimeSpan = TimeSpan.FromHours(8);
             }
             );
@@ -68,6 +68,7 @@ namespace SharePix.WebApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseRequestLocalization();
 
