@@ -235,7 +235,7 @@ namespace SharePix.WebApp.Controllers
                 }
                 else
                 {
-                    ViewData["SuccessMessage"] = Localize("passwordChanged.error");
+                    ViewData["ErrorMessage"] = Localize("passwordChanged.error");
                 }
                 return View(nameof(Login));
             }
@@ -251,25 +251,6 @@ namespace SharePix.WebApp.Controllers
         {
             return View();
         }
-
-        //public ActionResult Edit()
-        //{
-        //    int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-        //    Data.Models.UserAccount user = _userAccountProvider.GetFirstById(userId);
-        //    if (user != null)
-        //    {
-        //        EditViewModel model = new EditViewModel()
-        //        {
-        //            Id = user.Id,
-        //            FirstName = user.FirstName,
-        //            LastName = user.LastName,
-        //            Username = user.Username,
-        //            Email = user.Email
-        //        };
-        //        return View(model);
-        //    }
-        //    return RedirectToAction(nameof(Index), "Home");
-        //}
 
         public ActionResult Edit()
         {
@@ -299,7 +280,7 @@ namespace SharePix.WebApp.Controllers
                 int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 Data.Models.UserAccount user = new Data.Models.UserAccount()
                 {
-                    Id= model.Id,
+                    Id = model.Id,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Username = model.Username,

@@ -56,27 +56,31 @@ namespace SharePix.Data.Providers
         {
             var result = new Shared.Models.Result<UserAccount>();
 
-            if (_dbContext.UserAccounts.Any(x => x.Email == account.Email))
+            if (_dbContext.UserAccounts.Any(x => x.Email == account.Email && string.IsNullOrEmpty(x.PasswordHash)))
             {
-                result.ErrorMessage = "register.emailAlreadyExists";
-                return result;
-            }
+                account.Id = _dbContext.UserAccounts.FirstOrDefault(x => x.Email == account.Email && string.IsNullOrEmpty(x.PasswordHash)).Id;
 
-            if (_dbContext.UserAccounts.Any(x => x.Username == account.Username))
+                account = UpdateAccount(account).Object;
+            }
+            else
             {
-                result.ErrorMessage = "register.usernameAlreadyExists";
-                return result;
-            }
+                if (_dbContext.UserAccounts.Any(x => x.Email == account.Email))
+                {
+                    result.ErrorMessage = "register.emailAlreadyExists";
+                    return result;
+                }
 
-            //if (_dbContext.UserAccounts.Any(x => x.RecoveryToken == account.RecoveryToken))
-            //{
+                if (_dbContext.UserAccounts.Any(x => x.Username == account.Username))
+                {
+                    result.ErrorMessage = "register.usernameAlreadyExists";
+                    return result;
+                }
 
-            //}
-
-            account.RegisterDate = DateTime.Now;
-            account.IsActive = true;
-            account.PasswordHash = Shared.Providers.CryptographyProvider.EncodeToBase64(account.PasswordHash);
-            _dbContext.UserAccounts.Add(account);
+                account.RegisterDate = DateTime.Now;
+                account.IsActive = true;
+                account.PasswordHash = Shared.Providers.CryptographyProvider.EncodeToBase64(account.PasswordHash);
+                _dbContext.UserAccounts.Add(account);
+            }            
 
             try
             {
@@ -147,6 +151,7 @@ namespace SharePix.Data.Providers
                 }
 
                 _dbContext.SaveChanges();
+                result.Object = updateAccount;
             }
 
             return result;
