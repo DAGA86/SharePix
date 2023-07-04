@@ -4,7 +4,9 @@
     Layout = "~/Views/Shared/_GuestLayout.cshtml";
 }
 
-<header id="form-box" class="vm transparent">
+<link rel="stylesheet" href="~/css/guestRegister.css">
+
+<header id="form-box-register" class="vm transparent">
     <form asp-action="Register">
 
         @{
@@ -23,33 +25,39 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-style">
             <input asp-for="FirstName" class="form-control" />
-            <label asp-for="FirstName" class="control-label">@Localize("label.firstName")</label>
+            <label asp-for="FirstName">@Localize("label.firstName")</label>
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
         <div class="form-style">
             <input asp-for="LastName" class="form-control" />
-            <label asp-for="LastName" class="control-label">@Localize("label.lastName")</label>
+            <label asp-for="LastName">@Localize("label.lastName")</label>
             <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
         <div class="form-style">
             <input asp-for="Username" class="form-control" />
-            <label asp-for="Username" class="control-label">@Localize("label.username")</label>
+            <label asp-for="Username">@Localize("label.username")</label>
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
         <div class="form-style">
             <input asp-for="Email" class="form-control" />
-            <label asp-for="Email" class="control-label">@Localize("label.email")</label>
+            <label asp-for="Email">@Localize("label.email")</label>
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
-        <div class="form-style cs">
-            <input asp-for="Password" id="password" class="form-control input-conf" />
-            <label asp-for="Password" class="control-label">@Localize("label.password")</label>
-            <span asp-validation-for="Password" id="mess" class="text-danger"></span>
+        <div class="form-style">
+            <div class="cs">
+                <input asp-for="Password" id="password" class="form-control input-conf " />
+                <label asp-for="Password">@Localize("label.password")</label>
+                <span id="mess"></span>
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-        <div class="form-style cs">
-            <input type="password" id="confirmPassword" class="form-control input-conf" />
-            <label class="control-label">@Localize("label.confirmPassword")</label>
-            <span class="style" id="message"></span>
+        <div class="form-style">
+            <div class="cs">
+                <input type="password" id="confirmPassword" class="form-control input-conf" />
+                <label>@Localize("label.confirmPassword")</label>
+                <span id="message"></span>
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <div class="form-style padding">
             <input type="submit" value="@Localize("general.button.create")" class=" btn btn-primary" />

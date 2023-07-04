@@ -33,7 +33,6 @@ input.btt, input.btt.cancel {
     display: inline;
     font-size: 15px;
     padding: 1px;
-
 }
 
 input.btt {
@@ -70,4 +69,18 @@ input.form-edit {
     border-radius: 5px;
     border: 0;
     margin-bottom: 1rem;
+}
+
+.text-success {
+    color: #47a320;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.text-danger {
+    color: #d70000;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
 }

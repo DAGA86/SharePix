@@ -24,12 +24,12 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-style">
             <input asp-for="UsernameOrEmail" class="form-control" />
-            <label asp-for="UsernameOrEmail" class="control-label">@Localize("label.usernameOrEmail")</label>
+            <label asp-for="UsernameOrEmail">@Localize("label.usernameOrEmail")</label>
             <span asp-validation-for="UsernameOrEmail" class="text-danger"></span>
         </div>
         <div class="form-style">
             <input asp-for="Password" class="form-control" />
-            <label asp-for="Password" class="control-label">@Localize("label.password")</label>
+            <label asp-for="Password">@Localize("label.password")</label>
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <p>
