@@ -124,11 +124,11 @@
                 <!-- - - - - - - - - - - - - - Main Navigation - - - - - - - - - - - - - - - - -->
 
                 <nav>
-
+                    <a href="@Url.Action("UploadPhoto","Photos")">UploadPhoto</a>
                     <ul class="navigation">
 
                         <li class="has_submenu">
-
+                            
                             <a href="index.html">Home</a>
 
                             <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
@@ -341,8 +341,8 @@
                             asp-for="@requestCulture.RequestCulture.UICulture.Name">
                     </select>
                 </form>
-
-                <a href="#" class="action_btn large dark"><span id="sc_open" class="si-icon sc_open toggle_box" data-width="28" data-height="28" data-event="mouseover" data-icon-name="account"></span></a>
+                
+                <a href="@Url.Action("Edit","UserAccounts")" class="action_btn large dark"><span id="sc_open" class="si-icon sc_open toggle_box" data-width="28" data-height="28" data-event="mouseover" data-icon-name="account"></span></a>
 
 
                 <!-- - - - - - - - - - - - - - Isotope Filter - - - - - - - - - - - - - - - - -->

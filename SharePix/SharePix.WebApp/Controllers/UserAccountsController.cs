@@ -16,11 +16,13 @@ namespace SharePix.WebApp.Controllers
     public class UserAccountsController : BaseController
     {
         private UserAccountProvider _userAccountProvider;
+        private PhotoProvider _photoProvider;
         private readonly IConfiguration _Configuration;
 
         public UserAccountsController(DatabaseContext context, IConfiguration configuration, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(languageProvider, localizationProvider)
         {
             _userAccountProvider = new UserAccountProvider(context);
+            _photoProvider = new PhotoProvider(context);
             _Configuration = configuration;
         }
         // GET: UserAccountsController
@@ -285,9 +287,10 @@ namespace SharePix.WebApp.Controllers
                     LastName = model.LastName,
                     Username = model.Username,
                     Email = model.Email,
-                    PasswordHash = model.Password
+                    PasswordHash = model.Password                
+             
                 };
-
+               
                 var result = _userAccountProvider.UpdateAccount(user);
                 if (!string.IsNullOrEmpty(result.ErrorMessage))
                 {

@@ -1,0 +1,20 @@
+﻿@model SharePix.WebApp.Models.Photos.UploadPhotoViewModel
+
+@{
+    ViewData["Title"] = "Upload Photos";
+}
+
+@{
+    Layout = "~/Views/Shared/_BasicLayout.cshtml";
+}
+
+<h2>Upload Photos</h2>
+
+<form asp-action="UploadPhoto" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="OwnerId" />
+    <div class="form-group">
+        <label for="photos">Select Photos</label>
+        <input type="file" name="files" id="photos" multiple />
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
