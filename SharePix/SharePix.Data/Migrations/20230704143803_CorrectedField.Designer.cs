@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SharePix.Data.Contexts;
 
@@ -11,9 +12,10 @@ using SharePix.Data.Contexts;
 namespace SharePix.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230704143803_CorrectedField")]
+    partial class CorrectedField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,11 +158,14 @@ namespace SharePix.Data.Migrations
                     b.Property<DateTime>("UploadDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UserAccountId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("UserAccountId");
 
                     b.ToTable("Photo");
                 });
@@ -982,15 +987,15 @@ namespace SharePix.Data.Migrations
                         .WithMany("PhotoAlbuns")
                         .HasForeignKey("AlbumId");
 
-                    b.HasOne("SharePix.Data.Models.UserAccount", "Owner")
+                    b.HasOne("SharePix.Data.Models.UserAccount", "UserAccount")
                         .WithMany("OwnedPhotos")
-                        .HasForeignKey("OwnerId")
+                        .HasForeignKey("UserAccountId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Album");
 
-                    b.Navigation("Owner");
+                    b.Navigation("UserAccount");
                 });
 
             modelBuilder.Entity("SharePix.Data.Models.PhotoPersonTag", b =>
