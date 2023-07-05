@@ -27,6 +27,7 @@ namespace SharePix.Data.Providers
             return _context.Set<T>().Where(filterExpression).ToList();
         }
 
+        //change bool to int
         public T GetFirstFiltered<T>(Expression<Func<T, bool>> filterExpression) where T : class
             {
                 return _context.Set<T>().FirstOrDefault();

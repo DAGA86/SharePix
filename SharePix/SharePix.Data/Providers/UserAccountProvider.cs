@@ -140,11 +140,11 @@ namespace SharePix.Data.Providers
                     result.ErrorMessage = "register.usernameAlreadyExists";
                     return result;
                 }
-
                 updateAccount.FirstName = account.FirstName;
                 updateAccount.LastName = account.LastName;
                 updateAccount.Username = account.Username;
                 updateAccount.Email = account.Email;
+
                 if (updateAccount.PasswordHash != account.PasswordHash && !string.IsNullOrEmpty(account.PasswordHash))
                 {
                     updateAccount.PasswordHash = Shared.Providers.CryptographyProvider.EncodeToBase64(account.PasswordHash);

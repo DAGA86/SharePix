@@ -5,6 +5,7 @@ using SharePix.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
@@ -14,17 +15,23 @@ namespace SharePix.Data.Providers
     public class PhotoProvider : DatabaseRepository
     {
         private Contexts.DatabaseContext _dbContext;
+        private DatabaseRepository _databaseRepository;
 
         public PhotoProvider(Contexts.DatabaseContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
+
         }
 
         public Photo Create(Photo item)
         {
+            Models.UserAccount user = _dbContext.UserAccounts.FirstOrDefault(x => x.Id == item.OwnerId);
+
+            item.OwnerId = user.Id;
             item.UploadDate = DateTime.Now;
             _dbContext.Photos.Add(item);
             _dbContext.SaveChanges();
+
             return item;
         }
 
