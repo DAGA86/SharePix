@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using NuGet.Common;
 using Microsoft.AspNetCore.Identity;
 using NuGet.Protocol.Core.Types;
+using SharePix.Data.Models;
 
 namespace SharePix.WebApp.Controllers
 {
@@ -18,12 +19,14 @@ namespace SharePix.WebApp.Controllers
         private UserAccountProvider _userAccountProvider;
         private PhotoProvider _photoProvider;
         private readonly IConfiguration _Configuration;
+        private readonly IWebHostEnvironment _env;
 
-        public UserAccountsController(DatabaseContext context, IConfiguration configuration, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(languageProvider, localizationProvider)
+        public UserAccountsController(DatabaseContext context, IConfiguration configuration, IWebHostEnvironment env, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(languageProvider, localizationProvider)
         {
             _userAccountProvider = new UserAccountProvider(context);
             _photoProvider = new PhotoProvider(context);
             _Configuration = configuration;
+            _env = env;
         }
         // GET: UserAccountsController
         public ActionResult Index()
@@ -287,10 +290,13 @@ namespace SharePix.WebApp.Controllers
                     LastName = model.LastName,
                     Username = model.Username,
                     Email = model.Email,
-                    PasswordHash = model.Password                
-             
+                    PasswordHash = model.Password,
+                    //OwnedPhotos = new Photo()
+                    //{
+                    //    OwnerId = model.PhotoId,                       
+                    //}
                 };
-               
+                               
                 var result = _userAccountProvider.UpdateAccount(user);
                 if (!string.IsNullOrEmpty(result.ErrorMessage))
                 {

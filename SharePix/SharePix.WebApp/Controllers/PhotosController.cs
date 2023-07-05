@@ -32,9 +32,9 @@ namespace SharePix.WebApp.Controllers
             return View();
         }
 
-      
+
         // TODO: Mudar userccountProvider para databaseRepo...para na conseguir abrir a view ser ter sessao iniciada
-  
+
         public ActionResult UploadPhoto()
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -74,40 +74,39 @@ namespace SharePix.WebApp.Controllers
                         await file.CopyToAsync(stream);
                     }
 
-
-
-
-                    // Step 4: Process the image and save it with desired specifications
-                    using (var image = Image.Load(tempFilePath))
+                    if (files != null && files.Count > 0)
                     {
-                        var height = 1080;
-                        if (image.Height > height)
+                        // Step 4: Process the image and save it with desired specifications
+                        using (var image = Image.Load(tempFilePath))
                         {
-                            var ratio = (float)height / image.Height;
-                            var width = (int)(image.Width * ratio);
-                            image.Mutate(x => x.Resize(new ResizeOptions { Size = new Size(width, height) }));
-                        }
-
-                        if (ModelState.IsValid)
-                        {
-                            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                            Data.Models.Photo photo = new Data.Models.Photo()
+                            var height = 1080;
+                            if (image.Height > height)
                             {
-                                OwnerId = userId,
-                                Location = model.Location,
-                                Description = model.Description,
-                                Date = model.Date,
-                            };
-                            var newFileName = $"{_photoProvider.Create(photo).Id}.jpg";
+                                var ratio = (float)height / image.Height;
+                                var width = (int)(image.Width * ratio);
+                                image.Mutate(x => x.Resize(new ResizeOptions { Size = new Size(width, height) }));
+                            }
 
-                            string webRootPath = _env.WebRootPath;
+                            if (ModelState.IsValid)
+                            {
+                                int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                                Data.Models.Photo photo = new Data.Models.Photo()
+                                {
+                                    OwnerId = userId,
+                                    Location = model.Location,
+                                    Description = model.Description,
+                                    Date = model.Date,
+                                };
+                                var newFileName = $"{_photoProvider.Create(photo).Id}.jpg";
 
-                            var newPath = Path.Combine(webRootPath + "\\photos", newFileName);
+                                string webRootPath = _env.WebRootPath;
 
-                            image.Save(newPath);
+                                var newPath = Path.Combine(webRootPath + "\\photos", newFileName);
+
+                                image.Save(newPath);
+                            }
                         }
                     }
-
                 }
                 finally
                 {

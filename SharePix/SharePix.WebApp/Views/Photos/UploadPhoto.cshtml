@@ -7,14 +7,24 @@
 @{
     Layout = "~/Views/Shared/_BasicLayout.cshtml";
 }
+<link rel="stylesheet" href="~/css/uploadPhoto.css">
 
 <h2>Upload Photos</h2>
 
 <form asp-action="UploadPhoto" method="post" enctype="multipart/form-data">
+
     <input type="hidden" asp-for="OwnerId" />
     <div class="form-group">
-        <label for="photos">Select Photos</label>
-        <input type="file" name="files" id="photos" multiple />
+        <div class="containerPhoto">
+            <div id="preview" class="img"></div>
+            <input type="file" name="files" id="photos" multiple />
+        </div>
     </div>
+
     <button type="submit" class="btn btn-primary">Upload</button>
+
 </form>
+
+@section Scripts{
+    <script src="/js/uploadPhoto.js"></script>
+}
