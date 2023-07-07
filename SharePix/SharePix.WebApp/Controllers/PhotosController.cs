@@ -30,8 +30,7 @@ namespace SharePix.WebApp.Controllers
         }
 
 
-        // TODO: Mudar userccountProvider para databaseRepo...para na conseguir abrir a view ser ter sessao iniciada
-
+      
         public ActionResult UploadPhoto()
         {
             UploadPhotoViewModel model = new UploadPhotoViewModel();
@@ -112,7 +111,10 @@ namespace SharePix.WebApp.Controllers
 
         }
 
-
+        public ActionResult ViewOnePhoto()
+        {
+            return View();
+        }
         public ActionResult Edit(int id)
         {
             return View();

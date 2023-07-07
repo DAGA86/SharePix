@@ -8,21 +8,56 @@
     Layout = "~/Views/Shared/_BasicLayout.cshtml";
 }
 <link rel="stylesheet" href="~/css/uploadPhoto.css">
+<section id="form-def">
+    <h2>Upload Photos</h2>
 
-<h2>Upload Photos</h2>
+    <div class="post_extra">
 
-<form asp-action="UploadPhoto" method="post" enctype="multipart/form-data">
+        <div class="owl_wrap">
 
-    <div class="form-group">
-        <div class="containerPhoto">
-            <div id="preview" class="img"></div>
-            <input type="file" name="files" id="photos" multiple />
+            <div class="slideshow owl_carousel">
+
+                <img src="/images/portfolio_post_img_1.jpg" alt="">
+
+                <img src="/images/slideshow_img_1.jpg" alt="">
+
+                <img src="/images/slideshow_img_3.jpg" alt="">
+
+            </div>
+
+            <!-- - - - - - - - - - - - - - Controls with SVG icons - - - - - - - - - - - - - - - - -->
+
+            <span class="si-icon action_btn dark large owl-prev" data-width="28" data-height="28" data-event="mouseover" data-icon-name="previous"></span>
+
+            <span class="si-icon action_btn dark large owl-next" data-width="28" data-height="28" data-event="mouseover" data-icon-name="next"></span>
+
+            <!-- - - - - - - - - - - - - - End of Controls with SVG icons - - - - - - - - - - - - - - - - -->
+
         </div>
-    </div>
 
-    <button type="submit" class="btn btn-primary">Upload</button>
+    </div><!--/ .post_extra -->
 
-</form>
+    <form class="form-pic" asp-action="UploadPhoto" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="containerPhoto">
+                <div id="preview" class="img"></div>
+                <input type="file" name="files" id="photos" multiple />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Location">@Localize("label.location.title")</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1">
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">@Localize("label.description.title")</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Upload</button>
+
+    </form>
+</section>
 
 @section Scripts{
     <script src="/js/uploadPhoto.js"></script>
