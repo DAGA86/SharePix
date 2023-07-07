@@ -25,9 +25,6 @@ namespace SharePix.Data.Providers
 
         public Photo Create(Photo item)
         {
-            Models.UserAccount user = _dbContext.UserAccounts.FirstOrDefault(x => x.Id == item.OwnerId);
-
-            item.OwnerId = user.Id;
             item.UploadDate = DateTime.Now;
             _dbContext.Photos.Add(item);
             _dbContext.SaveChanges();

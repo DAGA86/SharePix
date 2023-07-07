@@ -6,11 +6,6 @@ using System.Security.Claims;
 using SharePix.Data.Providers;
 using SharePix.Data.Contexts;
 using SharePix.Shared.Providers;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using NuGet.Common;
-using Microsoft.AspNetCore.Identity;
-using NuGet.Protocol.Core.Types;
-using SharePix.Data.Models;
 
 namespace SharePix.WebApp.Controllers
 {

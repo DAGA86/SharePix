@@ -1,16 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SharePix.Data.Contexts;
-using SharePix.Data.Models;
 using SharePix.Data.Providers;
 using SharePix.WebApp.Models.Photos;
-using SharePix.WebApp.Models.UserAccounts;
 using System.Security.Claims;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace SharePix.WebApp.Controllers
 {
+    [Authorize]
     public class PhotosController : Controller
     {
         private DatabaseRepository _databaseRepository;
@@ -37,11 +34,8 @@ namespace SharePix.WebApp.Controllers
 
         public ActionResult UploadPhoto()
         {
-            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            UploadPhotoViewModel model = _userAccountProvider.GetFirstById(userId, x => new UploadPhotoViewModel
-            {
-                OwnerId = x.OwnedPhotos.First().OwnerId,
-            });
+            UploadPhotoViewModel model = new UploadPhotoViewModel();
+          
             if (model != null)
             {
                 return View(model);

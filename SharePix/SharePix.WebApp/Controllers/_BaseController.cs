@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore;
-using SharePix.Data.Contexts;
 using SharePix.Data.Providers;
 
 namespace SharePix.WebApp.Controllers

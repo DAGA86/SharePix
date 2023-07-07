@@ -1,8 +1,4 @@
-﻿using Humanizer.Localisation;
-using Microsoft.AspNetCore.Mvc.Localization;
-using SharePix.Data.Providers;
-using SharePix.WebApp.Controllers;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SharePix.WebApp.Models.UserAccounts
 {

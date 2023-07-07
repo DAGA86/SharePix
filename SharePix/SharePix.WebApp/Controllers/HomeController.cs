@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
-using SharePix.Data.Contexts;
 using SharePix.Data.Providers;
 using SharePix.WebApp.Models;
 using System.Diagnostics;
