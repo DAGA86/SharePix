@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using SharePix.Data.Providers;
 using SharePix.WebApp.Models;
+using SharePix.WebApp.Models.HomePage;
+using SharePix.WebApp.Models.Photos;
 using System.Diagnostics;
 
 namespace SharePix.WebApp.Controllers
@@ -32,7 +34,16 @@ namespace SharePix.WebApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            PhotosViewModel photosViewModel = new PhotosViewModel();
+
+            UploadPhotoViewModel[] uploadPhotoViewModel = null;
+            
+            if(uploadPhotoViewModel != null)
+            {
+                photosViewModel.UploadPhoto = uploadPhotoViewModel;
+            }
+
+            return View(photosViewModel);
         }
 
         public IActionResult Privacy()
