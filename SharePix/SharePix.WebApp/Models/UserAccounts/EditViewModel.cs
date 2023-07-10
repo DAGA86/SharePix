@@ -27,8 +27,6 @@ namespace SharePix.WebApp.Models.UserAccounts
         [MinLength(5, ErrorMessage = "password.minLength")]
         [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$", ErrorMessage = "password.regularExpression")]
         public string? Password { get; set; }
-
-        public int PhotoId { get; set; }
        
 
     }
