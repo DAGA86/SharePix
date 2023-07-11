@@ -1,23 +1,23 @@
 ﻿.img {
-    width: 200px;
+    width: 300px;
     display: flex;
     flex-direction: column;
 }
 
-section #form-def {
+section#fm {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-form.form-pic {
-    width: 800px;
-    height: 630px;
-
+form#pic {
+    width: 600px;
+    height: auto;
 }
 
-.owl-carousel .owl-item img {
-    display: block;
-    width: 50%;
-    align-items: center;
+h2 {
+    text-align: center;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #d4b60f
 }

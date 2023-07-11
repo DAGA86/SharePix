@@ -8,7 +8,7 @@ using System.Security.Claims;
 namespace SharePix.WebApp.Controllers
 {
     [Authorize]
-    public class PhotosController : Controller
+    public class PhotosController : BaseController
     {
         private DatabaseRepository _databaseRepository;
         private PhotoProvider _photoProvider;
@@ -16,7 +16,7 @@ namespace SharePix.WebApp.Controllers
         private UserAccountProvider _userAccountProvider;
 
 
-        public PhotosController(DatabaseContext context, IWebHostEnvironment env, LanguageProvider languageProvider, LocalizationProvider localizationProvider)/* : base(languageProvider, localizationProvider)*/
+        public PhotosController(DatabaseContext context, IWebHostEnvironment env, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(languageProvider, localizationProvider)
         {
             _databaseRepository = new DatabaseRepository(context);
             _photoProvider = new PhotoProvider(context);
