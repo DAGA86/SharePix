@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using SharePix.Data.Contexts;
+using SharePix.Data.Models;
 using SharePix.Data.Providers;
+using SharePix.Shared.Models;
 using SharePix.WebApp.Models;
 using SharePix.WebApp.Models.HomePage;
 using SharePix.WebApp.Models.Photos;
@@ -11,9 +15,11 @@ namespace SharePix.WebApp.Controllers
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
+        private DatabaseRepository _databaseRepository;
 
-        public HomeController(LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(languageProvider, localizationProvider)
+        public HomeController(DatabaseContext context, LanguageProvider languageProvider, LocalizationProvider localizationProvider) : base(languageProvider, localizationProvider)
         {
+            _databaseRepository = new DatabaseRepository(context);
 
         }
 
@@ -34,16 +40,14 @@ namespace SharePix.WebApp.Controllers
 
         public IActionResult Index()
         {
-            PhotosViewModel photosViewModel = new PhotosViewModel();
+            //IEnumerable<PhotoViewModel> photosViewModel = _databaseRepository.Get<Photo, PhotoViewModel>==
+            Result<List<PhotoViewModel>> result = _databaseRepository.Get<Photo, PhotoViewModel>(
+                null, 
+                x => new PhotoViewModel { 
+                    Id = x.Id, Location = x.Location, Date = x.Date, Description = x.Description, AlbumId = x.AlbumId }
+                );
 
-            UploadPhotoViewModel[] uploadPhotoViewModel = null;
-            
-            if(uploadPhotoViewModel != null)
-            {
-                photosViewModel.UploadPhoto = uploadPhotoViewModel;
-            }
-
-            return View(photosViewModel);
+            return View(result.Object);
         }
 
         public IActionResult Privacy()

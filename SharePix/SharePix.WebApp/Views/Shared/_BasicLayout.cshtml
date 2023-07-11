@@ -60,7 +60,7 @@
         <link rel="stylesheet" type="text/css" href="css/oldie.css">
         <script src="~/js/placeholderIE.js"></script>
     <![endif]-->
-
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 
 <body>
@@ -396,7 +396,7 @@
         <!-- - - - - - - - - - - - - - End page content - - - - - - - - - - - - - - - - -->
         <!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
 
-        <footer role="contentinfo" id="footer">
+        <footer role="contentinfo" id="footer" class="fullscreen">
 
             <span class="copyright">&copy; 2015 Joker. All rights reserved.</span>
 

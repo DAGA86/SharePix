@@ -6,6 +6,7 @@ using System.Security.Claims;
 using SharePix.Data.Providers;
 using SharePix.Data.Contexts;
 using SharePix.Shared.Providers;
+using Microsoft.AspNetCore.Http;
 
 namespace SharePix.WebApp.Controllers
 {
@@ -273,7 +274,7 @@ namespace SharePix.WebApp.Controllers
         // POST: UserAccountsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(EditViewModel model)
+        public ActionResult Edit(IFormFile photo, EditViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -285,14 +286,35 @@ namespace SharePix.WebApp.Controllers
                     LastName = model.LastName,
                     Username = model.Username,
                     Email = model.Email,
-                    PasswordHash = model.Password,
-                    //OwnedPhotos = new Photo()
-                    //{
-                    //    OwnerId = model.PhotoId,                       
-                    //}
+                    PasswordHash = model.Password
                 };
-                               
+
                 var result = _userAccountProvider.UpdateAccount(user);
+
+                if (photo != null && photo.Length > 0)
+                {
+                    var tempFilePath = Path.GetTempFileName();
+
+                    using (var image = Image.Load(photo.OpenReadStream()))
+                    {
+                        var height = 1080;
+                        if (image.Height > height)
+                        {
+                            var ratio = (float)height / image.Height;
+                            var width = (int)(image.Width * ratio);
+                            image.Mutate(x => x.Resize(new ResizeOptions { Size = new Size(width, height) }));
+                        }
+
+                        var newFileName = $"{result.Object.Id}.jpg";
+
+                        string webRootPath = _env.WebRootPath;
+
+                        var newPath = Path.Combine(webRootPath + "\\photos\\users", newFileName);
+
+                        image.Save(newPath);
+                    }
+                }
+
                 if (!string.IsNullOrEmpty(result.ErrorMessage))
                 {
                     ViewData["ErrorMessage"] = Localize(result.ErrorMessage);
