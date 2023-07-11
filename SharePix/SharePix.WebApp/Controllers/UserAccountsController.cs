@@ -112,7 +112,7 @@ namespace SharePix.WebApp.Controllers
             await this.HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectPermanent("~/Home/Index");
+            return RedirectPermanent("~/UserAccounts/Login");
         }
 
         public ActionResult Register()
@@ -274,7 +274,7 @@ namespace SharePix.WebApp.Controllers
         // POST: UserAccountsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(IFormFile photo, EditViewModel model)
+        public ActionResult Edit(IFormFile? photo, EditViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -322,7 +322,7 @@ namespace SharePix.WebApp.Controllers
                 else
                 {
                     ViewData["SuccessMessage"] = Localize("updateAccount.successMessage");
-                    return RedirectToAction(nameof(Edit));
+                    //return RedirectToAction(nameof(Edit));
                 }
             }
             else

@@ -4,17 +4,9 @@
     Layout = "~/Views/Shared/_BasicLayout.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/editUserAccount.css">
 
-@if (ViewData["SuccessMessage"] != null)
-{
-    <div class="text-success">@ViewData["SuccessMessage"]</div>
-}
-@if (ViewData["ErrorMessage"] != null)
-{
-    <div class="text-danger">@ViewData["ErrorMessage"]</div>
-}
 
+<h1>@Localize("profile.title")</h1>
 
 <div class="container">
     <div class="row gutters">
@@ -38,28 +30,35 @@
                 </div>
             </div>
 
-
-
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                 <div class="card h-100">
                     <div class="card-body">
                         <div class="row gutters">
+
+                            @if (ViewData["SuccessMessage"] != null)
+                            {
+                                <div class="text-success">@ViewData["SuccessMessage"]</div>
+                            }
+                            @if (ViewData["ErrorMessage"] != null)
+                            {
+                                <div class="text-danger">@ViewData["ErrorMessage"]</div>
+                            }
+
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class="mb-2 text-primary">@Localize("profile.title")</h6>
                             </div>
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label asp-for="FirstName">@Localize("label.firstName")</label>
+                                        <label asp-for="FirstName" class="control-label">@Localize("label.firstName")</label>
                                         <input asp-for="FirstName" class="form-edit">
                                         <span asp-validation-for="FirstName" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label asp-for="LastName">@Localize("label.lastName")</label>
+                                        <label asp-for="LastName" class="control-label">@Localize("label.lastName")</label>
                                         <input asp-for="LastName" class="form-edit" />
                                         <span asp-validation-for="LastName" class="text-danger"></span>
                                     </div>
@@ -68,14 +67,14 @@
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label asp-for="Username">@Localize("label.username")</label>
+                                        <label asp-for="Username" class="control-label">@Localize("label.username")</label>
                                         <input asp-for="Username" class="form-edit" />
                                         <span asp-validation-for="Username" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label asp-for="Email">@Localize("label.email")</label>
+                                        <label asp-for="Email" class="control-label">@Localize("label.email")</label>
                                         <input asp-for="Email" class="form-edit" />
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
@@ -84,19 +83,19 @@
                         </div>
                         <div class="row gutters">
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                <h6 class="mt-3 mb-2 pd-top-2">@Localize("profile.changePassword.title")</h6>
+                                <h5 class="mt-3 mb-2 pd-top-2">@Localize("profile.changePassword.title")</h5>
                             </div>
 
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group cs">
-                                    <label asp-for="Password">@Localize("label.password")</label>
+                                    <label asp-for="Password" class="control-label">@Localize("label.password")</label>
                                     <input asp-for="Password" id="password" class="form-edit input-conf" />
                                     <span id="mess" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                 <div class="form-group cs">
-                                    <label>@Localize("label.confirmPassword")</label>
+                                    <label class="control-label">@Localize("label.confirmPassword")</label>
                                     <input type="password" id="confirmPassword" class="form-edit input-conf" />
                                     <span class="style" id="message"></span>
                                 </div>
@@ -116,6 +115,9 @@
     </div>
 </div>
 
+@section Styles{
+    <link rel="stylesheet" href="~/css/editUserAccount.css">
+  }
 
 @section scripts{
     <script src="/js/editUserAccount.js"></script>

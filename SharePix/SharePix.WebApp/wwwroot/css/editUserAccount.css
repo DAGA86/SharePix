@@ -4,6 +4,7 @@
     color: #2e323c;
     position: relative;
     height: 100%;
+    padding: 0;
 }
 
 .account-settings .user-profile {
@@ -44,6 +45,11 @@ input.btt {
 
 label.control-label {
     padding: 18px 0 0;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #000000;
+    font-size:18px;
+    
 }
 
 input.form-edit {
@@ -51,7 +57,7 @@ input.form-edit {
     -webkit-border-radius: 10px;
     -moz-border-radius: 2px;
     border-radius: 2px;
-    font-size: 15px;
+    font-size: 14px;
     background: #ffffff;
     color: #2e323c;
 }
@@ -89,9 +95,24 @@ input.form-edit {
     color: #f27d2a;
     font-family: 'Ysabeau Infant', sans-serif;
     font-weight: 600;
-    font-size: 17px;
+    font-size: 20px;
 }
 
 .pd-top-2{
     padding-top: 20px;
 }
+
+h1 {
+    text-align: center;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #d4b60f;
+    padding-bottom: 20px;
+}
+
+h5 {
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #d4b60f;
+}
+
