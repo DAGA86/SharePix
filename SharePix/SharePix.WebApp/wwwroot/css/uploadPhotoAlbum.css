@@ -1,0 +1,51 @@
+﻿.img {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+section#fm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form#pic {
+    width: 600px;
+    height: auto;
+}
+
+section#fm-Album {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form#pic-Album {
+    width: 800px;
+    height: auto;
+}
+
+h2 {
+    text-align: center;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #d4b60f
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #d4b60f;
+    padding-bottom: 20px;
+}
+
+h5 {
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #d4b60f;
+}
+
+
+

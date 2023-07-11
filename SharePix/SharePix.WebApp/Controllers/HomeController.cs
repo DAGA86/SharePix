@@ -9,6 +9,8 @@ using SharePix.WebApp.Models;
 using SharePix.WebApp.Models.HomePage;
 using SharePix.WebApp.Models.Photos;
 using System.Diagnostics;
+using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace SharePix.WebApp.Controllers
 {
@@ -40,14 +42,48 @@ namespace SharePix.WebApp.Controllers
 
         public IActionResult Index()
         {
-            //IEnumerable<PhotoViewModel> photosViewModel = _databaseRepository.Get<Photo, PhotoViewModel>==
-            Result<List<PhotoViewModel>> result = _databaseRepository.Get<Photo, PhotoViewModel>(
-                null, 
-                x => new PhotoViewModel { 
-                    Id = x.Id, Location = x.Location, Date = x.Date, Description = x.Description, AlbumId = x.AlbumId }
-                );
+    //        var kjjlk = _databaseRepository.Get2<Photo, HomePageViewModel>(
+    //            x => new HomePageViewModel { Id = x.Id, Date = x.Date },
+    //            x => x.Id != null,
+    //            new Expression<Func<Photo, object>>[]
+    //{
+    //    s => s.Id,  // Sort by FirstName ascending
+    //    s => s.UploadDate descending // Sort by LastName descending
+    //}
+    //);
 
-            return View(result.Object);
+
+            //IEnumerable<PhotoViewModel> photosViewModel = _databaseRepository.Get<Photo, PhotoViewModel>==
+
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            Result<List<Photo>> resultPhotos = _databaseRepository.Get<Photo, Photo>(
+                x => x.AlbumId == null && x.OwnerId == userId, null);
+
+            Result<List<Album>> resultAlbums = _databaseRepository.Get<Album, Album>(
+                x => x.OwnerId == userId, null);
+
+            foreach (var album in resultAlbums.Object)
+            {
+                resultPhotos.Object.Add(_databaseRepository.GetFirstFiltered<Photo>(x => x.AlbumId == album.Id));
+            }
+            resultPhotos.Object = resultPhotos.Object.OrderByDescending(x => x.UploadDate).ToList();
+            List<HomePageViewModel> list = new List<HomePageViewModel>();
+            foreach (var photo in resultPhotos.Object)
+            {
+                list.Add(new HomePageViewModel()
+                {
+                    Id = photo.Id,
+                    Date = photo.Date,
+                    Description = photo.Description,
+                    Location = photo.Location,
+                    AlbumName = photo.Album?.Name,
+                    AlbumId = photo.AlbumId,
+                });
+            }
+
+
+
+            return View(list);
         }
 
         public IActionResult Privacy()

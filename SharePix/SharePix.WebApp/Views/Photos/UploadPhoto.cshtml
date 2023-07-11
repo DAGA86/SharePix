@@ -11,6 +11,7 @@
 <h2>Upload Photos</h2>
 <section id="fm">
     <form id="pic" asp-action="UploadPhoto" enctype="multipart/form-data">
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <div class="containerPhoto">
                 <div id="preview" class="img"></div>
@@ -30,7 +31,7 @@
 </section>
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/uploadPhoto.css">
+    <link rel="stylesheet" href="~/css/uploadPhotoAlbum.css">
   }
 
 @section Scripts{

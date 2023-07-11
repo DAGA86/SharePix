@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SharePix.WebApp.Models.HomePage.PhotoViewModel>
+﻿@model IEnumerable<SharePix.WebApp.Models.HomePage.HomePageViewModel>
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,47 +20,91 @@
 
         @foreach (var photo in Model)
         {
-            <div class="isotope_item travelling">
-                <div class="grid_sizer"></div>
+            if (photo.AlbumId == null)
+            {
+                <div class="isotope_item travelling">
+                    <div class="grid_sizer"></div>
 
-                <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
+                    <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
 
-                <div class="inner_j_item item_type_1">
+                    <div class="inner_j_item item_type_1">
+                      
+                            <img class="item_image" src="~/photos/@(photo.Id).jpg" />                
+                        <a href="portfolio_mixed_list_post.html" class="overlay_link"></a>
+                        @*<h4 class="title"><a href="portfolio_mixed_list_post.html">Portfolio Post 1</a></h4>*@
 
-                    <img class="item_image" src="~/photos/@(photo.Id).jpg" />
-                    <a href="portfolio_mixed_list_post.html" class="overlay_link"></a>
-                    @*<h4 class="title"><a href="portfolio_mixed_list_post.html">Portfolio Post 1</a></h4>*@
+
+                        <!-- - - - - - - - - - - - - - Category & Statistic - - - - - - - - - - - - - - - - -->
+
+                        <div class="meta">
+
+                            <!-- - - - - - - - - - - - - - Title & Category - - - - - - - - - - - - - - - - -->
 
 
-                    <!-- - - - - - - - - - - - - - Category & Statistic - - - - - - - - - - - - - - - - -->
+                            <div class="stats">
 
-                    <div class="meta">
+                                <span class="sl_wrap"><i class="icon-eye"></i><a href="#" class="stat_link">15</a></span>
+                                <span class="sl_wrap"><i class="icon-heart-empty"></i><a href="#" class="stat_link">97</a></span>
 
-                        <!-- - - - - - - - - - - - - - Title & Category - - - - - - - - - - - - - - - - -->
+                            </div>
 
-                        <div class="category"><a href="#">Travelling</a></div>
+                        </div>
 
-                        <div class="stats">
+                        <!-- - - - - - - - - - - - - - End of Category & Statistic - - - - - - - - - - - - - - - - -->
 
-                            <span class="sl_wrap"><i class="icon-eye"></i><a href="#" class="stat_link">15</a></span>
-                            <span class="sl_wrap"><i class="icon-heart-empty"></i><a href="#" class="stat_link">97</a></span>
+                    </div>
+
+                    <!-- - - - - - - - - - - - - - End of Portfolio Item - - - - - - - - - - - - - - - - -->
+
+                </div>
+            }
+            else
+            {   <!-- - - - - - - - - - - - - Album - - - - - - - - - - - - - - - - -->
+
+                <div class="isotope_item travelling">
+
+                    <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
+
+                    <div class="inner_j_item item_type_5">
+
+                        <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="">
+
+                        <a href="portfolio_video_post.html" class="overlay_link"></a>
+
+                        <h4 class="title"><a href="portfolio_video_post.html">@(photo.AlbumName)</a></h4>
+
+                        <div class="meta">
+
+                            <!-- - - - - - - - - - - - - - Title & Category - - - - - - - - - - - - - - - - -->
+
+                            <div class="category"><a href="#">Travelling</a></div>
+
+                            <!-- - - - - - - - - - - - - - End of Title & Category - - - - - - - - - - - - - - - - -->
+                            <!-- - - - - - - - - - - - - - Item Statistic - - - - - - - - - - - - - - - - -->
+
+                            <div class="stats">
+
+                                <span class="sl_wrap"><i class="icon-eye"></i><a href="#" class="stat_link">15</a></span>
+                                <span class="sl_wrap"><i class="icon-heart-empty"></i><a href="#" class="stat_link">97</a></span>
+
+                            </div>
+
+                            <!-- - - - - - - - - - - - - - End of Item Statistic - - - - - - - - - - - - - - - - -->
 
                         </div>
 
                     </div>
 
-                    <!-- - - - - - - - - - - - - - End of Category & Statistic - - - - - - - - - - - - - - - - -->
+                    <!-- - - - - - - - - - - - - - End of Portfolio Item - - - - - - - - - - - - - - - - -->
 
                 </div>
-
-                <!-- - - - - - - - - - - - - - End of Portfolio Item - - - - - - - - - - - - - - - - -->
-
-            </div>
+            }
         }
-
 
         <!-- - - - - - - - - - - - - - End of Isotope Container - - - - - - - - - - - - - - - - -->
     </div>
+
+ 
 </main>
 @section Scripts{
     <script src="~/plugins/isotope.pkgd.min.js"></script>

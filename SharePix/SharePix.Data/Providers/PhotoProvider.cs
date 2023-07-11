@@ -15,7 +15,6 @@ namespace SharePix.Data.Providers
     public class PhotoProvider : DatabaseRepository
     {
         private Contexts.DatabaseContext _dbContext;
-        private DatabaseRepository _databaseRepository;
 
         public PhotoProvider(Contexts.DatabaseContext dbContext) : base(dbContext)
         {

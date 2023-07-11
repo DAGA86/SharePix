@@ -28,8 +28,4 @@
     <ProjectReference Include="..\SharePix.Shared\SharePix.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\photos\" />
-  </ItemGroup>
-
 </Project>
