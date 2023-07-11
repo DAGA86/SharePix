@@ -18,7 +18,7 @@ namespace SharePix.Data.Models
         public DateTime CreateDate { get; set; }
         public int OwnerId { get; set; }
 
-        public UserAccount UserAccount { get; set; }
+        public UserAccount Owner { get; set; }
         public ICollection<Photo> PhotoAlbuns { get; set; }
     }
 }
