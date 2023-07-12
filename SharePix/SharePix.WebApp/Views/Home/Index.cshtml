@@ -10,7 +10,7 @@
 
     <div class="template_container">
 
-        <h1>Full Width Masonry Portfolio</h1>
+        <h1>@Localize("")</h1>
 
     </div>
 
@@ -28,30 +28,22 @@
                     <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
 
                     <div class="inner_j_item item_type_1">
+                        <a href="~/photos/@(photo.Id).jpg" data-lightbox="photos" data-title="@(photo.Description)">
+                            <img class="item_image" src="~/photos/@(photo.Id).jpg" />
+                            <p class="overlay_link"></p>
+                        </a>
                       
-                            <img class="item_image" src="~/photos/@(photo.Id).jpg" />                
-                        <a href="portfolio_mixed_list_post.html" class="overlay_link"></a>
-                        @*<h4 class="title"><a href="portfolio_mixed_list_post.html">Portfolio Post 1</a></h4>*@
+                        <h4 class="title">@(photo.Description)</h4>
 
-
-                        <!-- - - - - - - - - - - - - - Category & Statistic - - - - - - - - - - - - - - - - -->
 
                         <div class="meta">
-
-                            <!-- - - - - - - - - - - - - - Title & Category - - - - - - - - - - - - - - - - -->
-
-
                             <div class="stats">
 
                                 <span class="sl_wrap"><i class="icon-eye"></i><a href="#" class="stat_link">15</a></span>
                                 <span class="sl_wrap"><i class="icon-heart-empty"></i><a href="#" class="stat_link">97</a></span>
 
                             </div>
-
                         </div>
-
-                        <!-- - - - - - - - - - - - - - End of Category & Statistic - - - - - - - - - - - - - - - - -->
-
                     </div>
 
                     <!-- - - - - - - - - - - - - - End of Portfolio Item - - - - - - - - - - - - - - - - -->
@@ -59,28 +51,21 @@
                 </div>
             }
             else
-            {   <!-- - - - - - - - - - - - - Album - - - - - - - - - - - - - - - - -->
+            {
+                <!-- - - - - - - - - - - - - Album - - - - - - - - - - - - - - - - -->
 
                 <div class="isotope_item travelling">
-
-                    <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
-
                     <div class="inner_j_item item_type_5">
+                        <a href="~/photos/@(photo.Id).jpg" data-lightbox="albuns" data-title="@(photo.Description)">
+                        <img class="item_image" src="~/photos/@(photo.Id).jpg" alt=""></a>
 
-                        <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="">
+                        <a asp-action="Index" asp-controller="Albums" asp-route-id="@photo.AlbumId" class="overlay_link"></a>
 
-                        <a href="portfolio_video_post.html" class="overlay_link"></a>
-
-                        <h4 class="title"><a href="portfolio_video_post.html">@(photo.AlbumName)</a></h4>
+                        <h4 class="title"><a asp-action="Index" asp-controller="Albums" asp-route-id="@photo.AlbumId">@(photo.AlbumName)</a></h4>
 
                         <div class="meta">
 
-                            <!-- - - - - - - - - - - - - - Title & Category - - - - - - - - - - - - - - - - -->
-
-                            <div class="category"><a href="#">Travelling</a></div>
-
-                            <!-- - - - - - - - - - - - - - End of Title & Category - - - - - - - - - - - - - - - - -->
-                            <!-- - - - - - - - - - - - - - Item Statistic - - - - - - - - - - - - - - - - -->
+                               <div class="category"><a asp-action="Index" asp-controller="Albums">@Localize("album.title")</a></div>
 
                             <div class="stats">
 
@@ -88,11 +73,7 @@
                                 <span class="sl_wrap"><i class="icon-heart-empty"></i><a href="#" class="stat_link">97</a></span>
 
                             </div>
-
-                            <!-- - - - - - - - - - - - - - End of Item Statistic - - - - - - - - - - - - - - - - -->
-
                         </div>
-
                     </div>
 
                     <!-- - - - - - - - - - - - - - End of Portfolio Item - - - - - - - - - - - - - - - - -->
@@ -104,11 +85,18 @@
         <!-- - - - - - - - - - - - - - End of Isotope Container - - - - - - - - - - - - - - - - -->
     </div>
 
- 
+
 </main>
 @section Scripts{
     <script src="~/plugins/isotope.pkgd.min.js"></script>
-
+    <script>
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'alwaysShowNavOnTouchDevices': true,
+            'showImageNumberLabel': true,
+        })
+    </script>
 }
 
 

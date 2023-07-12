@@ -51,6 +51,7 @@
     <!-- Theme CSS
     ============================================ -->
     <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/lightbox.css">
     <!--<link rel="stylesheet" href="css/rtl.css"> -->
     <!-- JS Libs
     ============================================ -->
@@ -127,7 +128,7 @@
                 <!-- - - - - - - - - - - - - - Main Navigation - - - - - - - - - - - - - - - - -->
 
                 <nav>
-                    <a href="@Url.Action("UploadPhoto","Photos")">UploadPhoto</a>
+                    <a asp-action="UploadPhoto" asp-controller="Photos">UploadPhoto</a>
                     <ul class="navigation">
 
                         <li class="has_submenu">
@@ -481,6 +482,7 @@
 
     <script src="~/js/theme.core.js"></script>
     <script src="~/js/theme.plugins.js"></script>
+    <script src="~/js/lightbox.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
