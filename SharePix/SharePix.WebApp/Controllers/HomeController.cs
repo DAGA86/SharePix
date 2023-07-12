@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Localization;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using SharePix.Data.Contexts;
@@ -14,6 +15,7 @@ using System.Security.Claims;
 
 namespace SharePix.WebApp.Controllers
 {
+    [Authorize]
     public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;

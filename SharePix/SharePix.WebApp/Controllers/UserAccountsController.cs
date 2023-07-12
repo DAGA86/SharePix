@@ -7,6 +7,7 @@ using SharePix.Data.Providers;
 using SharePix.Data.Contexts;
 using SharePix.Shared.Providers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SharePix.WebApp.Controllers
 {
@@ -253,6 +254,7 @@ namespace SharePix.WebApp.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult Edit()
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
@@ -271,6 +273,7 @@ namespace SharePix.WebApp.Controllers
             return RedirectToAction(nameof(Index), "Home");
         }
 
+        [Authorize]
         // POST: UserAccountsController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -332,12 +335,14 @@ namespace SharePix.WebApp.Controllers
             return View(model);
         }
 
+        [Authorize]
         // GET: UserAccountsController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
+        [Authorize]
         // POST: UserAccountsController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
