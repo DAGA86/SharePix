@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SharePix.Data.Contexts;
 
@@ -11,9 +12,10 @@ using SharePix.Data.Contexts;
 namespace SharePix.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230714094926_AddedTranslationsSeed")]
+    partial class AddedTranslationsSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -644,9 +646,9 @@ namespace SharePix.Data.Migrations
                         },
                         new
                         {
-                            Key = "uploadPhoto.title",
+                            Key = "uploadPhotos.title",
                             LanguageId = 1,
-                            Value = "Upload photo"
+                            Value = "Upload photos"
                         },
                         new
                         {
@@ -1064,7 +1066,7 @@ namespace SharePix.Data.Migrations
                         },
                         new
                         {
-                            Key = "uploadPhoto.title",
+                            Key = "uploadPhotos.title",
                             LanguageId = 2,
                             Value = "Carregar foto"
                         });

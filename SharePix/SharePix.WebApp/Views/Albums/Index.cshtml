@@ -6,6 +6,11 @@
 
 <title>@ViewData["Title"] - @Localize("albums.title")</title>
 
+@if (ViewData["SuccessMessage"] != null)
+{
+    <div class="text-success">@ViewData["SuccessMessage"]</div>
+}
+
 <main role="main">
 
     <div class="template_container">

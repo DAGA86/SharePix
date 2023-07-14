@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Plugins;
 using SharePix.Data.Contexts;
 using SharePix.Data.Models;
 using SharePix.Data.Providers;
@@ -62,7 +63,8 @@ namespace SharePix.WebApp.Controllers
         {
             if (files == null || files.Count == 0)
             {
-                return BadRequest("No files uploaded.");
+                ViewData["ErrorMessage"] = Localize("createAlbum.error");
+                return View(nameof(Create));
             }
 
             if (ModelState.IsValid)
@@ -132,7 +134,8 @@ namespace SharePix.WebApp.Controllers
                 }
             }
 
-            return Ok("Photos uploaded successfully.");
+            ViewData["SuccessMessage"] = Localize("createAlbum.success");
+            return View(nameof(Index));
 
         }
 

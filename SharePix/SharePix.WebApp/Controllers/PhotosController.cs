@@ -48,7 +48,8 @@ namespace SharePix.WebApp.Controllers
         {
             if (files == null || files.Count == 0)
             {
-                return BadRequest("No files uploaded.");
+                ViewData["ErrorMessage"] = Localize("uploadPhoto.error");
+                return View(nameof(UploadPhoto));
             }
 
             foreach (var file in files)
@@ -107,7 +108,8 @@ namespace SharePix.WebApp.Controllers
                 }
             }
 
-            return Ok("Photos uploaded successfully.");
+            ViewData["SuccessMessage"] = Localize("uploadPhoto.success");
+            return View(nameof(Index));
 
         }
 
