@@ -4,14 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<title>@ViewData["Title"] - SharePix.WebApp</title>
+<title>@ViewData["Title"] - @Localize("homepage.title")</title>
 
 <main role="main">
 
-    <div class="template_container">
-
-        <h1>@Localize("")</h1>
-
+    <div class="template_container checkbox-home">
+        <h2 class="h2-personalize">@Localize("gallery.title")</h2>
+        <input type="checkbox" id="photos" checked><label for="photos">@Localize("photos.title")</label>
+        <input type="checkbox" id="albums" checked><label for="albums">@Localize("albums.title")</label>
     </div>
 
     <!-- - - - - - - - - - - - - - Isotope Container - - - - - - - - - - - - - - - - -->
@@ -22,7 +22,7 @@
         {
             if (photo.AlbumId == null)
             {
-                <div class="isotope_item travelling">
+                <div class="photo isotope_item travelling">
                     <div class="grid_sizer"></div>
 
                     <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
@@ -32,7 +32,7 @@
                             <img class="item_image" src="~/photos/@(photo.Id).jpg" />
                             <p class="overlay_link"></p>
                         </a>
-                      
+
                         <h4 class="title">@(photo.Description)</h4>
 
 
@@ -54,10 +54,11 @@
             {
                 <!-- - - - - - - - - - - - - Album - - - - - - - - - - - - - - - - -->
 
-                <div class="isotope_item travelling">
+                <div class="album isotope_item travelling">
                     <div class="inner_j_item item_type_5">
                         <a href="~/photos/@(photo.Id).jpg" data-lightbox="albuns" data-title="@(photo.Description)">
-                        <img class="item_image" src="~/photos/@(photo.Id).jpg" alt=""></a>
+                            <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="">
+                        </a>
 
                         <a asp-action="Index" asp-controller="Albums" asp-route-id="@photo.AlbumId" class="overlay_link"></a>
 
@@ -65,7 +66,7 @@
 
                         <div class="meta">
 
-                               <div class="category"><a asp-action="Index" asp-controller="Albums">@Localize("album.title")</a></div>
+                            <div class="category"><a asp-action="Index" asp-controller="Albums">@Localize("album.title")</a></div>
 
                             <div class="stats">
 
@@ -89,14 +90,7 @@
 </main>
 @section Scripts{
     <script src="~/plugins/isotope.pkgd.min.js"></script>
-    <script>
-        lightbox.option({
-            'resizeDuration': 200,
-            'wrapAround': true,
-            'alwaysShowNavOnTouchDevices': true,
-            'showImageNumberLabel': true,
-        })
-    </script>
+    <script src="~/js/homepage.js"></script>
 }
 
 

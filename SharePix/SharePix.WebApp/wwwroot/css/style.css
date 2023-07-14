@@ -75,9 +75,34 @@
 .pb-2{
 	padding-bottom: 5px;
 }
-	html{
-		overflow-x: hidden;
-	}
+
+.form-control-language{
+	color: #fff;
+	background: transparent;
+
+}
+
+.checkbox-home {
+	padding-bottom: 15px;
+	text-align: right;
+}
+
+.h2-personalize {
+	text-align: center;
+	font-family: 'Ysabeau Infant', sans-serif;
+	font-weight: 700;
+	font-size: 50px;
+	color: #d4b60f
+}
+
+.size {
+	width: 90px;
+}
+
+
+html {
+	overflow-x: hidden;
+}
 
 	body{
 		font: 400 16px/24px 'Open Sans', sans-serif;
