@@ -72,7 +72,15 @@
 		1. Default stylesheets
 
 ------------------------------------------------ */
-.pb-2{
+.description-home {
+	font-family: 'Ysabeau Infant', sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	color: #fff;
+	text-align: justify;
+}
+
+.pb-2 {
 	padding-bottom: 5px;
 }
 
@@ -83,16 +91,24 @@
 }
 
 .checkbox-home {
-	padding-bottom: 15px;
 	text-align: right;
+	font-family: 'Ysabeau Infant', sans-serif;
+	font-weight: 400;
+	font-size: 16px;
 }
+
+label.marg {
+	margin-left: 7px;
+}
+
 
 .h2-personalize {
 	text-align: center;
 	font-family: 'Ysabeau Infant', sans-serif;
 	font-weight: 700;
 	font-size: 50px;
-	color: #d4b60f
+	color: #d4b60f;
+	margin-bottom: 0;
 }
 
 .size {
@@ -1958,11 +1974,29 @@ html {
 		input[type="checkbox"] + label{
 			position: relative;
 			cursor: pointer;
-			padding-left: 30px;
+			padding-left: 20px;
 			margin-bottom: 0px;
 		}
 
-		input[type="radio"] + label::before,
+			input[type="radio"] + label::before,
+			input[type="checkbox"] + label::before {
+				content: "";
+				font-family: 'fontello';
+				text-align: center;
+				color: #505050;
+				display: block;
+				background-color: #f8f8f8;
+				border: 1px solid #ddd;
+				position: absolute;
+				top: 50%;
+				left: 0;
+				margin-top: -8px;
+				width: 14px;
+				height: 14px;
+				line-height: 12px;
+			}
+
+		/*input[type="radio"] + label::before,
 		input[type="checkbox"] + label::before{
 			content: "";
 			font-family: 'fontello';
@@ -1978,7 +2012,7 @@ html {
 			width: 22px;
 			height: 22px;
 			line-height: 20px;
-		}
+		}*/
 
 		input[type="radio"] + label::before{
 			border-radius: 50%;

@@ -8,7 +8,7 @@
 
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
     var cultureItems = LocOptions.Value.SupportedUICultures
-        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.Name })
         .ToList();
 }
 
@@ -82,7 +82,7 @@
             <!-- - - - - - - - - - - - - - Logo - - - - - - - - - - - - - - - - -->
             <div>
 
-                <a href="index.html" class="logo">
+                <a class="logo size">
 
                     <img src="~/images/logo.png" alt="">
 
@@ -92,7 +92,7 @@
                     <input type="hidden" id="returnUrl" name="returnUrl" value="@returnUrl" />
                     <select id="culture"
                             name="culture"
-                            class="form-control"
+                            class="form-control-language"
                             onchange="this.form.submit();"
                             asp-items="cultureItems"
                             asp-for="@requestCulture.RequestCulture.UICulture.Name">

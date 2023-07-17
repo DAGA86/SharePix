@@ -8,7 +8,7 @@
 
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
     var cultureItems = LocOptions.Value.SupportedUICultures
-        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.Name })
         .ToList();
 }
 
@@ -115,9 +115,9 @@
 
             <!-- - - - - - - - - - - - - - Logo - - - - - - - - - - - - - - - - -->
 
-            <a href="/Home/Index" class="logo">
+            <a asp-action="Index" asp-controller="Home" class="logo">
 
-                <img src="~/images/logo.png" alt="">
+                <img class="size" src="~/images/logo.png" alt="">
 
             </a>
 
@@ -129,31 +129,16 @@
                 <!-- - - - - - - - - - - - - - Main Navigation - - - - - - - - - - - - - - - - -->
 
                 <nav>
-                    <a href="@Url.Action("UploadPhoto","Photos")">UploadPhoto</a>
+
                     <ul class="navigation">
 
                         <li class="has_submenu">
-                            
-                            <a href="index.html">Home</a>
+                            <a>@Localize("photos.title")</a>
 
                             <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
                             <ul class="submenu">
-
-                                <li><a href="index.html">Fullscreen slider</a></li>
-                                <li><a href="home_rev_slider.html">Revolution slider</a></li>
-                                <li><a href="home_ribbon_slider.html">Ribbon slider</a></li>
-                                <li><a href="home_masonry_albums.html">Masonry albums</a></li>
-                                <li><a href="home_grid_albums.html">Grid albums</a></li>
-                                <li><a href="home_masonry_portfolio.html">Masonry portfolio</a></li>
-                                <li><a href="home_grid_portfolio.html">Grid portfolio</a></li>
-                                <li><a href="home_kenburns_slideshow.html">Kenburns</a></li>
-                                <li><a href="home_masonry_wall.html">Masonry wall</a></li>
-                                <li><a href="home_grid_wall.html">Grid wall</a></li>
-                                <li><a href="home_bg_image.html">Background image</a></li>
-                                <li><a href="home_bg_youtube_video.html">Background Youtube video</a></li>
-                                <li><a href="home_bg_vimeo_video.html">Background Vimeo video</a></li>
-
+                                <li><a asp-action="UploadPhoto" asp-controller="Photos">@Localize("uploadPhoto.title")</a></li>
                             </ul>
 
                             <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
@@ -162,172 +147,25 @@
 
                         <li class="has_submenu current">
 
-                            <a href="pages_about.html">Pages</a>
+                            <a>@Localize("albums.title")</a>
 
                             <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
                             <ul class="submenu">
-
-                                <li class="current"><a href="pages_about.html">About</a></li>
-                                <li><a href="pages_contact.html">Contact</a></li>
-                                <li><a href="pages_full_width.html">Full width page</a></li>
-                                <li><a href="pages_with_sidebar.html">Page with sidebar</a></li>
-                                <li><a href="pages_coming_soon.html">Coming soon</a></li>
-                                <li><a href="pages_404.html">404 page</a></li>
-
+                                <li><a asp-action="Create" asp-controller="Albums">@Localize("createAlbum.title")</a></li>
                             </ul>
 
                             <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
 
                         </li>
-
-                        <li class="has_submenu">
-
-                            <a href="portfolio_masonry_full_width.html">Portfolio</a>
-
-                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
-                            <ul class="submenu">
-
-                                <li class="has_submenu">
-
-                                    <a href="portfolio_masonry_full_width.html">Masonry</a>
-
-                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                                    <ul class="submenu">
-
-                                        <li><a href="portfolio_masonry_full_width.html">Full width</a></li>
-                                        <li><a href="portfolio_masonry_2_columns.html">2 columns</a></li>
-                                        <li><a href="portfolio_masonry_3_columns.html">3 columns</a></li>
-                                        <li><a href="portfolio_masonry_4_columns.html">4 columns</a></li>
-
-                                    </ul>
-
-                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                                </li>
-                                <li class="has_submenu">
-
-                                    <a href="portfolio_grid_full_width.html">Grid</a>
-
-                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                                    <ul class="submenu">
-
-                                        <li><a href="portfolio_grid_full_width.html">Full width</a></li>
-                                        <li><a href="portfolio_grid_2_columns.html">2 columns</a></li>
-                                        <li><a href="portfolio_grid_3_columns.html">3 columns</a></li>
-                                        <li><a href="portfolio_grid_4_columns.html">4 columns</a></li>
-
-                                    </ul>
-
-                                    <!-- - - - - - - - - - - - - - Submenu (level 3) - - - - - - - - - - - - - - - - -->
-
-                                </li>
-                                <li><a href="portfolio_image_list_post.html">Image list post with top image</a></li>
-                                <li><a href="portfolio_image_slideshow_post.html">Image slideshow post</a></li>
-                                <li><a href="portfolio_video_post.html">Video post</a></li>
-                                <li><a href="portfolio_audio_post.html">Audio post with top image</a></li>
-                                <li><a href="portfolio_mixed_list_post.html">Mixed list post</a></li>
-                                <li><a href="portfolio_post_with_sidebar.html">Post with sidebar</a></li>
-                                <li><a href="portfolio_ribbon_post.html">Ribbon post</a></li>
-
-                            </ul>
-
-                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
+                        <li>
+                            <a asp-action="Edit" asp-controller="UserAccounts">@Localize("profile.title")</a>
                         </li>
-
-                        <li class="has_submenu">
-
-                            <a href="galleries_masonry_albums.html">Galleries</a>
-
-                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
-                            <ul class="submenu">
-
-                                <li><a href="galleries_masonry_albums.html">Masonry albums</a></li>
-                                <li><a href="galleries_grid_albums.html">Grid albums</a></li>
-                                <li><a href="galleries_ribbon.html">Ribbon gallery</a></li>
-                                <li><a href="galleries_flow.html">Flow gallery</a></li>
-                                <li><a href="galleries_kenburns.html">Kenburns</a></li>
-                                <li><a href="galleries_masonry_wall.html">Masonry wall</a></li>
-                                <li><a href="galleries_grid_wall.html">Grid wall</a></li>
-                                <li><a href="galleries_protected.html">Protected gallery</a></li>
-
-                            </ul>
-
-                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
+                        <li>
+                            <a asp-action="Logout" asp-controller="UserAccounts">@Localize("logout.title")</a>
                         </li>
-
-                        <li class="has_submenu">
-
-                            <a href="features_elements.html">Features</a>
-
-                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
-                            <ul class="submenu">
-
-                                <li><a href="features_elements.html">Elements</a></li>
-                                <li><a href="features_typography.html">Typography</a></li>
-                                <li><a href="features_columns.html">Columns</a></li>
-                                <li><a href="RTL/index.html">RTL layout</a></li>
-
-                            </ul>
-
-                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
-                        </li>
-
-                        <li class="has_submenu">
-
-                            <a href="blog_full_width.html">Blog</a>
-
-                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
-                            <ul class="submenu">
-
-                                <li><a href="blog_full_width.html">Full width blog</a></li>
-                                <li><a href="blog_with_sidebar.html">Blog with sidebar</a></li>
-                                <li><a href="blog_masonry.html">Masonry blog</a></li>
-                                <li><a href="blog_full_width_post.html">Full width single blog post</a></li>
-                                <li><a href="blog_post_with_right_sidebar.html">Single blog post with right sidebar</a></li>
-                                <li><a href="blog_post_with_left_sidebar.html">Single blog post with left sidebar</a></li>
-                                <li><a href="blog_post_with_extended_image.html">Single blog post with extended featured image</a></li>
-
-                            </ul>
-
-                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
-                        </li>
-
-                        <li class="has_submenu">
-
-                            <a href="shop_full_width_front_page.html">Shop</a>
-
-                            <!-- - - - - - - - - - - - - - Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
-                            <ul class="submenu">
-
-                                <li><a href="shop_full_width_front_page.html">Full width front page</a></li>
-                                <li><a href="shop_front_page_with_sidebar.html">Front page with sidebar</a></li>
-                                <li><a href="shop_full_width_product_page.html">Full width product page</a></li>
-                                <li><a href="shop_product_page_with_sidebar.html">Product page with sidebar</a></li>
-                                <li><a href="shop_shopping_cart.html">Shopping cart</a></li>
-                                <li><a href="shop_checkout.html">Checkout</a></li>
-
-                            </ul>
-
-                            <!-- - - - - - - - - - - - - - End of Submenu (level 2) - - - - - - - - - - - - - - - - -->
-
-                        </li>
-
                     </ul>
-
                 </nav>
-
                 <!-- - - - - - - - - - - - - - End of Main Navigation - - - - - - - - - - - - - - - - -->
 
             </div><!--/ #vertical_menu_wrap -->
@@ -340,29 +178,23 @@
                     <input type="hidden" id="returnUrl" name="returnUrl" value="@returnUrl" />
                     <select id="culture"
                             name="culture"
-                            class="form-control"
+                            class="form-control-language"
                             onchange="this.form.submit();"
                             asp-items="cultureItems"
                             asp-for="@requestCulture.RequestCulture.UICulture.Name">
                     </select>
                 </form>
                 
-                <a href="@Url.Action("Edit","UserAccounts")" class="action_btn large dark"><span id="sc_open" class="si-icon sc_open toggle_box" data-width="28" data-height="28" data-event="mouseover" data-icon-name="account"></span></a>
-
 
                 <!-- - - - - - - - - - - - - - Isotope Filter - - - - - - - - - - - - - - - - -->
 
                 <div id="filter_wrap">
 
-                    <span id="filter_btn" class="si-icon toggle_box" data-width="28" data-height="28" data-event="click" data-icon-name="filter"></span>
+                    <img id="filter_btn" src="~/images/add.png" class="toggle_box" data-width="28" data-height="28" data-event="click" data-icon-name="filter">
 
                     <ul id="filter" class="animation_box">
-
-                        <li data-filter="*">All</li>
-                        <li data-filter=".people">People</li>
-                        <li data-filter=".macro">Macro</li>
-                        <li data-filter=".travelling">Travelling</li>
-
+                        <li><a asp-action="UploadPhoto" asp-controller="Photos">@Localize("uploadPhoto.title")</a></li>
+                        <li><a asp-action="Create" asp-controller="Albums">@Localize("createAlbum.title")</a></li>
                     </ul>
 
                 </div>
@@ -370,17 +202,6 @@
 
 
                 <!-- - - - - - - - - - - - - - End of Isotope Filter - - - - - - - - - - - - - - - - -->
-                <!-- - - - - - - - - - - - - - Searchform - - - - - - - - - - - - - - - - -->
-
-                <form role="search" class="nav_searchform">
-
-                    <input type="search" placeholder="Search..." name="">
-
-                    <button><span class="si-icon" data-width="24" data-height="24" data-event="mouseover" data-icon-name="search"></span></button>
-
-                </form>
-
-                <!-- - - - - - - - - - - - - - End of Searchform - - - - - - - - - - - - - - - - -->
 
                 <span id="toggle_menu" class="si-icon" data-width="36" data-height="36" data-event="click" data-icon-name="hamburgerCross"></span>
 
@@ -394,7 +215,7 @@
         <!-- - - - - - - - - - - - - - End of Extended Block - - - - - - - - - - - - - - - - -->
         <!-- - - - - - - - - - - - - - Page content - - - - - - - - - - - - - - - - -->
 
-        <div id="page_wrap">
+        <div id="page_wrap" class="wall">
             @RenderBody()
         </div><!--/ .page_wrapper -->
         <!-- - - - - - - - - - - - - - End page content - - - - - - - - - - - - - - - - -->
