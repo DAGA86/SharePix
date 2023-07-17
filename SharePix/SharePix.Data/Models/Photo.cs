@@ -16,7 +16,6 @@ namespace SharePix.Data.Models
         public DateTime UploadDate { get; set; }
         [StringLength(68)]
         public string? Location { get; set; }
-        [StringLength(256)]
         public string? Description { get; set; }
         public int? AlbumId { get; set; }
 

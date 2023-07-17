@@ -112,12 +112,11 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "updateAccount.successMessage", Value = "Changes made successfully!", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "profile.preview.title", Value = "Preview:", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.upload", Value = "Upload", LanguageId = 1 });
-
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.name.maxLength", Value = "Maximun 32 characters", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.name.minLength", Value = "Minimun 1 character", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.description.maxLength", Value = "Maximun 256 characters", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhoto.location.maxLength", Value = "Maximun 68 characters", LanguageId = 1 });
-            builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhoto.description.maxLength", Value = "Maximun 256 characters", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhoto.description.maxLength", Value = "Maximun 1000 characters", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.error", Value = "Error creating album!", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.success", Value = "Album successfully created!", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhoto.error", Value = "Error uploading images", LanguageId = 1 });
@@ -126,11 +125,16 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.title", Value = "Create album", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "label.name", Value = "Name", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "label.description", Value = "Description", LanguageId = 1 });
-            builder.Entity<Translation>().HasData(new Translation { Key = "label.data", Value = "Date", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "label.date", Value = "Date", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "label.location", Value = "Location", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "homepage.title", Value = "Home Page", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhoto.title", Value = "Upload photo", LanguageId = 1 });
-            
+
+            builder.Entity<Translation>().HasData(new Translation { Key = "album.title", Value = "Album", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "logout.title", Value = "Logout", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "photos.title", Value = "Photos", LanguageId = 1 });
+
+
 
 
             builder.Entity<Translation>().HasData(new Translation { Key = "register.title", Value = "Registar", LanguageId = 2 });
@@ -186,12 +190,11 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "updateAccount.successMessage", Value = "Alterações realizadas com sucesso!", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "profile.preview.title", Value = "Pré-visualização:", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "general.button.upload", Value = "Carregar", LanguageId = 2 });
-
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.name.maxLength", Value = "Máximo 32 caracteres", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.name.minLength", Value = "Mínimo 1 caracter", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.description.maxLength", Value = " Máximo 256 caracteres ", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhoto.location.maxLength", Value = " Máximo 68 caracteres ", LanguageId = 2 });
-            builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhoto.description.maxLength", Value = " Máximo 256 caracteres ", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhoto.description.maxLength", Value = " Máximo 1000 caracteres ", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.error", Value = "Erro ao criar álbum!", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.success", Value = "Álbum criado com sucesso!", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhoto.error", Value = "Erro ao carregar imagens", LanguageId = 2 });
@@ -200,11 +203,16 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "createAlbum.title", Value = "Criar álbum", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "label.name", Value = "Nome", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "label.description", Value = "Descrição", LanguageId = 2 });
-            builder.Entity<Translation>().HasData(new Translation { Key = "label.data", Value = "Data", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "label.date", Value = "Data", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "label.location", Value = "Localização", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "homepage.title", Value = "Página principal", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhoto.title", Value = "Carregar foto", LanguageId = 2 });
-            
+
+            builder.Entity<Translation>().HasData(new Translation { Key = "album.title", Value = "Álbum", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "logout.title", Value = "Sair", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "photos.title", Value = "Fotos", LanguageId = 2 });
+
+
 
             base.OnModelCreating(builder);
         }
