@@ -179,31 +179,9 @@ namespace SharePix.Data.Providers
             return _context.Set<T>().Where(filterExpression).ToList();
         }
 
-        //change bool to int
-        public T GetFirstFiltered<T>(Expression<Func<T, bool>> filterExpression) where T : class
+         public T GetFirstFiltered<T>(Expression<Func<T, bool>> filterExpression) where T : class
         {
             return _context.Set<T>().FirstOrDefault(filterExpression);
-        }
-
-        public void DeleteFiltered<T>(Expression<Func<T, bool>> filterExpression) where T : class
-        {
-            var entities = _context.Set<T>().Where(filterExpression);
-
-            _context.Set<T>().RemoveRange(entities);
-
-            _context.SaveChanges();
-        }
-
-        public void EditFiltered<T>(Expression<Func<T, bool>> filterExpression, Action<T> editAction) where T : class
-        {
-            var entities = _context.Set<T>().Where(filterExpression);
-
-            foreach (var entity in entities)
-            {
-                editAction(entity);
-            }
-
-            _context.SaveChanges();
         }
 
 

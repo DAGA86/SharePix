@@ -44,19 +44,6 @@ namespace SharePix.WebApp.Controllers
 
         public IActionResult Index()
         {
-    //        var kjjlk = _databaseRepository.Get2<Photo, HomePageViewModel>(
-    //            x => new HomePageViewModel { Id = x.Id, Date = x.Date },
-    //            x => x.Id != null,
-    //            new Expression<Func<Photo, object>>[]
-    //{
-    //    s => s.Id,  // Sort by FirstName ascending
-    //    s => s.UploadDate descending // Sort by LastName descending
-    //}
-    //);
-
-
-            //IEnumerable<PhotoViewModel> photosViewModel = _databaseRepository.Get<Photo, PhotoViewModel>==
-
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             Result<List<Photo>> resultPhotos = _databaseRepository.Get<Photo, Photo>(
                 x => x.AlbumId == null && x.OwnerId == userId, null);

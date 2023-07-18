@@ -9,9 +9,9 @@ namespace SharePix.Data.Providers
 {
     public class AlbumProvider: DatabaseRepository
     {
-        private Contexts.DatabaseContext _dbContext;
+        private readonly Contexts.DatabaseContext _dbContext;
 
-        public AlbumProvider(Contexts.DatabaseContext dbContext) : base(dbContext) //? base
+        public AlbumProvider(Contexts.DatabaseContext dbContext) : base(dbContext) 
         {
             _dbContext = dbContext;
         }
