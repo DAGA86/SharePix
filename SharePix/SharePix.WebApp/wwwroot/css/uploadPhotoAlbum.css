@@ -1,7 +1,6 @@
-﻿.img {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
+﻿.img-file {
+    margin: 2px;
+    padding-bottom: 20px;
 }
 
 section#fm {
@@ -38,7 +37,7 @@ h1 {
     font-family: 'Ysabeau Infant', sans-serif;
     font-weight: 600;
     color: #d4b60f;
-    padding-bottom: 20px;
+    padding-top: 20px;
 }
 
 h5 {
@@ -47,5 +46,42 @@ h5 {
     color: #d4b60f;
 }
 
+input.btt, input.btt.cancel {
+    margin: .5rem;
+    color: #fff;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    width: 80px;
+    height: 30px;
+    display: inline;
+    font-size: 15px;
+    padding: 1px;
+    float: right;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #000;
+}
 
+input.btt {
+    background-color: #eab2c5da;
+}
 
+    input.btt.cancel {
+        background-color: #d41f1f88;
+    }
+
+.text-success {
+    color: #47a320;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.text-danger {
+    color: #d70000;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+}
