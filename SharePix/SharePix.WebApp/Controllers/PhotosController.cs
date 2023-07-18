@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SharePix.Data.Contexts;
+using SharePix.Data.Models;
 using SharePix.Data.Providers;
+using SharePix.Shared.Models;
+using SharePix.WebApp.Models.Albums;
 using SharePix.WebApp.Models.Photos;
+using SharePix.WebApp.Models.UserAccounts;
 using System.Security.Claims;
 
 namespace SharePix.WebApp.Controllers
@@ -24,13 +28,6 @@ namespace SharePix.WebApp.Controllers
             _env = env;
         }
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-
-
         public ActionResult UploadPhoto()
         {
             UploadPhotoViewModel model = new UploadPhotoViewModel();
@@ -42,6 +39,7 @@ namespace SharePix.WebApp.Controllers
 
             return RedirectToAction(nameof(Index), "Home");
         }
+
 
         [HttpPost]
         public async Task<IActionResult> UploadPhoto(List<IFormFile> files, UploadPhotoViewModel model)
@@ -113,14 +111,55 @@ namespace SharePix.WebApp.Controllers
 
         }
 
-        public ActionResult ViewOnePhoto()
+
+        public ActionResult EditPhoto(int id)
         {
-            return View();
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            EditPhotoViewModel model = _photoProvider.GetFirstById(id, x => new EditPhotoViewModel
+            {
+                Id = id,
+                Date = x.Date,
+                Location = x.Location,
+                Description = x.Description,
+
+            });
+            if (model != null)
+            {
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index), "Home");
+
         }
-        public ActionResult Edit(int id)
+
+        [HttpPost]
+        public ActionResult EditPhoto(EditPhotoViewModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                Photo photo = new Photo()
+                {
+                    Id = model.Id,
+                    Date = model.Date,
+                    Location = model.Location,
+                    Description = model.Description
+
+                };
+                _photoProvider.Update(photo);
+
+                if (photo == null)
+                {
+                    ViewData["ErrorMessage"] = Localize("editPhoto.error");
+                    return View(nameof(EditPhoto));
+                }
+            }
+
+            TempData["SuccessMessage"] = Localize("editPhoto.success");
+            return RedirectToAction(nameof(Index), "Home");
+
         }
+
+
 
         public ActionResult Delete(int id)
         {

@@ -5,6 +5,7 @@ using SharePix.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,11 @@ namespace SharePix.Data.Providers
         {
             _dbContext = dbContext;
 
+        }
+
+        public TViewModel GetFirstById<TViewModel>(int id, Expression<Func<Photo, TViewModel>> selectExpression)
+        {
+            return _dbContext.Photos.Where(x => x.Id == id).Select(selectExpression).FirstOrDefault();
         }
 
         public Photo Create(Photo item)
