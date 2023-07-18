@@ -29,18 +29,21 @@ input.btt, input.btt.cancel {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     width: 80px;
-    height: 40px;
+    height: 30px;
     display: inline;
     font-size: 15px;
     padding: 1px;
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #000;
 }
 
 input.btt {
-    background-color: #0094ff;
+    background-color: #eab2c5da;
 }
 
     input.btt.cancel {
-        background-color: #db3232;
+        background-color: #d41f1f88;
     }
 
 label.control-label {
@@ -107,7 +110,8 @@ h1 {
     font-family: 'Ysabeau Infant', sans-serif;
     font-weight: 600;
     color: #d4b60f;
-    padding-bottom: 20px;
+    padding: 20px 0 20px;
+
 }
 
 h5 {
