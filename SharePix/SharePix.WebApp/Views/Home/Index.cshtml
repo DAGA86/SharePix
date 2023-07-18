@@ -8,11 +8,15 @@
 
 <main role="main">
 
-    <div class="template_container checkbox-home">
-        <h2 class="h2-personalize">@Localize("gallery.title")</h2>
-        <input type="checkbox" id="photos" checked><label for="photos">@Localize("photos.title")</label>
-        <input type="checkbox" id="albums" checked><label for="albums">@Localize("albums.title")</label>
-    </div>
+    @if (ViewData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            @ViewData["SuccessMessage"]
+        </div>
+    }
 
     <!-- - - - - - - - - - - - - - Isotope Container - - - - - - - - - - - - - - - - -->
 
@@ -28,12 +32,12 @@
                     <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
 
                     <div class="inner_j_item item_type_1">
+
                         <a href="~/photos/@(photo.Id).jpg" data-lightbox="photos" data-title="@(photo.Description)">
                             <img class="item_image" src="~/photos/@(photo.Id).jpg" />
                             <p class="overlay_link"></p>
+                            <h4 class="title description-home">@(photo.Description)</h4>
                         </a>
-
-                        <h4 class="title">@(photo.Description)</h4>
 
 
                         <div class="meta">
@@ -85,7 +89,6 @@
 
         <!-- - - - - - - - - - - - - - End of Isotope Container - - - - - - - - - - - - - - - - -->
     </div>
-
 
 </main>
 @section Scripts{

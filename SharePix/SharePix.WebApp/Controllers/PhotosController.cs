@@ -30,11 +30,11 @@ namespace SharePix.WebApp.Controllers
         }
 
 
-      
+
         public ActionResult UploadPhoto()
         {
             UploadPhotoViewModel model = new UploadPhotoViewModel();
-          
+
             if (model != null)
             {
                 return View(model);
@@ -108,8 +108,8 @@ namespace SharePix.WebApp.Controllers
                 }
             }
 
-            ViewData["SuccessMessage"] = Localize("uploadPhoto.success");
-            return View(nameof(Index));
+            TempData["SuccessMessage"] = Localize("uploadPhoto.success");
+            return RedirectToAction(nameof(Index), "Home");
 
         }
 

@@ -82,6 +82,8 @@ namespace SharePix.WebApp.Controllers
                     AlbumId = photo.AlbumId,
                 });
             }
+            if (TempData["SuccessMessage"] != null)
+                ViewData["SuccessMessage"] = TempData["SuccessMessage"];
 
 
 
