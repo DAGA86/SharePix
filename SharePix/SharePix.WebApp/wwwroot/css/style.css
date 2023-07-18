@@ -72,6 +72,13 @@
 		1. Default stylesheets
 
 ------------------------------------------------ */
+.alert-edit {
+	margin: 0 10px 5px;
+	font-family: 'Ysabeau Infant', sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+}
+
 .description-home {
 	font-family: 'Ysabeau Infant', sans-serif;
 	font-weight: 400;
@@ -86,7 +93,7 @@
 
 .form-control-language{
 	color: #fff;
-	background: transparent;
+	background: #181818;
 
 }
 
@@ -1558,7 +1565,7 @@ html {
 			color: #181818;
 		}
 
-		.close{
+/*		.close{
 			color: #888 !important;
 			line-height: 0;
 			font-size: 18px;
@@ -1581,7 +1588,7 @@ html {
 			content: '\e814';
 			font-family: 'Fontello';
 			cursor: pointer;
-		}
+		}*/
 
 		.action_btn{
 			text-align: center !important;

@@ -15,12 +15,17 @@
 });
 
 
+setTimeout(function () {
+    $("#successAlert").alert("close");
+}, 6000);
+
 
 lightbox.option({
     'resizeDuration': 200,
     'wrapAround': true,
     'alwaysShowNavOnTouchDevices': true,
     'showImageNumberLabel': true,
+    'disableScrolling': true,
 })
 
 

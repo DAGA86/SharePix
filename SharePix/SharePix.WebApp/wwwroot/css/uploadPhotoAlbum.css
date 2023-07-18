@@ -1,7 +1,12 @@
 ﻿.img-file {
     margin: 2px;
     padding-bottom: 20px;
+    text-align: center;
 }
+    .img-file img {
+        max-width: 700px;
+        height: 400px;
+    }
 
 section#fm {
     display: flex;
@@ -9,10 +14,10 @@ section#fm {
     align-items: center;
 }
 
-form#pic {
+/*form#pic {
     width: 600px;
     height: auto;
-}
+}*/
 
 section#fm-Album {
     display: flex;
@@ -85,3 +90,5 @@ input.btt {
     font-weight: 600;
     font-size: 17px;
 }
+
+
