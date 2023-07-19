@@ -6,8 +6,8 @@
 
 <h1>@Localize("createAlbum.title")</h1>
 
-<section id="fm-Album">
-    <form asp-action="Create" id="pic-Album" enctype="multipart/form-data">
+<section id="fm">
+    <form asp-action="Create" id="av" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         
         @if (ViewData["ErrorMessage"] != null)
@@ -15,23 +15,26 @@
             <div class="text-danger">@ViewData["ErrorMessage"]</div>
         }
 
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <div class="containerPhoto">
-                <div id="preview" class="img"></div>
-                <input type="file" name="files" id="photos" multiple />
+                <div id="preview" class="img-file" ></div>
+                <div class="col-md-4 align-add input-group">
+                    <label for="photos" class="btn-add">@Localize("uploadPhotos.title")</label>
+                    <input name="files" id="photos" type="file" class="btn-add" multiple style="display:none;" />
+                </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label asp-for="Name" class="control-label">@Localize("label.name")</label>
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-12">
             <label asp-for="Description">@Localize("label.description")</label>
             <textarea asp-for="Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
 
-        <div class="form-style ">
+        <div class="form-group col-md-12">
             <input type="submit" value="@Localize("general.button.save")" class="btt" />
             <input type="button" onclick="window.location = '/Home/Index'" value="@Localize("general.button.cancel")" class="btt cancel" />
         </div>
@@ -42,7 +45,7 @@
 </section>
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/uploadPhotoAlbum.css">
+    <link rel="stylesheet" href="~/css/stylePhotoAlbum.css">
   }
 
 @section Scripts{

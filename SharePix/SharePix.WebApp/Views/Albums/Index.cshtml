@@ -8,7 +8,12 @@
 
 @if (ViewData["SuccessMessage"] != null)
 {
-    <div class="text-success">@ViewData["SuccessMessage"]</div>
+    <div id="successAlert" class="alert alert-success alert-dismissible alert-edit" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @ViewData["SuccessMessage"]
+    </div>
 }
 
 <main role="main">
@@ -18,7 +23,7 @@
         <h1>@(Model.Name)</h1>
 
 
-        <p>@(Model.Description)</p>
+        <h5 class="color">@(Model.Description)</h5>
     </div>
 
     <!-- - - - - - - - - - - - - - Isotope Container - - - - - - - - - - - - - - - - -->
@@ -33,12 +38,16 @@
                 <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
 
                 <div class="inner_j_item item_type_1">
+                    <div class="abc">
+                        <a asp-action="EditPhoto" asp-controller="Photos" asp-route-id="@photo.Id">
+                            <img src="~/images/edit.png" alt="">
+                        </a>
+                    </div>
                     <a href="~/photos/@(photo.Id).jpg" data-lightbox="photos" data-title="@(photo.Description)">
-                        <img class="item_image" src="~/photos/@(photo.Id).jpg" />
+                        <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="" />
                         <p class="overlay_link"></p>
+                        <h4 class="title description-home">@(photo.Description)</h4>
                     </a>
-
-                    <h4 class="title">@(photo.Description)</h4>
 
                     <div class="meta">
                         <div class="stats">
@@ -60,16 +69,13 @@
 
 
 </main>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/stylePhotoAlbum.css">
+  }
+
 @section Scripts{
     <script src="~/plugins/isotope.pkgd.min.js"></script>
-    <script>
-        lightbox.option({
-            'resizeDuration': 200,
-            'wrapAround': true,
-            'alwaysShowNavOnTouchDevices': true,
-            'showImageNumberLabel': true,
-        })
-    </script>
+    <script src="~/js/homepage.js"></script>
 }
-
 
