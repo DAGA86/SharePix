@@ -134,8 +134,8 @@ namespace SharePix.WebApp.Controllers
                 }
             }
 
-            ViewData["SuccessMessage"] = Localize("createAlbum.success");
-            return View(nameof(Index));
+            TempData["SuccessMessage"] = Localize("createAlbum.success");
+            return RedirectToAction(nameof(Index), "Home");
 
         }
 

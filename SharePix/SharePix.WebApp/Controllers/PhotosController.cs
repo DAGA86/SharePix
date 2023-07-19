@@ -156,7 +156,6 @@ namespace SharePix.WebApp.Controllers
 
             TempData["SuccessMessage"] = Localize("editPhoto.success");
             return RedirectToAction(nameof(Index), "Home");
-
         }
 
 
