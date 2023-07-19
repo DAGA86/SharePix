@@ -48,7 +48,7 @@ namespace SharePix.Data.Providers
 
                 _dbContext.SaveChanges();
             }
-            return photo;
+            return updatePhoto;
 
         }
     }

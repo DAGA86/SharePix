@@ -34,23 +34,28 @@ namespace SharePix.WebApp.Controllers
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             Result<List<AlbumPhotoViewModel>> resultPhotos = _databaseRepository.Get<Photo, AlbumPhotoViewModel>(
                 x => x.AlbumId == id && x.OwnerId == userId,
-                x => new AlbumPhotoViewModel { Date = x.Date, Description = x.Description, Id = x.Id, Location = x.Location, UploadDate = x.UploadDate}
+                x => new AlbumPhotoViewModel { Date = x.Date, Description = x.Description, Id = x.Id, Location = x.Location, UploadDate = x.UploadDate }
                 );
 
             Result<List<AlbumViewModel>> resultAlbum = _databaseRepository.Get<Album, AlbumViewModel>(
                 x => x.Id == id && x.OwnerId == userId,
-                x => new AlbumViewModel { Id = x.Id, Name = x.Name, Description = x.Description, CreateDate = x.CreateDate}
+                x => new AlbumViewModel { Id = x.Id, Name = x.Name, Description = x.Description, CreateDate = x.CreateDate }
                 );
 
             if (resultAlbum.Object != null && resultAlbum.Object.Any())
-            {                
+            {
                 AlbumViewModel viewModel = resultAlbum.Object.First();
                 viewModel.Photos = resultPhotos.Object;
-                return View(viewModel);
-            }
 
+                if (TempData["SuccessMessage"] != null)
+                    ViewData["SuccessMessage"] = TempData["SuccessMessage"];
+
+                return View(viewModel);
+                                
+            }
+            
             return RedirectToAction(nameof(Index), "Home");
-        }
+        }      
 
 
         public IActionResult Create()
@@ -112,7 +117,6 @@ namespace SharePix.WebApp.Controllers
                                 Data.Models.Photo photo = new Data.Models.Photo()
                                 {
                                     OwnerId = userId,
-                                    Description = model.Description,
                                     AlbumId = album.Id,
 
                                 };

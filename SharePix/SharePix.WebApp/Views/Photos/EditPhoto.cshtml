@@ -12,6 +12,7 @@
 <section id="fm">
     <form id="pic" asp-action="EditPhoto" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="AlbumId" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         @if (ViewData["ErrorMessage"] != null)
         {
@@ -45,7 +46,7 @@
 </section>
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/uploadPhotoAlbum.css">
+    <link rel="stylesheet" href="~/css/stylePhotoAlbum.css">
   }
 
 @section Scripts{

@@ -10,5 +10,6 @@ namespace SharePix.WebApp.Models.Photos
         public string? Location { get; set; }
         [MaxLength(1000, ErrorMessage = "uploadPhoto.description.maxLength")]
         public string? Description { get; set; }
+        public int? AlbumId { get; set; }
     }
 }

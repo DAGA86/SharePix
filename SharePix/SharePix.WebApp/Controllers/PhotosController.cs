@@ -121,7 +121,8 @@ namespace SharePix.WebApp.Controllers
                 Date = x.Date,
                 Location = x.Location,
                 Description = x.Description,
-
+                AlbumId = x.AlbumId,
+                
             });
             if (model != null)
             {
@@ -143,22 +144,23 @@ namespace SharePix.WebApp.Controllers
                     Date = model.Date,
                     Location = model.Location,
                     Description = model.Description
-
                 };
-                _photoProvider.Update(photo);
+                photo = _photoProvider.Update(photo);
 
-                if (photo == null)
+               if (photo != null)
                 {
-                    ViewData["ErrorMessage"] = Localize("editPhoto.error");
-                    return View(nameof(EditPhoto));
+                    TempData["SuccessMessage"] = Localize("editPhoto.success");
+                    if (photo.AlbumId != null)
+                    {
+                        return RedirectToAction(nameof(Index), "Albums", new {id = photo.AlbumId});
+                    }
+
+                        return RedirectToAction(nameof(Index), "Home");                   
                 }
             }
-
-            TempData["SuccessMessage"] = Localize("editPhoto.success");
-            return RedirectToAction(nameof(Index), "Home");
+            ViewData["ErrorMessage"] = Localize("editPhoto.error");
+            return View(model);
         }
-
-
 
         public ActionResult Delete(int id)
         {
