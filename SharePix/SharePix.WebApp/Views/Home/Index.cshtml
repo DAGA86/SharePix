@@ -32,15 +32,15 @@
                     <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
 
                     <div class="inner_j_item item_type_1">
-                        <a asp-action="EditPhoto" asp-controller="Photos" asp-route-id="@photo.Id">
-                            <img src="~/images/edit.png" alt="">
-                        </a>
+                        <div class="abc">
+                            <a asp-action="EditPhoto" asp-controller="Photos" asp-route-id="@photo.Id">
+                                <img src="~/images/edit.png" alt="">
+                            </a>
+                        </div>
                         <a href="~/photos/@(photo.Id).jpg" data-lightbox="photos" data-title="@(photo.Description)">
-                            <img class="item_image" src="~/photos/@(photo.Id).jpg" alt=""/>
-                            
+                            <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="" />
                             <p class="overlay_link"></p>
                             <h4 class="title description-home">@(photo.Description)</h4>
-                            
                         </a>
 
 
@@ -64,6 +64,11 @@
 
                 <div class="album isotope_item travelling">
                     <div class="inner_j_item item_type_5">
+                        <div class="abc">
+                            <a asp-action="EditAlbum" asp-controller="Albums" asp-route-id="@photo.AlbumId">
+                                <img src="~/images/edit.png" alt="">
+                            </a>
+                        </div>
                         <a href="~/photos/@(photo.Id).jpg" data-lightbox="albuns" data-title="@(photo.Description)">
                             <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="">
                         </a>
