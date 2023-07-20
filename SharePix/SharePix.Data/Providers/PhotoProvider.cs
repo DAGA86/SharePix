@@ -51,5 +51,19 @@ namespace SharePix.Data.Providers
             return updatePhoto;
 
         }
+
+        public bool Delete(int id)
+        {
+            Photo? photoToDelete = _dbContext.Photos.FirstOrDefault(x => x.Id == id);
+            if (photoToDelete != null)
+            {
+                _dbContext.Photos.Remove(photoToDelete);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+       
     }
 }
