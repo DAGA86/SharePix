@@ -1,0 +1,55 @@
+﻿@model SharePix.WebApp.Models.Albums.EditAlbumViewModel
+
+@{
+    Layout = "~/Views/Shared/_BasicLayout.cshtml";
+}
+
+<h1>@Localize("editAlbum.title")</h1>
+
+<section id="fm">
+    <form asp-action="EditAlbum" id="av" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+
+        @if (ViewData["ErrorMessage"] != null)
+        {
+            <div class="text-danger">@ViewData["ErrorMessage"]</div>
+        }
+
+        @foreach (var photoId in Model.PhotoIds)
+        {
+            <input type="hidden" name="PhotoIds" value="@photoId" />
+            <div class="form-group col-md-12">
+                <div class="containerPhoto">
+                    <div id="preview" class="img-file"><img src="~/photos/@(photoId).jpg" /></div>
+                </div>
+            </div>
+        }
+
+        <div class="form-group col-md-12">
+            <label asp-for="Name" class="control-label">@Localize("label.name")</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-12">
+            <label asp-for="Description">@Localize("label.description")</label>
+            <textarea asp-for="Description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <div class="form-group col-md-12">
+            <input type="submit" value="@Localize("general.button.save")" class="btt" />
+            <input type="button" onclick="window.location = '/Home/Index'" value="@Localize("general.button.cancel")" class="btt cancel" />
+        </div>
+
+
+
+    </form>
+</section>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/stylePhotoAlbum.css">
+  }
+
+@section Scripts{
+    <script src="/js/uploadPhoto.js"></script>
+}

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,11 @@ namespace SharePix.Data.Providers
         public AlbumProvider(Contexts.DatabaseContext dbContext) : base(dbContext) 
         {
             _dbContext = dbContext;
+        }
+
+        public TViewModel GetFirstById<TViewModel>(int id, Expression<Func<Album, TViewModel>> selectExpression)
+        {
+            return _dbContext.Albuns.Where(x => x.Id == id).Select(selectExpression).FirstOrDefault();
         }
 
         public Album Create(Album item)
@@ -35,8 +41,20 @@ namespace SharePix.Data.Providers
        
                 _dbContext.SaveChanges();
             }
-            return album;
+            return updateAlbum;
 
+        }
+
+        public bool Delete(int id)
+        {
+            Album? albumToDelete = _dbContext.Albuns.FirstOrDefault(x => x.Id == id);
+            if (albumToDelete != null)
+            {
+                _dbContext.Albuns.Remove(albumToDelete);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
     }

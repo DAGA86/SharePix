@@ -7,6 +7,7 @@ using SharePix.Data.Providers;
 using SharePix.Shared.Models;
 using SharePix.WebApp.Models.Albums;
 using SharePix.WebApp.Models.HomePage;
+using SharePix.WebApp.Models.Photos;
 using System.Security.Claims;
 
 namespace SharePix.WebApp.Controllers
@@ -143,6 +144,59 @@ namespace SharePix.WebApp.Controllers
 
         }
 
-    }
+
+        public ActionResult EditAlbum(int id)
+        {
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            EditAlbumViewModel model = _albumProvider.GetFirstById(id, x => new EditAlbumViewModel
+            {
+                Id = id,
+                Name = x.Name,
+                Description = x.Description,
+                PhotoIds = x.PhotoAlbuns.Select(x => x.Id)
+
+            });
+            if (model != null)
+            {
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index), "Home");
+
+        }
+
+
+        [HttpPost]
+        public ActionResult EditAlbum(EditAlbumViewModel model)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                Album album = new Album()
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Description = model.Description
+                };
+                album = _albumProvider.Update(album);
+
+                if (album != null)
+                {
+                    TempData["SuccessMessage"] = Localize("editAlbum.success");
+                    return RedirectToAction(nameof(Index), "Albums");
+                }
+            }
+            ViewData["ErrorMessage"] = Localize("editAlbum.error");
+            return View(model);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+
+}
 }
 
