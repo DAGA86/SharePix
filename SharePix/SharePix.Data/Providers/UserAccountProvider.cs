@@ -157,12 +157,12 @@ namespace SharePix.Data.Providers
             return result;
         }
 
-        public bool DeleteAccount(int id)
+        public bool IsInactive(int id)
         {
-            Models.UserAccount? deleteAccount = _dbContext.UserAccounts.FirstOrDefault(x => x.Id == id);
-            if (deleteAccount != null)
+            UserAccount? userInactive = _dbContext.UserAccounts.FirstOrDefault(x => x.Id == id);
+            if (userInactive != null)
             {
-                _dbContext.UserAccounts.Remove(deleteAccount);
+                userInactive.IsActive = false;
                 _dbContext.SaveChanges();
                 return true;
             }

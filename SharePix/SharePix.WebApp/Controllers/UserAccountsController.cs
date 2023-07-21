@@ -8,6 +8,7 @@ using SharePix.Data.Contexts;
 using SharePix.Shared.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using SharePix.Shared.Models;
 
 namespace SharePix.WebApp.Controllers
 {
@@ -335,27 +336,18 @@ namespace SharePix.WebApp.Controllers
             return View(model);
         }
 
-        [Authorize]
-        // GET: UserAccountsController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult IsInactive(int id)
         {
-            return View();
-        }
+            bool isUserInactive = _userAccountProvider.IsInactive(id);
 
-        [Authorize]
-        // POST: UserAccountsController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            if (isUserInactive == true)
             {
-                return RedirectToAction(nameof(Index));
+                ViewData["SuccessMessage"] = Localize("inactiveAccount.successMessage");
+                return RedirectToAction(nameof(Index), "Home");
             }
-            catch
-            {
-                return View();
-            }
+
+            ViewData["ErrorMessage"] = Localize("inactiveAccount.errorMessage");
+            return View();
         }
     }
 }
