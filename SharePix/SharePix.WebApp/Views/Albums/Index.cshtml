@@ -6,16 +6,6 @@
 
 <title>@ViewData["Title"] - @Localize("albums.title")</title>
 
-@if (ViewData["SuccessMessage"] != null)
-{
-    <div id="successAlert" class="alert alert-success alert-dismissible alert-edit" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        @ViewData["SuccessMessage"]
-    </div>
-}
-
 <main role="main">
 
     <div class="template_container">
@@ -25,25 +15,32 @@
 
         <h5 class="color">@(Model.Description)</h5>
     </div>
-
+    @if (ViewData["SuccessMessage"] != null)
+    {
+        <div id="successAlert" class="alert alert-success alert-dismissible alert-edit" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            @ViewData["SuccessMessage"]
+        </div>
+    }
     <!-- - - - - - - - - - - - - - Isotope Container - - - - - - - - - - - - - - - - -->
 
-    <div class="portfolio_isotope_container full_width" data-max-request-posts="35" data-page-type="portfolio" data-masonry="true" @*data-url="~/json/portfolio_items.json"*@>
+    <div class="gallery_isotope_container full_width" data-max-request-posts="35" data-page-type="gallery" data-masonry="true" @*data-url="json/gallery_masonry_wall.json"*@>
 
         @foreach (var photo in Model.Photos)
         {
             <div class="isotope_item travelling">
-                <div class="grid_sizer"></div>
 
                 <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
 
-                <div class="inner_j_item item_type_1">
+                <div class="album inner_j_item item_type_1">
                     <div class="abc">
                         <a asp-action="EditPhoto" asp-controller="Photos" asp-route-id="@photo.Id">
                             <img src="~/images/edit.png" alt="">
                         </a>
                     </div>
-                    <a href="~/photos/@(photo.Id).jpg" data-lightbox="photos" data-title="@(photo.Description)">
+                    <a href="~/photos/@(photo.Id).jpg" class="fancybox wall_image photo" data-rel="gallery_wall">
                         <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="" />
                         <p class="overlay_link"></p>
                         <h4 class="title description-home">@(photo.Description)</h4>

@@ -23,6 +23,22 @@
                 <div id="preview" class="img-file"><img src="~/photos/@(Model.Id).jpg" /></div>
             </div>
         </div>
+
+        <div class="form-group">
+            <label for="multiselectInput">Select Tags</label>
+            <select id="multiselectInput" class="form-control" multiple="multiple">
+                <!-- The options will be populated dynamically via AJAX request -->
+            </select>
+        </div>
+
+@*
+        <div class="form-group">
+            <label for="newTagInput">Create New Tag:</label>
+            <input type="text" id="newTagInput" class="form-control" />
+            <button type="button" id="createTagBtn" class="btn btn-primary">Create Tag</button>
+        </div>
+*@
+
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label asp-for="Date">@Localize("label.date")</label>
@@ -34,22 +50,50 @@
             </div>
         </div>
         <div class="form-group col-md-12">
-            <label asp-for="Description" >@Localize("label.description")</label>
+            <label asp-for="Description">@Localize("label.description")</label>
             <textarea asp-for="Description" class="form-control" rows="3"></textarea>
         </div>
         <div class="form-group col-md-12">
             <input type="submit" value="@Localize("general.button.upload")" class="btt" />
             <input type="button" onclick="window.location = '/Home/Index'" value="@Localize("general.button.cancel")" class="btt cancel" />
+            <div>
+                <button type="button" class="btt" data-toggle="modal" data-target="#exampleModal" asp-action="Delete"><img data-bs-toggle="tooltip" data-placement="bottom" title="@Localize("general.button.delete")" src="~/images/lixo.png" /></button>
+            </div>
         </div>
     </form>
 </section>
 
+
+
+<form>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@Localize("photo.message.warning")</h5>
+                </div>
+                <div class="modal-body">
+                    <p>@Localize("photo.message.delete")</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localize("general.button.cancel")</button>
+                    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@Model.Id">@Localize("general.button.confirm")</a>
+                    @*<a class="btn btn-primary" href="~/Photos/Delete/@(Model.Id)?albumId=@(Model.AlbumId)">@Localize("general.button.confirm")</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 @section Styles{
     <link rel="stylesheet" href="~/css/stylePhotoAlbum.css">
+
+
   }
 
 @section Scripts{
     <script src="/js/uploadPhoto.js"></script>
+    <script src="~/js/textTag.js"></script>
 }
 
 

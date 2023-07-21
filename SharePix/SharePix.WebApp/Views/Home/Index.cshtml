@@ -20,14 +20,13 @@
 
     <!-- - - - - - - - - - - - - - Isotope Container - - - - - - - - - - - - - - - - -->
 
-    <div class="portfolio_isotope_container full_width" data-max-request-posts="35" data-page-type="portfolio" data-masonry="true" @*data-url="~/json/portfolio_items.json"*@>
+    <div class="gallery_isotope_container full_width" data-max-request-posts="35" data-page-type="gallery" data-masonry="true" @*data-url="json/gallery_masonry_wall.json"*@>
 
         @foreach (var photo in Model)
         {
             if (photo.AlbumId == null)
             {
-                <div class="photo isotope_item travelling">
-                    <div class="grid_sizer"></div>
+                <div class="isotope_item travelling">
 
                     <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
 
@@ -36,8 +35,8 @@
                             <a asp-action="EditPhoto" asp-controller="Photos" asp-route-id="@photo.Id">
                                 <img src="~/images/edit.png" alt="">
                             </a>
-                        </div>
-                        <a href="~/photos/@(photo.Id).jpg" data-lightbox="photos" data-title="@(photo.Description)">
+                        </div>                     
+                        <a href="~/photos/@(photo.Id).jpg" class="fancybox wall_image photo" data-rel="gallery_wall">
                             <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="" />
                             <p class="overlay_link"></p>
                             <h4 class="title description-home">@(photo.Description)</h4>
@@ -62,14 +61,14 @@
             {
                 <!-- - - - - - - - - - - - - Album - - - - - - - - - - - - - - - - -->
 
-                <div class="album isotope_item travelling">
+                <div class="isotope_item travelling">
                     <div class="inner_j_item item_type_5">
                         <div class="abc">
                             <a asp-action="EditAlbum" asp-controller="Albums" asp-route-id="@photo.AlbumId">
                                 <img src="~/images/edit.png" alt="">
                             </a>
                         </div>
-                        <a href="~/photos/@(photo.Id).jpg" data-lightbox="albuns" data-title="@(photo.Description)">
+                        <a href="~/photos/@(photo.Id).jpg">
                             <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="">
                         </a>
 
@@ -100,8 +99,8 @@
     </div>
 
 </main>
+
 @section Scripts{
-    <script src="~/plugins/isotope.pkgd.min.js"></script>
     <script src="~/js/homepage.js"></script>
 }
 

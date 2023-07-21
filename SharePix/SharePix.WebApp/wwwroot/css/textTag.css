@@ -1,0 +1,15 @@
+﻿#suggestionsContainer {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.suggestionItem {
+    padding: 5px;
+    cursor: pointer;
+}
+
+    .suggestionItem:hover {
+        background-color: #f2f2f2;
+    }
