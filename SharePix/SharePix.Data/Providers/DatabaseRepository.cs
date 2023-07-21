@@ -119,8 +119,8 @@ namespace SharePix.Data.Providers
 
 
         public Result<List<TViewModel>> Get<TEntity, TViewModel>(
-            Expression<Func<TEntity, bool>>? filterExpression,
-            Expression<Func<TEntity, TViewModel>>? projection)
+            Expression<Func<TEntity, bool>>? filterExpression = null,
+            Expression<Func<TEntity, TViewModel>>? projection = null)
             where TEntity : class
         {
             Result<List<TViewModel>> result = new Result<List<TViewModel>>();
@@ -148,8 +148,8 @@ namespace SharePix.Data.Providers
         }
 
         public Result<List<TEntity>> Get<TEntity>(
-            Expression<Func<TEntity, bool>>? filterExpression,
-            Expression<Func<TEntity, TEntity>>? projection)
+            Expression<Func<TEntity, bool>>? filterExpression = null,
+            Expression<Func<TEntity, TEntity>>? projection = null)
             where TEntity : class
         {
             Result<List<TEntity>> result = new Result<List<TEntity>>();

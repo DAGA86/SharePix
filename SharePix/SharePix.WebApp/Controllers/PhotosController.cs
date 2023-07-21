@@ -8,6 +8,7 @@ using SharePix.WebApp.Models.Albums;
 using SharePix.WebApp.Models.Photos;
 using SharePix.WebApp.Models.UserAccounts;
 using System.Security.Claims;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace SharePix.WebApp.Controllers
 {
@@ -122,7 +123,7 @@ namespace SharePix.WebApp.Controllers
                 Location = x.Location,
                 Description = x.Description,
                 AlbumId = x.AlbumId,
-                
+
             });
             if (model != null)
             {
@@ -147,24 +148,35 @@ namespace SharePix.WebApp.Controllers
                 };
                 photo = _photoProvider.Update(photo);
 
-               if (photo != null)
+                if (photo != null)
                 {
                     TempData["SuccessMessage"] = Localize("editPhoto.success");
                     if (photo.AlbumId != null)
                     {
-                        return RedirectToAction(nameof(Index), "Albums", new {id = photo.AlbumId});
+                        return RedirectToAction(nameof(Index), "Albums", new { id = photo.AlbumId });
                     }
 
-                        return RedirectToAction(nameof(Index), "Home");                   
+                    return RedirectToAction(nameof(Index), "Home");
                 }
             }
             ViewData["ErrorMessage"] = Localize("editPhoto.error");
             return View(model);
         }
 
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id, int? albumId = null)
         {
-            return View();
+            if (_photoProvider.Delete(id))
+            {
+                TempData["SuccessMessage"] = Localize("deletePhoto.success");
+                if (albumId != null)
+                {
+                    return RedirectToAction(nameof(Index), "Albums", new { id = albumId });
+                }
+                return RedirectToAction(nameof(Index), "Home");
+            }
+            ViewData["ErrorMessage"] = Localize("deletePhoto.error");
+            return RedirectToAction(nameof(EditPhoto), "Photos");
+
         }
 
     }

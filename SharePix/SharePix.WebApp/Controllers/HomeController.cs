@@ -46,10 +46,10 @@ namespace SharePix.WebApp.Controllers
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             Result<List<Photo>> resultPhotos = _databaseRepository.Get<Photo, Photo>(
-                x => x.AlbumId == null && x.OwnerId == userId, null);
+                x => x.AlbumId == null && x.OwnerId == userId);
 
             Result<List<Album>> resultAlbums = _databaseRepository.Get<Album, Album>(
-                x => x.OwnerId == userId, null);
+                x => x.OwnerId == userId);
 
             foreach (var album in resultAlbums.Object)
             {

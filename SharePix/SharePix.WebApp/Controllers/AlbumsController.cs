@@ -192,11 +192,19 @@ namespace SharePix.WebApp.Controllers
         }
 
         public ActionResult Delete(int id)
-        {
-            return View();
+        { 
+            
+            if (_albumProvider.Delete(id))
+            {
+                    TempData["SuccessMessage"] = Localize("deleteAlbum.success");
+                    return RedirectToAction(nameof(Index), "Home");
+      
+            }
+            ViewData["ErrorMessage"] = Localize("deleteAlbum.error");
+            return RedirectToAction(nameof(EditAlbum), "Photos");
+
         }
 
-
-}
+    }
 }
 

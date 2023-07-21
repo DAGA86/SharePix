@@ -39,12 +39,33 @@
         <div class="form-group col-md-12">
             <input type="submit" value="@Localize("general.button.save")" class="btt" />
             <input type="button" onclick="window.location = '/Home/Index'" value="@Localize("general.button.cancel")" class="btt cancel" />
+            <div>
+                <button type="button" class="btt" data-toggle="modal" data-target="#exampleModal" asp-action="Delete"><img data-bs-toggle="tooltip" data-placement="bottom" title="@Localize("general.button.delete")" src="~/images/lixo.png" /></button>
+            </div>
         </div>
-
-
-
     </form>
 </section>
+
+
+<form>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@Localize("album.message.warning")</h5>
+                </div>
+                <div class="modal-body">
+                    <p>@Localize("album.message.delete")</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localize("general.button.cancel")</button>
+                    <a class="btn btn-primary" asp-action="Delete" asp-route-id="@Model.Id">@Localize("general.button.confirm")</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 
 @section Styles{
     <link rel="stylesheet" href="~/css/stylePhotoAlbum.css">

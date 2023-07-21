@@ -1,4 +1,5 @@
-﻿using SharePix.Data.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SharePix.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,7 @@ namespace SharePix.Data.Providers
             Album? albumToDelete = _dbContext.Albuns.FirstOrDefault(x => x.Id == id);
             if (albumToDelete != null)
             {
+                _dbContext.Photos.RemoveRange(_dbContext.Photos.Where(x => x.AlbumId == id));
                 _dbContext.Albuns.Remove(albumToDelete);
                 _dbContext.SaveChanges();
                 return true;
