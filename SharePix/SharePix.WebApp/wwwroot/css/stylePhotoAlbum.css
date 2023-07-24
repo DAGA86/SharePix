@@ -3,10 +3,10 @@
     padding-bottom: 20px;
     text-align: center;
 }
-    .img-file img {
+    /*.img-file img {
         max-width: 700px;
         height: 400px;
-    }
+    }*/
 
 section#fm {
     display: flex;

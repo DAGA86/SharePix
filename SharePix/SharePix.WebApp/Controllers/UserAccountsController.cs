@@ -342,11 +342,11 @@ namespace SharePix.WebApp.Controllers
 
             if (isUserInactive == true)
             {
-                ViewData["SuccessMessage"] = Localize("inactiveAccount.successMessage");
-                return RedirectToAction(nameof(Index), "Home");
+                ViewData["SuccessMessage"] = Localize("inactiveAccount.success");
+                return RedirectToAction(nameof(Login), "UserAccounts");
             }
 
-            ViewData["ErrorMessage"] = Localize("inactiveAccount.errorMessage");
+            ViewData["ErrorMessage"] = Localize("inactiveAccount.error");
             return View();
         }
     }

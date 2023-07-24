@@ -77,12 +77,9 @@
         }
     });
 
-
-
-    // Event handler for "Enter" key press in the multiselect input
     $(document).on('keyup', '.select2-search__field', function (e) {
         console.log(e.keyCode);
-        aif (e.keyCode === 13) {
+        if (e.keyCode === 13) {
             // Prevent the default action of pressing "Enter" in the Select2 input
             e.preventDefault();
             // Get the new tag value
@@ -91,7 +88,8 @@
             $.ajax({
                 url: '/TextTags/CreateTag',
                 type: 'POST',
-                data: { tagText: newTag },
+                contentType: 'application/json', // Set the content type to JSON
+                data: JSON.stringify({ tagText: newTag }), // Convert data to JSON format
                 success: function (data) {
                     // Add the new tag to the Select2 options
                     var option = new Option(data.text, data.id, true, true);
@@ -103,5 +101,31 @@
             });
         }
     });
+
+
+    //// Event handler for "Enter" key press in the multiselect input
+    //$(document).on('keyup', '.select2-search__field', function (e) {
+    //    console.log(e.keyCode);
+    //    aif(e.keyCode === 13) {
+    //        // Prevent the default action of pressing "Enter" in the Select2 input
+    //        e.preventDefault();
+    //        // Get the new tag value
+    //        var newTag = $(this).val();
+    //        // Create the new tag via AJAX call
+    //        $.ajax({
+    //            url: '/TextTags/CreateTag',
+    //            type: 'POST',
+    //            data: { tagText: newTag },
+    //            success: function (data) {
+    //                // Add the new tag to the Select2 options
+    //                var option = new Option(data.text, data.id, true, true);
+    //                $('#multiselectInput').append(option).trigger('change');
+    //            },
+    //            error: function (xhr, status, error) {
+    //                console.error(error);
+    //            }
+    //        });
+    //    }
+    //});
 });
 

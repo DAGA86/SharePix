@@ -6,10 +6,10 @@ namespace SharePix.WebApp.Models.Albums
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "field.required")]
-        [MaxLength(32, ErrorMessage = "createAlbum.name.maxLength")]
-        [MinLength(1, ErrorMessage = "createAlbum.name.minLength")]
+        [MaxLength(32, ErrorMessage = "album.name.maxLength")]
+        [MinLength(1, ErrorMessage = "album.name.minLength")]
         public string Name { get; set; }
-        [MaxLength(256, ErrorMessage = "createAlbum.description.maxLength")]
+        [MaxLength(256, ErrorMessage = "album.description.maxLength")]
         public string? Description { get; set; }
         public IEnumerable<int> PhotoIds { get; set; }
 

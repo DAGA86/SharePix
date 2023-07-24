@@ -184,7 +184,7 @@ namespace SharePix.WebApp.Controllers
                 if (album != null)
                 {
                     TempData["SuccessMessage"] = Localize("editAlbum.success");
-                    return RedirectToAction(nameof(Index), "Albums");
+                    return RedirectToAction(nameof(Index), "Home");
                 }
             }
             ViewData["ErrorMessage"] = Localize("editAlbum.error");
@@ -201,7 +201,7 @@ namespace SharePix.WebApp.Controllers
       
             }
             ViewData["ErrorMessage"] = Localize("deleteAlbum.error");
-            return RedirectToAction(nameof(EditAlbum), "Photos");
+            return RedirectToAction(nameof(EditAlbum), "Albums");
 
         }
 
