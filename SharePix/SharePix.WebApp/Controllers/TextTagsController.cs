@@ -34,17 +34,7 @@ namespace SharePix.Data.Providers
             return Json(result.Object);
         }
 
-        //[HttpGet]
-        //public IActionResult CreateTag(string tagText)
-        //{
-        //    Data.Models.TextTag textTag = new TextTag()
-        //    {
-        //        Description = tagText,
-        //    };
-        //    _textTagProvider.Create(textTag);
-        //    return Json(textTag.Description);
-        //}
-
+      
         [HttpPost]
         public async Task<IActionResult> CreateTag(string tagText)
         {

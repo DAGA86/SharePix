@@ -30,7 +30,7 @@ namespace SharePix.WebApp.Controllers
 
         }
 
-        public IActionResult Index(int id)
+        public IActionResult ViewAlbum(int id)
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             Result<List<AlbumPhotoViewModel>> resultPhotos = _databaseRepository.Get<Photo, AlbumPhotoViewModel>(
@@ -59,18 +59,18 @@ namespace SharePix.WebApp.Controllers
         }      
 
 
-        public IActionResult Create()
+        public IActionResult CreateAlbum()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(List<IFormFile> files, CreateAlbumViewModel model)
+        public async Task<IActionResult> CreateAlbum(List<IFormFile> files, CreateAlbumViewModel model)
         {
             if (files == null || files.Count == 0)
             {
                 ViewData["ErrorMessage"] = Localize("createAlbum.error");
-                return View(nameof(Create));
+                return View(nameof(CreateAlbum));
             }
 
             if (ModelState.IsValid)

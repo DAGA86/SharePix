@@ -72,13 +72,13 @@
                             <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="">
                         </a>
 
-                        <a asp-action="Index" asp-controller="Albums" asp-route-id="@photo.AlbumId" class="overlay_link"></a>
+                        <a asp-action="ViewAlbum" asp-controller="Albums" asp-route-id="@photo.AlbumId" class="overlay_link"></a>
 
-                        <h4 class="title"><a asp-action="Index" asp-controller="Albums" asp-route-id="@photo.AlbumId">@(photo.AlbumName)</a></h4>
+                        <h4 class="title"><a asp-action="ViewAlbum" asp-controller="Albums" asp-route-id="@photo.AlbumId">@(photo.AlbumName)</a></h4>
 
                         <div class="meta">
 
-                            <div class="category"><a asp-action="Index" asp-controller="Albums" asp-route-id="@photo.AlbumId">@Localize("album.title")</a></div>
+                            <div class="category"><a asp-action="ViewAlbum" asp-controller="Albums" asp-route-id="@photo.AlbumId">@Localize("album.title")</a></div>
 
                             <div class="stats">
 

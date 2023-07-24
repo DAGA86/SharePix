@@ -82,7 +82,7 @@
     // Event handler for "Enter" key press in the multiselect input
     $(document).on('keyup', '.select2-search__field', function (e) {
         console.log(e.keyCode);
-        if (e.keyCode === 13) {
+        aif (e.keyCode === 13) {
             // Prevent the default action of pressing "Enter" in the Select2 input
             e.preventDefault();
             // Get the new tag value

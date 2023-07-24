@@ -7,7 +7,7 @@
 <h1>@Localize("createAlbum.title")</h1>
 
 <section id="fm">
-    <form asp-action="Create" id="av" enctype="multipart/form-data">
+    <form asp-action="CreateAlbum" id="av" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         
         @if (ViewData["ErrorMessage"] != null)
@@ -38,10 +38,8 @@
             <input type="submit" value="@Localize("general.button.save")" class="btt" />
             <input type="button" onclick="window.location = '/Home/Index'" value="@Localize("general.button.cancel")" class="btt cancel" />
         </div>
-
-
-
     </form>
+
 </section>
 
 @section Styles{
