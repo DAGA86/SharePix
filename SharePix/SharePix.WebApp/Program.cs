@@ -40,6 +40,14 @@ namespace SharePix.WebApp
             builder.Services.AddControllersWithViews()
                 .AddViewLocalization();
 
+
+            builder.WebHost.ConfigureKestrel(serverOptions =>
+            {
+                serverOptions.Limits.MaxRequestBodySize = 100_000_000; // NOTE: set upload limit to unlimited, or specify the limit in number of bytes
+            });
+
+
+
             string[] cultures = new string[] { "en-US", "pt-PT" };
             var cultureInfos = cultures.Select(x => new CultureInfo(x)).ToArray();
 

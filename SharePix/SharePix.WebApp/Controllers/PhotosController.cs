@@ -72,7 +72,7 @@ namespace SharePix.WebApp.Controllers
                         // Step 4: Process the image and save it with desired specifications
                         using (var image = Image.Load(tempFilePath))
                         {
-                            var height = 1080;
+                            var height = 1080; //pixeis
                             if (image.Height > height)
                             {
                                 var ratio = (float)height / image.Height;

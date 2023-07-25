@@ -26,3 +26,22 @@
         }
     });
 });
+
+document.getElementById("uploadForm").addEventListener("submit", function (event) {
+    const maxFileSize = 100 * 1024 * 1024; // 100 MB in bytes 
+
+    const fileInput = document.getElementById("photos");
+    const files = fileInput.files;
+    let totalFileSize = 0;
+
+    for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        totalFileSize += file.size;
+    }
+
+    if (totalFileSize > maxFileSize) {
+        event.preventDefault(); // Prevent form submission
+        alert("Max 100 MB.");
+        return;
+    }
+});
