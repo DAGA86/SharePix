@@ -17,6 +17,7 @@ $(document).ready(function () {
         var reader = new FileReader();
 
         reader.onload = function (e) {
+            $('#previewImage').css("background-image", "url(" + e.target.result + ")");
             $('#previewImage').attr('src', e.target.result);
             $('#previewContainer').show();
         };

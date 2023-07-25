@@ -17,10 +17,9 @@
                     <div class="card-body">
                         <div class="account-settings">
                             <div class="user-profile">
-
                                 <div id="previewContainer">
                                     <h5>@Localize("profile.preview.title")</h5>
-                                    <img id="previewImage" src="~/photos/users/@(Model.Id).jpg" />
+                                    <div id="previewImage" class="preview-image" style="background-image:url(/photos/users/@(Model.Id).jpg);"></div>
                                 </div>
                                 <input type="file" id="photoInput" name="photo" style="display: none;">
                                 <button type="button" class="btt" id="uploadButton">@Localize("general.button.upload")</button>
