@@ -26,18 +26,18 @@
     }
     <!-- - - - - - - - - - - - - - Isotope Container - - - - - - - - - - - - - - - - -->
 
-    <div class="gallery_isotope_container full_width" data-max-request-posts="35" data-page-type="gallery" data-masonry="true" @*data-url="json/gallery_masonry_wall.json"*@>
+    <div class="portfolio_isotope_container full_width" data-max-request-posts="35" data-page-type="portfolio" data-masonry="true" @*data-url="json/gallery_masonry_wall.json"*@>
 
         @foreach (var photo in Model.Photos)
         {
             <div class="isotope_item travelling">
-
+                <div class="grid_sizer"></div>
                 <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
 
-                <div class="album inner_j_item item_type_1">
-                    <div class="abc">
+                <div class="inner_j_item item_type_1">
+                    <div class="button-edit-style">
                         <a asp-action="EditPhoto" asp-controller="Photos" asp-route-id="@photo.Id">
-                            <img src="~/images/edit.png" alt="">
+                            <img src="~/images/edit.png" alt="" class="float-right">
                         </a>
                     </div>
                     <a href="~/photos/@(photo.Id).jpg" class="fancybox wall_image photo" data-rel="gallery_wall">
@@ -73,6 +73,5 @@
 
 @section Scripts{
     <script src="~/plugins/isotope.pkgd.min.js"></script>
-    <script src="~/js/homepage.js"></script>
 }
 

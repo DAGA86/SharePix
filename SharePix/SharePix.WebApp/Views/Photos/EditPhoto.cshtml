@@ -10,7 +10,7 @@
 
 <h1>@Localize("editPhoto.title")</h1>
 <section id="fm">
-    <form id="av" asp-action="EditPhoto" enctype="multipart/form-data">
+    <form id="uploadForm" asp-action="EditPhoto" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="AlbumId" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>

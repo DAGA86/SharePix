@@ -7,7 +7,7 @@
 <h1>@Localize("createAlbum.title")</h1>
 
 <section id="fm">
-    <form asp-action="CreateAlbum" id="av" enctype="multipart/form-data">
+    <form asp-action="CreateAlbum" id="uploadForm" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         
         @if (ViewData["ErrorMessage"] != null)

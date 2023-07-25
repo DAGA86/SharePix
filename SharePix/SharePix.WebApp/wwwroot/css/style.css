@@ -72,12 +72,14 @@
 		1. Default stylesheets
 
 ------------------------------------------------ */
-.abc {
-    position: absolute;
+.button-edit-style {
+    position: relative;
     top: 10px;
-    left: 310px;
+    right: 10px;
     z-index: 9999;
-    height: 5px;
+    height: 0px;
+    width: 16px;
+    float: right;
 }
 
 

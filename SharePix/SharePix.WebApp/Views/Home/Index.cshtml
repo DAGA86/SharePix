@@ -20,20 +20,20 @@
 
     <!-- - - - - - - - - - - - - - Isotope Container - - - - - - - - - - - - - - - - -->
 
-    <div class="gallery_isotope_container full_width" data-max-request-posts="35" data-page-type="gallery" data-masonry="true" @*data-url="json/gallery_masonry_wall.json"*@>
+    <div class="portfolio_isotope_container full_width" data-max-request-posts="35" data-page-type="portfolio" data-masonry="true" @*data-url="json/gallery_masonry_wall.json"*@>
 
         @foreach (var photo in Model)
         {
             if (photo.AlbumId == null)
             {
                 <div class="isotope_item travelling">
-
+                    <div class="grid_sizer"></div>
                     <!-- - - - - - - - - - - - - - Portfolio Item - - - - - - - - - - - - - - - - -->
 
                     <div class="inner_j_item item_type_1">
-                        <div class="abc">
+                        <div class="button-edit-style">
                             <a asp-action="EditPhoto" asp-controller="Photos" asp-route-id="@photo.Id">
-                                <img src="~/images/edit.png" alt="">
+                                <img src="~/images/edit.png" alt="" class="float-right">
                             </a>
                         </div>                     
                         <a href="~/photos/@(photo.Id).jpg" class="fancybox wall_image photo" data-rel="gallery_wall">
@@ -62,14 +62,15 @@
                 <!-- - - - - - - - - - - - - Album - - - - - - - - - - - - - - - - -->
 
                 <div class="isotope_item travelling">
+                   @* <div class="grid_sizer"></div>*@
                     <div class="inner_j_item item_type_5">
-                        <div class="abc">
+                        <div class="button-edit-style">
                             <a asp-action="EditAlbum" asp-controller="Albums" asp-route-id="@photo.AlbumId">
                                 <img src="~/images/edit.png" alt="">
                             </a>
                         </div>
                         <a href="~/photos/@(photo.Id).jpg">
-                            <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="">
+                            <img class="item_image" src="~/photos/@(photo.Id).jpg" alt="" class="float-right">
                         </a>
 
                         <a asp-action="ViewAlbum" asp-controller="Albums" asp-route-id="@photo.AlbumId" class="overlay_link"></a>
