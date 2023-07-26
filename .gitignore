@@ -396,3 +396,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+/SharePix/SharePix.WebApp/wwwroot/photos/*
+!/SharePix/SharePix.WebApp/wwwroot/photos/*/
+/SharePix/SharePix.WebApp/wwwroot/photos/users/*
+!/SharePix/SharePix.WebApp/wwwroot/photos/users/*/
