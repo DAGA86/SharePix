@@ -26,11 +26,13 @@
 
         <div class="form-group">
             <label for="multiselectInput">Select Tags</label>
-            <select id="multiselectInput" class="form-control" multiple="multiple">
-                <!-- The options will be populated dynamically via AJAX request -->
+            <select id="multiselectInput" asp-for="textTagIds" asp-items="(MultiSelectList)ViewBag.TextTags" class="form-control" multiple="multiple">
+                @*@foreach (var item in (MultiSelectList)ViewBag.TextTags)
+                {
+                    <option value="@item.Value" selected="selected">@item.Text</option>
+                }*@
             </select>
         </div>
-
 
         <div class="form-row">
             <div class="form-group col-md-6">

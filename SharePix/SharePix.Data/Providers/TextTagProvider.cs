@@ -24,5 +24,17 @@ namespace SharePix.Data.Providers
 
             return tag;
         }
+
+        public bool Delete(int id)
+        {
+            TextTag? textTagToDelete = _dbContext.TextTags.FirstOrDefault(x => x.Id == id);
+            if (textTagToDelete != null)
+            {
+                _dbContext.TextTags.Remove(textTagToDelete);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

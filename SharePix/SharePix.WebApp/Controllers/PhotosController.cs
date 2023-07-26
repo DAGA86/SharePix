@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SharePix.Data.Contexts;
 using SharePix.Data.Models;
 using SharePix.Data.Providers;
@@ -7,6 +8,7 @@ using SharePix.Shared.Models;
 using SharePix.WebApp.Models.Albums;
 using SharePix.WebApp.Models.Photos;
 using SharePix.WebApp.Models.UserAccounts;
+using System.Collections.Generic;
 using System.Security.Claims;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -17,6 +19,7 @@ namespace SharePix.WebApp.Controllers
     {
         private DatabaseRepository _databaseRepository;
         private PhotoProvider _photoProvider;
+        private PhotoTextTagProvider _photoTextTagProvider;
         private readonly IWebHostEnvironment _env;
         private UserAccountProvider _userAccountProvider;
 
@@ -26,6 +29,7 @@ namespace SharePix.WebApp.Controllers
             _databaseRepository = new DatabaseRepository(context);
             _photoProvider = new PhotoProvider(context);
             _userAccountProvider = new UserAccountProvider(context);
+            _photoTextTagProvider = new PhotoTextTagProvider(context);
             _env = env;
         }
 
@@ -116,6 +120,12 @@ namespace SharePix.WebApp.Controllers
         public ActionResult EditPhoto(int id)
         {
             int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            Result<List<PhotoTextTag>> result = _databaseRepository.Get<PhotoTextTag, PhotoTextTag>(x => x.PhotoId == id);
+            Result<List<TextTag>> resultTextTag = _databaseRepository.Get<TextTag, TextTag>(x => result.Object.Select(y => y.TagId).Contains(x.Id));
+
+            ViewBag.TextTags = new MultiSelectList(resultTextTag.Object, "Id", "Description", resultTextTag.Object);
+
             EditPhotoViewModel model = _photoProvider.GetFirstById(id, x => new EditPhotoViewModel
             {
                 Id = id,
@@ -123,8 +133,9 @@ namespace SharePix.WebApp.Controllers
                 Location = x.Location,
                 Description = x.Description,
                 AlbumId = x.AlbumId,
+                textTagIds = x.TextTags.Select(x => x.TagId)
+            });         
 
-            });
             if (model != null)
             {
                 return View(model);
@@ -147,6 +158,16 @@ namespace SharePix.WebApp.Controllers
                     Description = model.Description
                 };
                 photo = _photoProvider.Update(photo);
+
+                //if (model.textTagIds != null && model.textTagIds.Any())
+                //{
+                    foreach (var tagId in model.textTagIds)
+                    {
+                        PhotoTextTag? photoTextTag = new PhotoTextTag() { PhotoId = model.Id, TagId = tagId };
+
+                        photoTextTag = _photoTextTagProvider.Create(photoTextTag);
+                    }
+                //}
 
                 if (photo != null)
                 {

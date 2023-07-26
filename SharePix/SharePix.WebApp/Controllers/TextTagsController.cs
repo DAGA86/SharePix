@@ -35,20 +35,19 @@ namespace SharePix.Data.Providers
         }
 
       
-        [HttpPost]
-        public async Task<IActionResult> CreateTag(string tagText)
+        public async Task<IActionResult> CreateTag(string newTextTag)
         {
             // Check if the tag already exists
-            var existingTag = _databaseRepository.GetFirstFiltered<TextTag>(x => x.Description == tagText);
+            var existingTag = _databaseRepository.GetFirstFiltered<TextTag>(x => x.Description == newTextTag);
 
             if (existingTag == null)
             {
                 // Tag doesn't exist, create a new one in the database
-                Data.Models.TextTag textTag = new TextTag()
+                Data.Models.TextTag newTag = new TextTag()
                 {
-                    Description = tagText,
+                    Description = newTextTag,
                 };
-                TextTag newTag = _textTagProvider.Create(textTag);
+                newTag = _textTagProvider.Create(newTag);
 
                 // Return the new tag's ID and text to the Select2 plugin
                 return Json(new { id = newTag.Id, text = newTag.Description });
