@@ -17,12 +17,44 @@ namespace SharePix.Data.Providers
             _dbContext = dbContext;
         }
 
-        public PhotoTextTag Create(PhotoTextTag tag)
+        public bool TagExists(int tagId)
         {
-            _dbContext.PhotoTextTags.Add(tag);
+            return _dbContext.PhotoTextTags.Any(x => x.TagId == tagId);
+        }
+
+        public List<PhotoTextTag> GetPhotoTextTagsByPhotoId(int photoId)
+        {
+            return _dbContext.PhotoTextTags.Where(x => x.PhotoId == photoId).ToList();
+        }
+
+        //public PhotoTextTag Create(PhotoTextTag tag)
+        //{
+        //    if (!TagExists(tag.TagId))
+        //    {
+        //        _dbContext.PhotoTextTags.Add(tag);
+        //        _dbContext.SaveChanges();
+        //    }
+
+        //    return tag;
+        //}
+
+        public PhotoTextTag Create(PhotoTextTag photoTextTag)
+        {
+            PhotoTextTag existingTag = _dbContext.PhotoTextTags.FirstOrDefault(x => x.PhotoId == photoTextTag.PhotoId && x.TagId == photoTextTag.TagId);
+
+            if (existingTag == null)
+
+                _dbContext.PhotoTextTags.Add(photoTextTag);
             _dbContext.SaveChanges();
 
-            return tag;
+            return photoTextTag;
+
+        }
+
+        public void Delete(PhotoTextTag photoTextTag)
+        {
+            _dbContext.PhotoTextTags.Remove(photoTextTag);
+            _dbContext.SaveChanges();
         }
     }
 }

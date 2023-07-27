@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
 using SharePix.Data.Contexts;
 using SharePix.Data.Models;
 using SharePix.Data.Providers;
@@ -94,13 +95,28 @@ namespace SharePix.WebApp.Controllers
                                     Description = model.Description,
                                     Date = model.Date,
                                 };
-                                var newFileName = $"{_photoProvider.Create(photo).Id}.jpg";
+
+                                var createPhoto = _photoProvider.Create(photo);
+
+                                var newFileName = $"{createPhoto.Id}.jpg";           
 
                                 string webRootPath = _env.WebRootPath;
 
                                 var newPath = Path.Combine(webRootPath + "\\photos", newFileName);
 
                                 image.Save(newPath);
+
+
+                                if (model.textTagIds != null && model.textTagIds.Any())
+                                {
+                                    foreach (var tagId in model.textTagIds)
+                                    {
+                                        PhotoTextTag? photoTextTag = new PhotoTextTag() { PhotoId = createPhoto.Id, TagId = tagId };
+
+                                        photoTextTag = _photoTextTagProvider.Create(photoTextTag);
+
+                                    }
+                                }
                             }
                         }
                     }
@@ -134,7 +150,7 @@ namespace SharePix.WebApp.Controllers
                 Description = x.Description,
                 AlbumId = x.AlbumId,
                 textTagIds = x.TextTags.Select(x => x.TagId)
-            });         
+            });
 
             if (model != null)
             {
@@ -145,7 +161,7 @@ namespace SharePix.WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditPhoto(EditPhotoViewModel model)
+        public ActionResult EditPhoto(EditPhotoViewModel model, int id)
         {
             if (ModelState.IsValid)
             {
@@ -159,17 +175,45 @@ namespace SharePix.WebApp.Controllers
                 };
                 photo = _photoProvider.Update(photo);
 
-                //if (model.textTagIds != null && model.textTagIds.Any())
-                //{
+                if (model.textTagIds != null && model.textTagIds.Any())
+                {
+                    var existingTags = _photoTextTagProvider.GetPhotoTextTagsByPhotoId(model.Id);
+                    var existingTagIds = existingTags.Select(x => x.TagId);
+
+                    // Check for tags to remove
+                    var tagsToRemove = existingTags.Where(x => !model.textTagIds.Contains(x.TagId)).ToList();
+                    foreach (var tagToRemove in tagsToRemove)
+                    {
+                        _photoTextTagProvider.Delete(tagToRemove);
+                    }
+
                     foreach (var tagId in model.textTagIds)
                     {
+
+                        //Result<List<PhotoTextTag>> resultTextTag = _databaseRepository.Get<PhotoTextTag, PhotoTextTag>(x => x.PhotoId == id && x.TagId == tagId);
+
+                        //bool tagExists = _photoTextTagProvider.TagExists(tagId);
+                        //if (!tagExists)
+                        //{
+                        //if (resultTextTag == null) { 
                         PhotoTextTag? photoTextTag = new PhotoTextTag() { PhotoId = model.Id, TagId = tagId };
 
                         photoTextTag = _photoTextTagProvider.Create(photoTextTag);
+
                     }
+                }
+
+                //else
+                //{
+                //    // If no tags were selected, remove all existing tags for the photo
+                //    var existingTags = _photoTextTagProvider.GetPhotoTextTagsByPhotoId(model.Id);
+                //    foreach (var tag in existingTags)
+                //    {
+                //        _photoTextTagProvider.Delete(tag);
+                //    }
                 //}
 
-                if (photo != null)
+                    if (photo != null)
                 {
                     TempData["SuccessMessage"] = Localize("editPhoto.success");
                     if (photo.AlbumId != null)

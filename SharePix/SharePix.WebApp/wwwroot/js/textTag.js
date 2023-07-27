@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     $('#multiselectInput').select2({      
-        placeholder: 'Select tags',
+        /*placeholder: 'Select tags',*/
         minimumInputLength: 1,
         tags: true, // Allow creating new tags
         tokenSeparators: [','],    

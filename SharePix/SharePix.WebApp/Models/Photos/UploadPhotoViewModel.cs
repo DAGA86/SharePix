@@ -11,6 +11,8 @@ namespace SharePix.WebApp.Models.Photos
         [MaxLength(1000, ErrorMessage = "photo.description.maxLength")]
         public string? Description { get; set; }
         public int? OwnerId { get; set; }
+        public List<int>? textTagIds { get; set; }
+
 
     }
 }
