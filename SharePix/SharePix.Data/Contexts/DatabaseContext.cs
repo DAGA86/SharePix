@@ -149,6 +149,8 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "deletePhoto.error", Value = "Error deleting photo!", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "inactiveAccount.success", Value = "Account successfully disabled!", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "inactiveAccount.error", Value = "Error when disabling account!", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhotos.title", Value = "Upload photos", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "add.tags", Value = "Add tags", LanguageId = 1 });
 
 
             builder.Entity<Translation>().HasData(new Translation { Key = "register.title", Value = "Registar", LanguageId = 2 });
@@ -241,7 +243,8 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "deletePhoto.error", Value = "Erro ao apagar foto!", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "inactiveAccount.success", Value = "Conta desativada com sucesso!", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "inactiveAccount.error", Value = " Erro ao desativar conta!", LanguageId = 2 });
-
+            builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhotos.title", Value = "Carregar fotos", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "add.tags", Value = "Adicionar etiquetas", LanguageId = 2 });
 
             base.OnModelCreating(builder);
         }
