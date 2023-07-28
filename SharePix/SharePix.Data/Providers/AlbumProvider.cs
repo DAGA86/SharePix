@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SharePix.Data.Providers
 {
-    public class AlbumProvider: DatabaseRepository
+    public class AlbumProvider : DatabaseRepository
     {
         private readonly Contexts.DatabaseContext _dbContext;
 

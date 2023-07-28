@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_GuestLayout.cshtml";
 }
 
-<link rel="stylesheet" href="~/css/guestRegister.css">
 
 <header id="form-box-register" class="vm transparent">
     <form asp-action="Register">
@@ -67,6 +66,10 @@
         </div>
     </form>
 </header>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/guestRegister.css">
+}
 
 @section scripts{
     <script src="/js/matchPassword.js"></script>

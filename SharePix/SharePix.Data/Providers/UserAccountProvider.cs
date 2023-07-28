@@ -4,14 +4,16 @@ using SharePix.Data.Models;
 using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq.Expressions;
+using System.Security.Principal;
+using SharePix.Shared.Models;
 
 namespace SharePix.Data.Providers
 {
-    public class UserAccountProvider
+    public class UserAccountProvider : DatabaseRepository
     {
         private Contexts.DatabaseContext _dbContext;
 
-        public UserAccountProvider(Contexts.DatabaseContext dbContext)
+        public UserAccountProvider(Contexts.DatabaseContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
@@ -56,11 +58,12 @@ namespace SharePix.Data.Providers
         {
             var result = new Shared.Models.Result<UserAccount>();
 
-            if (_dbContext.UserAccounts.Any(x => x.Email == account.Email && string.IsNullOrEmpty(x.PasswordHash)))
+            if (!_dbContext.UserAccounts.Any(x => x.Email == account.Email) && string.IsNullOrEmpty(account.PasswordHash))
             {
-                account.Id = _dbContext.UserAccounts.FirstOrDefault(x => x.Email == account.Email && string.IsNullOrEmpty(x.PasswordHash)).Id;
-
-                account = UpdateAccount(account).Object;
+                _dbContext.UserAccounts.Add(account);
+                _dbContext.SaveChanges();
+                result.Object = account;
+                return result;
             }
             else
             {
@@ -94,6 +97,7 @@ namespace SharePix.Data.Providers
 
             return result;
         }
+
 
         public UserAccount? GeneratePasswordResetToken(UserAccount account)
         {

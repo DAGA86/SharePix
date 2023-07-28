@@ -9,12 +9,18 @@ using SharePix.Shared.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using SharePix.Shared.Models;
+using SharePix.Data.Models;
+using SharePix.WebApp.Models.Albums;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace SharePix.WebApp.Controllers
 {
     public class UserAccountsController : BaseController
     {
         private UserAccountProvider _userAccountProvider;
+        private DatabaseRepository _databaseRepository;
+        private FriendProvider _friendProvider;
         private PhotoProvider _photoProvider;
         private readonly IConfiguration _Configuration;
         private readonly IWebHostEnvironment _env;
@@ -23,6 +29,8 @@ namespace SharePix.WebApp.Controllers
         {
             _userAccountProvider = new UserAccountProvider(context);
             _photoProvider = new PhotoProvider(context);
+            _databaseRepository = new DatabaseRepository(context);
+            _friendProvider = new FriendProvider(context);
             _Configuration = configuration;
             _env = env;
         }
@@ -249,11 +257,6 @@ namespace SharePix.WebApp.Controllers
             return View(model);
         }
 
-        // GET: UserAccountsController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         [Authorize]
         public ActionResult Edit()
@@ -336,6 +339,7 @@ namespace SharePix.WebApp.Controllers
             return View(model);
         }
 
+
         public ActionResult IsInactive(int id)
         {
             bool isUserInactive = _userAccountProvider.IsInactive(id);
@@ -349,5 +353,114 @@ namespace SharePix.WebApp.Controllers
             ViewData["ErrorMessage"] = Localize("inactiveAccount.error");
             return View();
         }
+
+
+        [HttpPost]
+        public ActionResult FriendsAndRequests(AddFriendViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                Data.Models.UserAccount user = _userAccountProvider.GetFirstByEmail(model.Email);
+
+                if (user == null)
+                {
+                    UserAccount newUser = new UserAccount()
+                    {
+                        Email = model.Email,
+                    };
+
+                    Result<UserAccount> newUserAccount = _userAccountProvider.Create(newUser);
+
+                    user = newUserAccount.Object;
+
+                    string emailRegister = $"https://localhost:7175/useraccounts/register";
+
+                    string content = $"<p>{Localize("email.content")}</p><a href=\"{emailRegister}\">{emailRegister}</a>";
+                    string subject = $"{Localize("email.subject")}";
+
+                    SendEmailProvider sendEmailProvider = new SendEmailProvider(_Configuration);
+
+                    sendEmailProvider.Send(user.FirstName ?? "", user.Email, subject, content);
+
+                    TempData["SuccessMessage"] = Localize("sendEmail.success");
+                    return RedirectToAction();
+
+                }
+                else
+                {
+                    Result<List<Friend>> resultFriendShip = _databaseRepository.Get<Friend, Friend>(
+                        x => (x.UserAccountId == userId && x.FriendAccountId == user.Id) ||
+                        (x.FriendAccountId == user.Id && x.UserAccountId == userId));
+
+                    if (resultFriendShip.Object.Any())
+                    {
+                        TempData["SuccessMessage"] = Localize("requestFriend.alreadyAdded");
+                        return RedirectToAction();
+                    }
+
+                }
+
+                Friend friend = new Friend()
+                {
+                    UserAccountId = userId,
+                    FriendAccountId = user.Id,
+                };
+
+                friend = _friendProvider.Create(friend);
+                TempData["SuccessMessage"] = Localize("requestFriend.success");
+                return RedirectToAction();
+            }
+
+            TempData["ErrorMessage"] = Localize("requestFriend.error");
+            return RedirectToAction();
+        }
+
+
+
+        public ActionResult FriendsAndRequests()
+        {
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            Result<List<RequestFriendsViewModel>> resultRequestsFriends = _databaseRepository.Get<Friend, RequestFriendsViewModel>(
+                x => x.FriendAccountId == userId && x.Status == FriendStatus.Requested,
+                x => new RequestFriendsViewModel { Email = x.UserAccount.Email, Username = x.UserAccount.Username });
+
+            Result<List<FriendsViewModel>> resultFriends = _databaseRepository.Get<Friend, FriendsViewModel>(
+               x => ((x.FriendAccountId == userId) || (x.UserAccountId == userId)) && x.Status == FriendStatus.Approved,
+               x => new FriendsViewModel { Email = x.UserAccount.Email, Username = x.UserAccount.Username });
+
+            AddFriendViewModel model = new AddFriendViewModel();
+            model.RequestFriends = resultRequestsFriends.Object;
+            model.Friends = resultFriends.Object;
+
+
+            if (TempData["SuccessMessage"] != null)
+                ViewData["SuccessMessage"] = TempData["SuccessMessage"];
+            if (TempData["ErrorMessage"] != null)
+                ViewData["ErrorMessage"] = TempData["ErrorMessage"];
+
+            return View(model);
+        }
+
+        //[HttpPost]
+        //public IActionResult DeleteFriend(int id)
+        //{
+        //    int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+        //    Result<List<Friend>> resultFriends = _databaseRepository.Get<Friend, Friend>(
+        //      x => ((x.FriendAccountId == userId) || (x.UserAccountId == userId)) && x.Status == FriendStatus.Approved);
+
+
+
+        //    if (_friendProvider.Delete(id))
+        //    {
+        //        TempData["SuccessMessage"] = Localize("deleteFriend.success");
+        //        return RedirectToAction();
+        //    }
+        //    ViewData["ErrorMessage"] = Localize("deleteFriend.error");
+        //    return RedirectToAction();
+
+        //}
+
     }
 }

@@ -98,7 +98,7 @@ namespace SharePix.WebApp.Controllers
 
                                 var createPhoto = _photoProvider.Create(photo);
 
-                                var newFileName = $"{createPhoto.Id}.jpg";           
+                                var newFileName = $"{createPhoto.Id}.jpg";
 
                                 string webRootPath = _env.WebRootPath;
 
@@ -189,31 +189,22 @@ namespace SharePix.WebApp.Controllers
 
                     foreach (var tagId in model.textTagIds)
                     {
-
-                        //Result<List<PhotoTextTag>> resultTextTag = _databaseRepository.Get<PhotoTextTag, PhotoTextTag>(x => x.PhotoId == id && x.TagId == tagId);
-
-                        //bool tagExists = _photoTextTagProvider.TagExists(tagId);
-                        //if (!tagExists)
-                        //{
-                        //if (resultTextTag == null) { 
                         PhotoTextTag? photoTextTag = new PhotoTextTag() { PhotoId = model.Id, TagId = tagId };
-
                         photoTextTag = _photoTextTagProvider.Create(photoTextTag);
-
                     }
                 }
 
-                //else
-                //{
-                //    // If no tags were selected, remove all existing tags for the photo
-                //    var existingTags = _photoTextTagProvider.GetPhotoTextTagsByPhotoId(model.Id);
-                //    foreach (var tag in existingTags)
-                //    {
-                //        _photoTextTagProvider.Delete(tag);
-                //    }
-                //}
+                else
+                {
+                    // If no tags were selected, remove all existing tags for the photo
+                    var existingTags = _photoTextTagProvider.GetPhotoTextTagsByPhotoId(model.Id);
+                    foreach (var tag in existingTags)
+                    {
+                        _photoTextTagProvider.Delete(tag);
+                    }
+                }
 
-                    if (photo != null)
+                if (photo != null)
                 {
                     TempData["SuccessMessage"] = Localize("editPhoto.success");
                     if (photo.AlbumId != null)

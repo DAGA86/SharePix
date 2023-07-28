@@ -22,164 +22,94 @@ namespace SharePix.Data.Providers
             _context = context;
         }
 
-        private IQueryable<TEntity> GetQueryable<TEntity>(
-            Expression<Func<TEntity, bool>>? filterExpression,
-            Expression<Func<TEntity, object>>[]? sortExpressions,
-            int? limit = null,
-            int? skip = null)
-            where TEntity : class
-        {
-            IQueryable<TEntity> query = _context.Set<TEntity>();
-
-            if (filterExpression != null)
-                query = query.Where(filterExpression);
-
-            if (sortExpressions != null && sortExpressions.Length > 0)
-            {
-                foreach (var sortExpression in sortExpressions)
-                {
-                    query = ApplySort(query, sortExpression);
-                }
-            }
-
-            if (skip.HasValue)
-            {
-                query = query.Skip(skip.Value);
-            }
-
-            if (limit.HasValue)
-            {
-                query = query.Take(limit.Value);
-            }
-
-            return query;
-        }
-
-        public Result<List<TViewModel>> Get2<TEntity, TViewModel>(
-            Expression<Func<TEntity, TViewModel>> projection,
-            Expression<Func<TEntity, bool>>? filterExpression,
-            Expression<Func<TEntity, object>>[]? sortExpressions,
-            int? limit = null,
-            int? skip = null)
-            where TEntity : class
-        {
-            Result<List<TViewModel>> result = new Result<List<TViewModel>>();
-            try
-            {
-                result.Object = GetQueryable(filterExpression, sortExpressions, limit, skip).Select(projection).ToList();
-            }
-            catch (Exception exception)
-            {
-                result.ErrorMessage = $"{nameof(Get)} - {exception.InnerException}";
-            }
-            return result;
-        }
-
-        public Result<List<TEntity>> Get2<TEntity>(
-            Expression<Func<TEntity, bool>>? filterExpression,
-            Expression<Func<TEntity, object>>[]? sortExpressions,
-            int? limit = null,
-            int? skip = null)
-            where TEntity : class
-        {
-
-            Result<List<TEntity>> result = new Result<List<TEntity>>();
-            try
-            {
-                result.Object = GetQueryable(filterExpression, sortExpressions, limit, skip).ToList();
-            }
-            catch (Exception exception)
-            {
-                result.ErrorMessage = $"{nameof(Get)} - {exception.InnerException}";
-            }
-            return result;
-        }
-
-        private IQueryable<TEntity> ApplySort<TEntity>(IQueryable<TEntity> query, Expression<Func<TEntity, object>> sortExpression)
-        {
-            if (sortExpression.Body is MemberExpression memberExpression)
-            {
-                var parameter = sortExpression.Parameters[0];
-                var keySelector = Expression.Lambda(memberExpression, parameter);
-
-                var orderByExpression = Expression.Call(
-                    typeof(Queryable),
-                    "OrderBy",
-                    new[] { typeof(TEntity), memberExpression.Type },
-                    query.Expression,
-                    Expression.Quote(keySelector)
-                );
-
-                return query.Provider.CreateQuery<TEntity>(orderByExpression);
-            }
-
-            return query;
-        }
-
-
-
+        // Método Get genérico que retorna uma lista de ViewModel (TViewModel) com base na entidade TEntity.
+        // Permite filtrar e projetar os resultados usando expressões opcionais.
         public Result<List<TViewModel>> Get<TEntity, TViewModel>(
             Expression<Func<TEntity, bool>>? filterExpression = null,
             Expression<Func<TEntity, TViewModel>>? projection = null)
             where TEntity : class
         {
+            // Cria uma instância de Result<List<TViewModel>> para armazenar o resultado.
             Result<List<TViewModel>> result = new Result<List<TViewModel>>();
+
             try
             {
+                // Obtém um IQueryable<TEntity> baseado no tipo TEntity do contexto (_context).
                 IQueryable<TEntity> query = _context.Set<TEntity>();
+
+                // Se foi fornecida uma expressão de filtro, adiciona o filtro à consulta.
                 if (filterExpression != null)
                 {
                     query = query.Where(filterExpression);
                 }
+
+                // Verifica se foi fornecida uma expressão de projeção.
                 if (projection != null)
                 {
+                    // Se sim, aplica a projeção e atribui os resultados ao objeto "Object" do resultado.
                     result.Object = query.Select(projection).ToList();
                 }
                 else
                 {
+                    // Se não foi fornecida uma expressão de projeção, utiliza a conversão direta (Cast) para TViewModel
+                    // e atribui os resultados ao objeto "Object" do resultado.
                     result.Object = query.Cast<TViewModel>().ToList();
                 }
             }
             catch (Exception exception)
             {
+                // Em caso de exceção, define a mensagem de erro no resultado.
                 result.ErrorMessage = $"{nameof(Get)} - {exception.Message}";
             }
+
+            // Retorna o resultado, que contém a lista de ViewModels ou uma mensagem de erro, se houver.
             return result;
         }
 
+
+
+        // Método Get genérico que recebe uma expressão de filtro opcional e uma expressão de projeção opcional.
         public Result<List<TEntity>> Get<TEntity>(
             Expression<Func<TEntity, bool>>? filterExpression = null,
             Expression<Func<TEntity, TEntity>>? projection = null)
             where TEntity : class
         {
+            // Cria uma instância de Result<List<TEntity>> para armazenar o resultado.
             Result<List<TEntity>> result = new Result<List<TEntity>>();
+
             try
             {
+                // Obtém um IQueryable<TEntity> baseado no tipo TEntity do contexto (_context).
                 IQueryable<TEntity> query = _context.Set<TEntity>();
+
+                // Se foi fornecida uma expressão de filtro, adiciona o filtro à consulta.
                 if (filterExpression != null)
                 {
                     query = query.Where(filterExpression);
                 }
+
+                // Se foi fornecida uma expressão de projeção, adiciona a projeção à consulta.
                 if (projection != null)
                 {
                     query = query.Select(projection);
                 }
+
+                // Executa a consulta e atribui os resultados ao objeto "Object" do resultado.
                 result.Object = query.ToList();
             }
             catch (Exception exception)
             {
+                // Em caso de exceção, define a mensagem de erro no resultado.
                 result.ErrorMessage = $"{nameof(Get)} - {exception.Message}";
             }
+
+            // Retorna o resultado, que contém a lista de entidades ou uma mensagem de erro, se houver.
             return result;
         }
 
 
-        public List<T> GetAllFiltered<T>(Expression<Func<T, bool>> filterExpression) where T : class
-        {
-            return _context.Set<T>().Where(filterExpression).ToList();
-        }
 
-         public T GetFirstFiltered<T>(Expression<Func<T, bool>> filterExpression) where T : class
+        public T GetFirstFiltered<T>(Expression<Func<T, bool>> filterExpression) where T : class
         {
             return _context.Set<T>().FirstOrDefault(filterExpression);
         }
