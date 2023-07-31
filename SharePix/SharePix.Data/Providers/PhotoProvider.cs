@@ -30,7 +30,7 @@ namespace SharePix.Data.Providers
 
         public Photo Create(Photo item)
         {
-            item.UploadDate = DateTime.Now;
+            item.UploadDate = DateTime.UtcNow;
             _dbContext.Photos.Add(item);
             _dbContext.SaveChanges();
 

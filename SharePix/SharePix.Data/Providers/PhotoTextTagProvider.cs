@@ -27,17 +27,6 @@ namespace SharePix.Data.Providers
             return _dbContext.PhotoTextTags.Where(x => x.PhotoId == photoId).ToList();
         }
 
-        //public PhotoTextTag Create(PhotoTextTag tag)
-        //{
-        //    if (!TagExists(tag.TagId))
-        //    {
-        //        _dbContext.PhotoTextTags.Add(tag);
-        //        _dbContext.SaveChanges();
-        //    }
-
-        //    return tag;
-        //}
-
         public PhotoTextTag Create(PhotoTextTag photoTextTag)
         {
             PhotoTextTag existingTag = _dbContext.PhotoTextTags.FirstOrDefault(x => x.PhotoId == photoTextTag.PhotoId && x.TagId == photoTextTag.TagId);

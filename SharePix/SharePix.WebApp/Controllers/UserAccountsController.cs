@@ -137,6 +137,7 @@ namespace SharePix.WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                Result<UserAccount> result = new();
                 Data.Models.UserAccount user = new Data.Models.UserAccount()
                 {
                     Username = model.Username,
@@ -145,7 +146,18 @@ namespace SharePix.WebApp.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName
                 };
-                var result = _userAccountProvider.Create(user);
+
+                var pendingUser = _userAccountProvider.GetPendingByEmail(model.Email);
+
+                if (pendingUser != null)
+                {
+                    user.Id = pendingUser.Id;
+                    result = _userAccountProvider.UpdateAccount(user);
+                }
+                else
+                {
+                    result = _userAccountProvider.Create(user);
+                }
                 if (!string.IsNullOrEmpty(result.ErrorMessage))
                 {
                     ViewData["ErrorMessage"] = Localize(result.ErrorMessage);
@@ -155,7 +167,6 @@ namespace SharePix.WebApp.Controllers
                     ViewData["SuccessMessage"] = Localize("register.success");
                     return View(nameof(Login));
                 }
-
             }
             else
             {
@@ -375,9 +386,10 @@ namespace SharePix.WebApp.Controllers
                     user = newUserAccount.Object;
 
                     string emailRegister = $"https://localhost:7175/useraccounts/register";
+                    string login = $"https://localhost:7175/useraccounts/login";
 
-                    string content = $"<p>{Localize("email.content")}</p><a href=\"{emailRegister}\">{emailRegister}</a>";
-                    string subject = $"{Localize("email.subject")}";
+                    string content = $"<p>{user.Username}{Localize("email.content.newRegister")}</p><a href=\"{emailRegister}\">{emailRegister}</a>";
+                    string subject = $"{Localize("email.subject.newFriendOrRegister")}";
 
                     SendEmailProvider sendEmailProvider = new SendEmailProvider(_Configuration);
 
@@ -443,24 +455,46 @@ namespace SharePix.WebApp.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public IActionResult DeleteFriend(int id)
-        //{
-        //    int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-        //    Result<List<Friend>> resultFriends = _databaseRepository.Get<Friend, Friend>(
-        //      x => ((x.FriendAccountId == userId) || (x.UserAccountId == userId)) && x.Status == FriendStatus.Approved);
 
 
+        public IActionResult DeleteFriend(string friendusername)
+        {
+            int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-        //    if (_friendProvider.Delete(id))
-        //    {
-        //        TempData["SuccessMessage"] = Localize("deleteFriend.success");
-        //        return RedirectToAction();
-        //    }
-        //    ViewData["ErrorMessage"] = Localize("deleteFriend.error");
-        //    return RedirectToAction();
+            Result<List<Friend>> resultDelete = _databaseRepository.Get<Friend, Friend>(
+                 x => (x.FriendAccount.Username == friendusername && x.UserAccountId == userId) || (x.FriendAccountId == userId && x.UserAccount.Username == friendusername));
 
-        //}
+            if (resultDelete.Object.Any())
+            {
+                if (_friendProvider.Delete(resultDelete.Object.FirstOrDefault().UserAccountId, resultDelete.Object.FirstOrDefault().FriendAccountId))
+                {
+                    TempData["SuccessMessage"] = Localize("deleteFriend.success");
+                    return RedirectToAction(nameof(FriendsAndRequests));
+                }
+            }
+
+            ViewData["ErrorMessage"] = Localize("deleteFriend.error");
+            return RedirectToAction(nameof(FriendsAndRequests));
+
+        }
+
+        public IActionResult AcceptFriend(string friendusername)
+        {
+            Friend friend = _friendProvider.GetFriendByUsername(friendusername);
+
+            if (friend != null)
+            {
+                if (_friendProvider.UpdateStatus(friend.UserAccountId, friend.FriendAccountId))
+                {
+                    TempData["SuccessMessage"] = Localize("addFriend.success");
+                    return RedirectToAction(nameof(FriendsAndRequests));
+                }
+
+            }
+
+            ViewData["ErrorMessage"] = Localize("addFriend.error");
+            return RedirectToAction(nameof(FriendsAndRequests));
+        }
 
     }
 }

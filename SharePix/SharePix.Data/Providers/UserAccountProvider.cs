@@ -36,6 +36,10 @@ namespace SharePix.Data.Providers
         {
             return _dbContext.UserAccounts.FirstOrDefault(u => u.Email == email);
         }
+        public UserAccount? GetPendingByEmail(string email)
+        {
+            return _dbContext.UserAccounts.FirstOrDefault(u => u.Email == email && string.IsNullOrEmpty(u.PasswordHash));
+        }
         public UserAccount? GetFirstByRecoveryToken(Guid token)
         {
             return _dbContext.UserAccounts.FirstOrDefault(u => u.RecoveryToken == token);
@@ -58,32 +62,25 @@ namespace SharePix.Data.Providers
         {
             var result = new Shared.Models.Result<UserAccount>();
 
-            if (!_dbContext.UserAccounts.Any(x => x.Email == account.Email) && string.IsNullOrEmpty(account.PasswordHash))
+            if (_dbContext.UserAccounts.Any(x => x.Email == account.Email))
             {
-                _dbContext.UserAccounts.Add(account);
-                _dbContext.SaveChanges();
-                result.Object = account;
+                result.ErrorMessage = "register.emailAlreadyExists";
                 return result;
             }
-            else
+
+            else if (_dbContext.UserAccounts.Any(x => x.Username == account.Username))
             {
-                if (_dbContext.UserAccounts.Any(x => x.Email == account.Email))
-                {
-                    result.ErrorMessage = "register.emailAlreadyExists";
-                    return result;
-                }
+                result.ErrorMessage = "register.usernameAlreadyExists";
+                return result;
+            }
 
-                if (_dbContext.UserAccounts.Any(x => x.Username == account.Username))
-                {
-                    result.ErrorMessage = "register.usernameAlreadyExists";
-                    return result;
-                }
-
-                account.RegisterDate = DateTime.Now;
+            if (!string.IsNullOrEmpty(account.PasswordHash))
+            {
                 account.IsActive = true;
+                account.RegisterDate = DateTime.Now;
                 account.PasswordHash = Shared.Providers.CryptographyProvider.EncodeToBase64(account.PasswordHash);
-                _dbContext.UserAccounts.Add(account);
-            }            
+            }
+            _dbContext.UserAccounts.Add(account);
 
             try
             {
@@ -149,7 +146,13 @@ namespace SharePix.Data.Providers
                 updateAccount.Username = account.Username;
                 updateAccount.Email = account.Email;
 
-                if (updateAccount.PasswordHash != account.PasswordHash && !string.IsNullOrEmpty(account.PasswordHash))
+                if (updateAccount.RegisterDate == null)
+                {
+                    updateAccount.IsActive = true;
+                    updateAccount.RegisterDate = DateTime.UtcNow;
+                }
+
+                if (!string.IsNullOrEmpty(account.PasswordHash))
                 {
                     updateAccount.PasswordHash = Shared.Providers.CryptographyProvider.EncodeToBase64(account.PasswordHash);
                 }

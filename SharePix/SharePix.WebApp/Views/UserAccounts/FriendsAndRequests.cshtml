@@ -10,10 +10,10 @@
 }
 @if (ViewData["SuccessMessage"] != null)
 {
-    <div class="text-danger">@ViewData["SuccessMessage"]</div>
+    <div class="text-success">@ViewData["SuccessMessage"]</div>
 }
 
-<h2>@Localize("friendship.title")</h2>
+<h2>@Localize("friends.title")</h2>
 
 <div>
     <button type="button" class="btt" data-toggle="modal" data-target="#exampleModal" asp-action="AddFriend"><img data-placement="bottom" src="~/images/icon_plus.png" />@Localize("addFriends.button")"</button>
@@ -46,7 +46,7 @@
         <table>
             <thead>
                 <tr>
-                    <th>@Localize("friends.title")</th>
+                    <th>@Localize("myList.title")</th>
             </thead>
             <tbody>
                 @foreach (var item in Model.Friends)
@@ -55,7 +55,7 @@
                         <td>
                             @item.Username
                             <p>@item.Email</p>
-                            <button type="button" class="btt" data-toggle="modal" data-target="#exampleModal1" asp-action="DeleteFriend"><img src="~/images/remove.png" alt=""></button>
+                            <button type="button" class="btt" data-toggle="modal" data-target="#exampleModal1" onclick="javascript:$('#confirmDeleteAnchor').attr('href', '/UserAccounts/DeleteFriend/?friendUsername=@item.Username'); $('#deleteModalEmail').text('@item.Email');"><img src="~/images/remove.png" alt=""></button>
                         </td>
                     </tr>
                 }
@@ -77,8 +77,8 @@
                         <td>
                             @item.Username
                             <p>@item.Email</p>
-                            <a asp-action="DeleteFriend" asp-controller="UserAccounts"><img src="~/images/remove.png" alt=""></a>
-                            <a asp-action="DeleteFriend" asp-controller="UserAccounts"><img src="~/images/accept.png" alt=""></a>
+                            <button type="button" class="btt" data-toggle="modal" data-target="#exampleModal1" onclick="javascript:$('#confirmDeleteAnchor').attr('href', '/UserAccounts/DeleteFriend/?friendUsername=@item.Username'); $('#deleteModalEmail').text('@item.Email');"><img src="~/images/remove.png" alt=""></button>
+                            <a asp-action="AcceptFriend" asp-route-friendUsername="@item.Username"><img src="~/images/accept.png" alt=""></a>
                         </td>
                     </tr>
                 }
@@ -88,22 +88,26 @@
 </div>
 
 
-<form asp-action="DeleteFriend">
-    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@Localize("delete.warning")</h5>
-                </div>
-                <div class="modal-body">
-                    <label asp-for="Email">@Localize("searchEmail.title")</label>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localize("general.button.cancel")</button>
-                    <button type="submit" class="btn btn-primary">@Localize("general.button.send")</button>
-                    @*<a class="btn btn-primary" href="~/Photos/Delete/@(Model.Id)?albumId=@(Model.AlbumId)">@Localize("general.button.confirm")</a>*@
-                </div>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@Localize("delete.warning")</h5>
+            </div>
+            <div class="modal-body">
+                <label>@Localize("confirmDeleteEmail.message")</label>
+                <p id="deleteModalEmail"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localize("general.button.cancel")</button>
+                <a id="confirmDeleteAnchor" class="btn btn-primary" href="">@Localize("general.button.send")</a>
+                @*<a class="btn btn-primary" href="~/Photos/Delete/@(Model.Id)?albumId=@(Model.AlbumId)">@Localize("general.button.confirm")</a>*@
             </div>
         </div>
     </div>
-</form>
+</div>
+
+
+@section Scripts{
+}

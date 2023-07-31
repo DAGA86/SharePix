@@ -17,6 +17,11 @@ namespace SharePix.Data.Providers
 
         }
 
+        public Friend GetFriendByUsername(string username)
+        {
+            return _dbContext.Friends.FirstOrDefault(x => x.UserAccount.Username == username);
+        }
+
         public Friend Create(Friend friend)
         {
             friend.Status = FriendStatus.Requested;
@@ -26,12 +31,24 @@ namespace SharePix.Data.Providers
             return friend;
         }
 
-        public bool Delete(int id)
+        public bool Delete(int userAccountId, int friendAccountId)
         {
-            Friend? friendToDelete = _dbContext.Friends.FirstOrDefault(x => x.UserAccountId == id);
+            Friend? friendToDelete = _dbContext.Friends.FirstOrDefault(x => x.UserAccountId == userAccountId && x.FriendAccountId == friendAccountId);
             if (friendToDelete != null)
             {
                 _dbContext.Friends.Remove(friendToDelete);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateStatus(int userAccountId, int friendAccountId)
+        {
+            Friend? updateStatus = _dbContext.Friends.FirstOrDefault(x => x.UserAccountId == userAccountId && x.FriendAccountId == friendAccountId);
+            if (updateStatus != null)
+            {
+                updateStatus.Status = FriendStatus.Approved;
                 _dbContext.SaveChanges();
                 return true;
             }
