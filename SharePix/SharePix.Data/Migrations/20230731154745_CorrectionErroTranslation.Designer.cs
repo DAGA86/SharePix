@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SharePix.Data.Contexts;
 
@@ -11,9 +12,10 @@ using SharePix.Data.Contexts;
 namespace SharePix.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20230731154745_CorrectionErroTranslation")]
+    partial class CorrectionErroTranslation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -828,7 +830,7 @@ namespace SharePix.Data.Migrations
                         {
                             Key = "email.content.newRegister",
                             LanguageId = 1,
-                            Value = "You've been sent a friend request. Login to your account or create one!"
+                            Value = "You've been sent a friend request. Login to your account or create one "
                         },
                         new
                         {
@@ -889,12 +891,6 @@ namespace SharePix.Data.Migrations
                             Key = "message.discovery",
                             LanguageId = 1,
                             Value = "Discover the best place to share photos with your friends"
-                        },
-                        new
-                        {
-                            Key = "sendEmail.request",
-                            LanguageId = 1,
-                            Value = "Request sent successfully. Waiting for it to be accepted."
                         },
                         new
                         {
@@ -1494,7 +1490,7 @@ namespace SharePix.Data.Migrations
                         {
                             Key = "email.content.newRegister",
                             LanguageId = 2,
-                            Value = "Foi-lhe enviado um pedido de amizade. Aceda à sua conta ou criar uma!"
+                            Value = "Foi-lhe enviado um pedido de amizade. Aceda à sua conta ou criar uma"
                         },
                         new
                         {
@@ -1555,12 +1551,6 @@ namespace SharePix.Data.Migrations
                             Key = "message.discovery",
                             LanguageId = 2,
                             Value = "Descubra o melhor local para partilhar fotografias com os seus amigos"
-                        },
-                        new
-                        {
-                            Key = "sendEmail.request",
-                            LanguageId = 2,
-                            Value = "Pedido enviado com sucesso. Aguarde que seja aceite."
                         });
                 });
 

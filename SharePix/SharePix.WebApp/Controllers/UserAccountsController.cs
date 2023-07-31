@@ -388,14 +388,16 @@ namespace SharePix.WebApp.Controllers
                     string emailRegister = $"https://localhost:7175/useraccounts/register";
                     string login = $"https://localhost:7175/useraccounts/login";
 
-                    string content = $"<p>{user.Username}{Localize("email.content.newRegister")}</p><a href=\"{emailRegister}\">{emailRegister}</a>";
-                    string subject = $"{Localize("email.subject.newFriendOrRegister")}";
+                    string content = $"<p>{user.Username}{Localize("email.content.newRegister")}</p>" +
+                        $"<p>{Localize("login.title")}</p><a href=\"{login}\">{login}</a>" +
+                        $"<p>{Localize("register.title")}</p><a href=\"{emailRegister}\">{emailRegister}</a>";
+                    string subject = $"{Localize("email.subject.newRequest")}";
 
                     SendEmailProvider sendEmailProvider = new SendEmailProvider(_Configuration);
 
                     sendEmailProvider.Send(user.FirstName ?? "", user.Email, subject, content);
 
-                    TempData["SuccessMessage"] = Localize("sendEmail.success");
+                    TempData["SuccessMessage"] = Localize("sendEmail.request");
                     return RedirectToAction();
 
                 }

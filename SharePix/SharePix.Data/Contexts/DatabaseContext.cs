@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Org.BouncyCastle.Asn1.Ocsp;
 using SharePix.Data.Contexts;
 using SharePix.Data.Models;
 
@@ -152,6 +153,27 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhotos.title", Value = "Upload photos", LanguageId = 1 });
             builder.Entity<Translation>().HasData(new Translation { Key = "add.tags", Value = "Add tags", LanguageId = 1 });
 
+            builder.Entity<Translation>().HasData(new Translation { Key = "add.newFriend.title", Value = "Add new friend", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "searchEmail.title", Value = "Search email:", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "friends.title", Value = "Friends", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "myList.title", Value = "My list", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "requests.title", Value = "Requests", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "delete.warning", Value = "Warning", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "confirmDeleteEmail.message", Value = "Do you want to delete / rejest this friend?", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "email.content.newRegister", Value = "You've been sent a friend request. Login to your account or create one!", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "email.subject.newRequest", Value = "New friend request", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "requestFriend.alreadyAdded", Value = "Friend already added!", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "requestFriend.success", Value = "Request sent successfully!", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "requestFriend.error", Value = "Error when adding friend!", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "deleteFriend.success", Value = "Friend successfully deleted!", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "deleteFriend.error", Value = "Error deleting friend!", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "addFriend.success", Value = "Friend added successfully!", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "addFriend.error", Value = " Error when adding friend!", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "message.welcome", Value = "Welcome to SharePix", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "message.discovery", Value = "Discover the best place to share photos with your friends", LanguageId = 1 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "sendEmail.request", Value = "Request sent successfully. Waiting for it to be accepted.", LanguageId = 1 });
+
+         
 
             builder.Entity<Translation>().HasData(new Translation { Key = "register.title", Value = "Registar", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "login.title", Value = "Entrar", LanguageId = 2 });
@@ -245,6 +267,27 @@ namespace SharePix.Data.Contexts
             builder.Entity<Translation>().HasData(new Translation { Key = "inactiveAccount.error", Value = " Erro ao desativar conta!", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "uploadPhotos.title", Value = "Carregar fotos", LanguageId = 2 });
             builder.Entity<Translation>().HasData(new Translation { Key = "add.tags", Value = "Adicionar etiquetas", LanguageId = 2 });
+
+            builder.Entity<Translation>().HasData(new Translation { Key = "add.newFriend.title", Value = "Adicionar novo amigo", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "searchEmail.title", Value = "Procurar por email:", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "friends.title", Value = "Amigos", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "myList.title", Value = "Minha lista ", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "requests.title", Value = "Pedidos", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "delete.warning", Value = "Aviso", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "confirmDeleteEmail.message", Value = "Pretende apagar / rejeitar este amigo?", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "email.content.newRegister", Value = "Foi-lhe enviado um pedido de amizade. Aceda à sua conta ou criar uma!", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "email.subject.newRequest", Value = "Novo pedido de amizade", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "requestFriend.alreadyAdded", Value = "Amigo já adicionado!", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "requestFriend.success", Value = "Pedido enviado com sucesso!", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "requestFriend.error", Value = "Erro ao enviar pedido!", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "deleteFriend.success", Value = "Amigo apagado com sucesso!", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "deleteFriend.error", Value = "Erro ao apagar amigo!", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "addFriend.success", Value = "Amigo adicionado com sucesso!", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "addFriend.error", Value = "Erro ao adicionar amigo!", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "message.welcome", Value = "Bem-vindo à SharePix", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "message.discovery", Value = "Descubra o melhor local para partilhar fotografias com os seus amigos", LanguageId = 2 });
+            builder.Entity<Translation>().HasData(new Translation { Key = "sendEmail.request", Value = "Pedido enviado com sucesso. Aguarde que seja aceite.", LanguageId = 2 });
+
 
             base.OnModelCreating(builder);
         }
