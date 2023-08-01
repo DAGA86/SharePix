@@ -4,7 +4,9 @@
     Layout = "~/Views/Shared/_BasicLayout.cshtml";
 }
 
-<title>@ViewData["Title"] - @Localize("albums.title")</title>
+@{
+    ViewData["Title"] = Localize("albums.title");
+}
 
 <main role="main">
 

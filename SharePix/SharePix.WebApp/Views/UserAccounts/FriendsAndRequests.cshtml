@@ -4,6 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+    ViewData["Title"] = Localize("friends.title");
+}
+
 @if (ViewData["ErrorMessage"] != null)
 {
     <div id="errorAlert" class="alert alert-danger alert-dismissible alert-edit" role="alert">

@@ -3,14 +3,12 @@
 @{
     Layout = "~/Views/Shared/_GuestLayout.cshtml";
 }
-
+@{
+    ViewData["Title"] = Localize("register.title");
+}
 
 <header id="form-box-register" class="vm transparent">
     <form asp-action="Register">
-
-        @{
-            ViewData["Title"] = Localize("register.title");
-        }
 
         @if (ViewData["ErrorMessage"] != null)
         {
