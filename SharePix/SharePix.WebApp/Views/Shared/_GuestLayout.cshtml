@@ -92,7 +92,7 @@
                     <input type="hidden" id="returnUrl" name="returnUrl" value="@returnUrl" />
                     <select id="culture"
                             name="culture"
-                            class="form-control-language"
+                            class="form-control-language-log"
                             onchange="this.form.submit();"
                             asp-items="cultureItems"
                             asp-for="@requestCulture.RequestCulture.UICulture.Name">
@@ -127,8 +127,7 @@
 
                                 <div class="caption sfb stb" data-x="30" data-y="bottom" data-speed="400" data-voffset="-95">
 
-
-                                    <p class="slide_desc">Duis ac turpis. Aliquam Erat Volutpat.</p>
+                                    <p class="slide_desc letter">@Localize("message.welcome")</p>
 
                                 </div>
 
@@ -140,8 +139,6 @@
 
                                 <div class="caption sfb stb" data-x="30" data-y="bottom" data-speed="400" data-voffset="-95">
 
-                                    <p class="slide_desc">Duis ac turpis. Donec sit amet eros.</p>
-
                                 </div>
 
                             </li>
@@ -152,7 +149,7 @@
 
                                 <div class="caption sfb stb" data-x="30" data-y="bottom" data-speed="400" data-voffset="-95">
 
-                                    <p class="slide_desc">Duis ac turpis. Donec sit amet eros.</p>
+                                    <p class="slide_desc letter">@Localize("message.discovery")</p>
 
                                 </div>
 
@@ -164,7 +161,7 @@
 
                                 <div class="caption sfb stb" data-x="30" data-y="bottom" data-speed="400" data-voffset="-95">
 
-                                    <p class="slide_desc">Duis ac turpis. Donec sit amet eros.</p>
+                                    <p class="slide_desc letter">@Localize("message.discovery")</p>
 
                                 </div>
 
@@ -175,8 +172,6 @@
                                 <img src="~/images/5.jpg" alt="">
 
                                 <div class="caption sfb stb" data-x="30" data-y="bottom" data-speed="400" data-voffset="-95">
-
-                                    <p class="slide_desc">Duis ac turpis. Donec sit amet eros.</p>
 
                                 </div>
 
@@ -196,44 +191,12 @@
             </main>
             @RenderBody()
 
-            @*<ul class="page_actions">
-
-            <li>
-
-            <!-- - - - - - - - - - - - - - Share - - - - - - - - - - - - - - - - -->
-
-            <div class="share_wrap">
-
-            <span class="si-icon share action_btn dark large" data-width="28" data-height="28" data-event="click" data-icon-name="socialLight"></span>
-
-            <div class="addthis_sharing_toolbox large_icons"></div>
-
-            </div>
-
-            <!-- - - - - - - - - - - - - - End of Share - - - - - - - - - - - - - - - - -->
-
-            </li>
-
-            <li><span id="rs_prev" class="si-icon action_btn dark large" data-width="28" data-height="28" data-event="mouseover" data-icon-name="previous"></span></li>
-
-            <li class="play_pause_action_wrap">
-            <span id="rs_pause" class="si-icon action_btn dark large" data-width="28" data-height="28" data-event="mouseover" data-icon-name="pause"></span>
-            <span id="rs_play" class="si-icon action_btn dark large" data-width="42" data-height="42" data-event="mouseover" data-icon-name="play"></span>
-            </li>
-
-            <li><span id="rs_next" class="si-icon action_btn dark large" data-width="28" data-height="28" data-event="mouseover" data-icon-name="next"></span></li>
-
-            <li><span id="rs_show_thumbs" class="si-icon action_btn dark large" data-width="28" data-height="28" data-event="mouseover" data-icon-name="thumbs"></span></li>
-
-            <li class="fs_stay"><span id="toggle_view_fullscreen" class="si-icon si-icon-reverse action_btn dark large" data-width="28" data-height="28" data-icon-name="plusLight"></span></li>
-
-            </ul>*@
         </div><!--/ #page_wrapper -->
         <!-- - - - - - - - - - - - - - Footer - - - - - - - - - - - - - - - - -->
 
         <footer role="contentinfo" id="footer" class="fullscreen">
 
-            <span class="copyright">&copy; 2015 Joker. All rights reserved.</span>
+            <span class="copyright">&copy; 2023 SharePix </span>
 
             <!-- - - - - - - - - - - - - - Social icons - - - - - - - - - - - - - - - - -->
 

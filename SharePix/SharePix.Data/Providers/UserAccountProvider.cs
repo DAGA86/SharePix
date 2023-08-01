@@ -1,6 +1,5 @@
 ﻿using MimeKit;
 using SharePix.Data.Models;
-
 using MailKit.Net.Smtp;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq.Expressions;

@@ -38,11 +38,21 @@
 
                             @if (ViewData["SuccessMessage"] != null)
                             {
-                                <div class="text-success">@ViewData["SuccessMessage"]</div>
+                                <div id="successAlert" class="alert alert-success alert-dismissible alert-edit" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    @ViewData["SuccessMessage"]
+                                </div>
                             }
                             @if (ViewData["ErrorMessage"] != null)
                             {
-                                <div class="text-danger">@ViewData["ErrorMessage"]</div>
+                                <div class="alert alert-danger alert-dismissible alert-edit" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    @ViewData["ErrorMessage"]
+                                </div>
                             }
 
                             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -120,4 +130,5 @@
 
 @section scripts{
     <script src="/js/editUserAccount.js"></script>
+    <script src="~/js/alertSuccess.js"></script>
 }

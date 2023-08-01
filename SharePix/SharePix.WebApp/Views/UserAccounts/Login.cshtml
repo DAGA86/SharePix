@@ -11,10 +11,14 @@
 <header id="form-box" class="vm transparent">
     <form asp-action="Login">
 
-        @if (ViewData["SuccessMessage"] != null)
+        @if (ViewData["ErrorMessage"] != null)
         {
-
-            <div class="text-success">@ViewData["SuccessMessage"]</div>
+            <div class="alert alert-danger alert-dismissible alert-edit" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                @ViewData["ErrorMessage"]
+            </div>
         }
 
         <h3>@Localize("login.title")</h3>

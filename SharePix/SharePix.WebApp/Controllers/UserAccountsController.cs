@@ -379,6 +379,7 @@ namespace SharePix.WebApp.Controllers
                     UserAccount newUser = new UserAccount()
                     {
                         Email = model.Email,
+                        Username = model.Email
                     };
 
                     Result<UserAccount> newUserAccount = _userAccountProvider.Create(newUser);
@@ -388,7 +389,7 @@ namespace SharePix.WebApp.Controllers
                     string emailRegister = $"https://localhost:7175/useraccounts/register";
                     string login = $"https://localhost:7175/useraccounts/login";
 
-                    string content = $"<p>{user.Username}{Localize("email.content.newRegister")}</p>" +
+                    string content = $"<p>{Localize("email.content.newRegister")}</p>" +
                         $"<p>{Localize("login.title")}</p><a href=\"{login}\">{login}</a>" +
                         $"<p>{Localize("register.title")}</p><a href=\"{emailRegister}\">{emailRegister}</a>";
                     string subject = $"{Localize("email.subject.newRequest")}";
