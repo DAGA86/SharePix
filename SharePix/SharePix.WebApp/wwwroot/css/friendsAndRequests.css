@@ -1,0 +1,46 @@
+﻿.add-btn {
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #000;
+    float: right;
+    padding: 10px 0 30px;
+    
+}
+
+.pad-size {
+    padding-right: 5px;
+}
+
+th {
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #2a9d8f;
+    font-size: 20px;
+    text-align: center;
+    background-color:#dbf6e9;
+}
+
+.icon-x {
+    float: right;
+    position: relative;
+    bottom: 10px;
+    margin-right: 10px;
+}
+
+.icon-r {
+    float: right;
+    position: relative;
+    right: 5px;
+    bottom: 10px;
+}
+
+.table-friend {
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+    color: #000;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}

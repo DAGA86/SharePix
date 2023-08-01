@@ -107,6 +107,17 @@
     background: #181818;
 }
 
+.form-control-language-log {
+    color: #fff;
+    background: transparent;
+}
+
+.letter {
+    font-family: 'Ysabeau Infant', sans-serif;
+    font-weight: 600;
+
+} 
+
 .checkbox-home {
     text-align: right;
     font-family: 'Ysabeau Infant', sans-serif;
@@ -126,6 +137,7 @@ label.marg {
     font-size: 50px;
     color: #d4b60f;
     margin-bottom: 0;
+    padding-top: 10px;
 }
 
 .size {
@@ -1804,7 +1816,7 @@ table {
     table td,
     table th {
         padding: 9px 20px 8px;
-        border: 1px solid #181818;
+        /*border: 1px solid #181818;*/
     }
 
 th {
@@ -5761,9 +5773,9 @@ audio {
         width: 125px;
     }
 
-    table th {
+    /*table th {
         display: none;
-    }
+    }*/
 
     table:not(.j_calendar) td {
         overflow: hidden;

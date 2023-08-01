@@ -6,17 +6,30 @@
 
 @if (ViewData["ErrorMessage"] != null)
 {
-    <div class="text-danger">@ViewData["ErrorMessage"]</div>
+    <div id="errorAlert" class="alert alert-danger alert-dismissible alert-edit" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @ViewData["ErrorMessage"]
+    </div>
 }
+
 @if (ViewData["SuccessMessage"] != null)
 {
-    <div class="text-success">@ViewData["SuccessMessage"]</div>
+    <div id="successAlert" class="alert alert-success alert-dismissible alert-edit" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @ViewData["SuccessMessage"]
+    </div>
 }
 
-<h2>@Localize("friends.title")</h2>
+<h2 class="h2-personalize">@Localize("friends.title")</h2>
 
-<div>
-    <button type="button" class="btt" data-toggle="modal" data-target="#exampleModal" asp-action="AddFriend"><img data-placement="bottom" src="~/images/icon_plus.png" />@Localize("add.newFriend.title")</button>
+<div class="container">
+    <div>
+        <button type="button" class="add-btn" data-toggle="modal" data-target="#exampleModal" asp-action="AddFriend"><img class="pad-size" data-placement="bottom" src="~/images/plus.png" style="width:auto !important;" />@Localize("add.newFriend.title")</button>
+    </div>
 </div>
 
 <form asp-action="FriendsAndRequests">
@@ -34,56 +47,63 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">@Localize("general.button.cancel")</button>
                     <button type="submit" class="btn btn-primary">@Localize("general.button.send")</button>
-                    @*<a class="btn btn-primary" href="~/Photos/Delete/@(Model.Id)?albumId=@(Model.AlbumId)">@Localize("general.button.confirm")</a>*@
                 </div>
             </div>
         </div>
     </div>
 </form>
 
-<div class="row">
+<div class="row center">
     <div class="col-md-6">
-        <table>
-            <thead>
-                <tr>
-                    <th>@Localize("myList.title")</th>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Friends)
-                {
+        <div class="table-responsive-md">
+            <table class="table table-borderless table-friend">
+                <thead>
                     <tr>
-                        <td>
-                            @item.Username
-                            <p>@item.Email</p>
-                            <button type="button" class="btt" data-toggle="modal" data-target="#exampleModal1" onclick="javascript:$('#confirmDeleteAnchor').attr('href', '/UserAccounts/DeleteFriend/?friendUsername=@item.Username'); $('#deleteModalEmail').text('@item.Email');"><img src="~/images/remove.png" alt=""></button>
-                        </td>
+                        <th scope="col">@Localize("myList.title")</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Friends)
+                    {
+                        <tr>
+                            <td>
+                                @item.Username
+                                <p>
+                                    @item.Email
+                                    <button type="button" class="icon-x" data-toggle="modal" data-target="#exampleModal1" onclick="javascript:$('#confirmDeleteAnchor').attr('href', '/UserAccounts/DeleteFriend/?friendUsername=@item.Username'); $('#deleteModalEmail').text('@item.Email');"><img src="~/images/remove.png" alt=""></button>
+                                </p>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="col-md-6">
-        <table>
-            <thead>
-                <tr>
-                    <th>@Localize("requests.title")</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.RequestFriends)
-                {
+        <div class="table-responsive-sm">
+            <table class="table table-borderless table-friend">
+                <thead>
                     <tr>
-                        <td>
-                            @item.Username
-                            <p>@item.Email</p>
-                            <button type="button" class="btt" data-toggle="modal" data-target="#exampleModal1" onclick="javascript:$('#confirmDeleteAnchor').attr('href', '/UserAccounts/DeleteFriend/?friendUsername=@item.Username'); $('#deleteModalEmail').text('@item.Email');"><img src="~/images/remove.png" alt=""></button>
-                            <a asp-action="AcceptFriend" asp-route-friendUsername="@item.Username"><img src="~/images/accept.png" alt=""></a>
-                        </td>
+                        <th>@Localize("requests.title")</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.RequestFriends)
+                    {
+                        <tr>
+                            <td>
+                                @item.Username
+                                <br>
+                                @item.Email
+                                <a class="icon-r" asp-action="AcceptFriend" asp-route-friendUsername="@item.Username"><img src="~/images/accept.png" alt="" style="width:auto !important;"></a>
+                                <button type="button" class="icon-x" data-toggle="modal" data-target="#exampleModal1" onclick="javascript:$('#confirmDeleteAnchor').attr('href', '/UserAccounts/DeleteFriend/?friendUsername=@item.Username'); $('#deleteModalEmail').text('@item.Email');"><img src="~/images/remove.png" alt=""></button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
@@ -108,6 +128,11 @@
     </div>
 </div>
 
+@section Styles{
+    <link rel="stylesheet" href="~/css/friendsAndRequests.css">
+}
 
 @section Scripts{
+    <script src="~/js/alertSuccess.js"></script>
 }
+
